@@ -29,12 +29,12 @@ spring:
       filter:
         enabled: true
 
-forex:
-  api:
-    key: ${FOREX_API_KEY:}
-    url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
-    base: "USD"
-
-orders:
-  api:
-    baseUrl: "http://localhost:8081"
+#forex:
+#  api:
+#    key: ${FOREX_API_KEY:}
+#    url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
+#    base: "USD"
+#
+#orders:
+#  api:
+#    baseUrl: "http://localhost:8081"
