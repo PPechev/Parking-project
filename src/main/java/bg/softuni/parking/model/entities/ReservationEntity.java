@@ -1,15 +1,13 @@
 package bg.softuni.parking.model.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 
 import java.time.LocalDateTime;
 
 @Entity
-public class Reservation  extends BaseEntity{
+@Table(name = "reservations")
+public class ReservationEntity extends BaseEntity{
 
 
     @ManyToOne
@@ -23,7 +21,7 @@ public class Reservation  extends BaseEntity{
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
-    public Reservation() {
+    public ReservationEntity() {
     }
 
 
@@ -31,7 +29,7 @@ public class Reservation  extends BaseEntity{
         return user;
     }
 
-    public Reservation setUser(UserEntity user) {
+    public ReservationEntity setUser(UserEntity user) {
         this.user = user;
         return this;
     }
@@ -40,7 +38,7 @@ public class Reservation  extends BaseEntity{
         return parkingSpot;
     }
 
-    public Reservation setParkingSpot(ParkingSpotEntity parkingSpot) {
+    public ReservationEntity setParkingSpot(ParkingSpotEntity parkingSpot) {
         this.parkingSpot = parkingSpot;
         return this;
     }
@@ -49,7 +47,7 @@ public class Reservation  extends BaseEntity{
         return startTime;
     }
 
-    public Reservation setStartTime(LocalDateTime startTime) {
+    public ReservationEntity setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
         return this;
     }
@@ -58,7 +56,7 @@ public class Reservation  extends BaseEntity{
         return endTime;
     }
 
-    public Reservation setEndTime(LocalDateTime endTime) {
+    public ReservationEntity setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
         return this;
     }
