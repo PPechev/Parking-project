@@ -1,9 +1,7 @@
 package bg.softuni.parking.model.entities;
 
 import bg.softuni.parking.model.enums.UserRoleEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +10,7 @@ import java.util.Set;
 @Table(name = "roles")
 public class Role  extends BaseEntity{
 
-
+    @Enumerated(EnumType.STRING)
     private UserRoleEnum name;
 
 
