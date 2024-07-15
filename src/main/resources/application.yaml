@@ -38,3 +38,9 @@ spring:
 #orders:
 #  api:
 #    baseUrl: "http://localhost:8081"
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
