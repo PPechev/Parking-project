@@ -3,10 +3,10 @@ package bg.softuni.parking.model.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Vehicles")
+@Table(name = "vehicles")
 public class Vehicle  extends BaseEntity{
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String licensePlate;
 
     @ManyToOne

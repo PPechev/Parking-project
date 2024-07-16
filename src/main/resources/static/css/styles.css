@@ -1,11 +1,86 @@
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    background-image: url('/images/img5.jpg'); !* Заменете с правилния път към вашето изображение *!*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    color: white; !* Цветът на текста е бял *!*/
+/*}*/
+
+/*header {*/
+/*    background-color: transparent; !* Напълно прозрачен фон за хедъра *!*/
+/*    padding: 0.1rem;*/
+/*    text-align: center;*/
+/*    color: white; !* Цветът на текста в хедъра е бял *!*/
+/*}*/
+
+/*nav ul {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*}*/
+
+/*nav li {*/
+/*    display: inline;*/
+/*    margin-right: 1rem;*/
+/*}*/
+
+/*nav li a {*/
+/*    color: white; !* Цветът на текста в навигацията е бял *!*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*main {*/
+/*    padding: 1rem;*/
+/*    background-color: transparent; !* Напълно прозрачен фон за основното съдържание *!*/
+/*    margin: 1rem;*/
+/*    color: white; !* Цветът на текста в основното съдържание е бял *!*/
+/*}*/
+
+/*footer {*/
+/*    background-color: transparent; !* Полупрозрачен фон за футъра *!*/
+/*    text-align: center;*/
+/*    padding: 1rem;*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+/*    color: white; !* Цветът на текста във футъра е бял *!*/
+/*}*/
+
+/*.alert {*/
+/*    padding: 1rem;*/
+/*    margin-bottom: 1rem;*/
+/*    border: 1px solid transparent;*/
+/*    border-radius: .25rem;*/
+/*}*/
+
+/*.alert-success {*/
+/*    color: #155724;*/
+/*    background-color: #d4edda;*/
+/*    border-color: #c3e6cb;*/
+/*}*/
+
+/*.alert-danger {*/
+/*    color: #721c24;*/
+/*    background-color: #f8d7da;*/
+/*    border-color: #f5c6cb;*/
+/*}*/
+
 body {
     font-family: Arial, sans-serif;
+    background-image: url('/images/img5.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    color: white;
 }
 
 header {
-    background-color: #f8f9fa;
+    background-color: transparent;
     padding: 1rem;
     text-align: center;
+    color: white;
 }
 
 nav ul {
@@ -18,34 +93,49 @@ nav li {
     margin-right: 1rem;
 }
 
+nav li a {
+    color: white;
+    text-decoration: none;
+}
+
 main {
     padding: 1rem;
+    background-color: transparent;
+    margin: 1rem;
+    color: white;
 }
 
 footer {
-    background-color: #f8f9fa;
+    background-color: transparent;
     text-align: center;
     padding: 1rem;
     position: fixed;
     bottom: 0;
     width: 100%;
+    color: white;
 }
 
-.alert {
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: .25rem;
+.parking-spot-list {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.alert-success {
-    color: #155724;
-    background-color: #d4edda;
-    border-color: #c3e6cb;
+.parking-spot {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    color: white;
 }
 
-.alert-danger {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+.parking-spot.available {
+    background-color: green;
+}
+
+.parking-spot.occupied {
+    background-color: red;
 }

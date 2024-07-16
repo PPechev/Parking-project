@@ -11,7 +11,7 @@ public class ParkingSpot  extends BaseEntity{
     @Column(nullable = false)
     private String location;
     @Column(nullable = false)
-    private boolean available;
+    private boolean available = true;
 
     public ParkingSpot() {
     }

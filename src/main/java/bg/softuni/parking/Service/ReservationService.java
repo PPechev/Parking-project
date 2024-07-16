@@ -23,4 +23,8 @@ public class ReservationService {
     public List<Reservation> findAllByUser(User user) {
         return reservationRepository.findAllByUser(user);
     }
+
+    public List<Reservation> findAll() {
+        return reservationRepository.findAll();
+    }
 }

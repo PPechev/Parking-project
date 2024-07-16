@@ -23,4 +23,8 @@ public class ParkingSpotService {
     public List<ParkingSpot> findAllAvailable() {
         return parkingSpotRepository.findAllByAvailable(true);
     }
+
+    public List<ParkingSpot> findAll() {
+        return parkingSpotRepository.findAll();
+    }
 }

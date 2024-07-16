@@ -25,4 +25,8 @@ public class VehicleService {
     public List<Vehicle> findAllByUser(User user) {
         return vehicleRepository.findAllByOwner(user);
     }
+
+    public List<Vehicle> findAll() {
+        return vehicleRepository.findAll();
+    }
 }

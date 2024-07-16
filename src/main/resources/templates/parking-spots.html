@@ -1,19 +1,44 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header th:replace="fragments/layout"></header>-->
+
+<!--<main>-->
+<!--    <div>-->
+<!--        <h2>Списък на паркинг места</h2>-->
+<!--        <ul>-->
+<!--            <li th:each="spot : ${parkingSpots}" th:text="${spot.location}"></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Паркинг места</title>
 </head>
 <body>
 <header th:replace="fragments/layout"></header>
 
 <main>
     <div>
-        <h2>Списък на паркинг места</h2>
-        <ul>
-            <li th:each="spot : ${parkingSpots}" th:text="${spot.location}"></li>
-        </ul>
+        <h2>Паркинг места</h2>
+        <div class="parking-spot-list">
+            <div th:each="spot : ${parkingSpots}" class="parking-spot" th:classappend="${spot.available} ? 'available' : 'occupied'">
+                <span th:text="${spot.location}"></span>
+            </div>
+        </div>
     </div>
 </main>
 
+<footer th:replace="fragments/layout :: footer"></footer>
 </body>
 </html>
