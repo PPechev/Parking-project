@@ -15,6 +15,6 @@ public class LoginController {
     @PostMapping("/login")
     public String loginSubmit() {
         // Логика за проверка на логин данни
-        return "redirect:/home";
+        return "redirect:/";
     }
 }
