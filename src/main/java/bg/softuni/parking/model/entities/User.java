@@ -15,6 +15,46 @@ public class User extends BaseEntity {
     private String password;
     @Column(nullable = false , unique = true )
     private String email;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public User setPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    private String firstName;
+    private String lastName;
+
+//    public String getPhone() {
+//        return phone;
+//    }
+//
+//    public User setPhone(String phone) {
+//        this.phone = phone;
+//        return this;
+//    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public User setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

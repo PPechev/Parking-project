@@ -1,22 +1,90 @@
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">-->
+<!--<head>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header>-->
+<!--    <h1>Паркинг Система</h1>-->
+<!--    <div th:fragment="layout(activeLink)">-->
+<!--        <nav>-->
+<!--            <ul class="nav-menu">-->
+<!--                <li class="nav-item" sec:authorize="hasRole('ADMIN')">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button"-->
+<!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                        Admin-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-menu" aria-labelledby="adminDropdown">-->
+<!--                        <a class="dropdown-item" href="#">Action</a>-->
+<!--                        <a class="dropdown-item" href="#">Another action</a>-->
+<!--                        <div class="dropdown-divider"></div>-->
+<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li><a th:href="@{/}" th:classappend="${activeLink == 'home'} ? 'active'">Начало</a></li>-->
+<!--                <li><a th:href="@{/users}" th:classappend="${activeLink == 'users'} ? 'active'">Потребители</a></li>-->
+<!--                <li><a th:href="@{/vehicles}" th:classappend="${activeLink == 'vehicles'} ? 'active'">Превозни средства</a></li>-->
+<!--                <li><a th:href="@{/parking-spots}" th:classappend="${activeLink == 'parking-spots'} ? 'active'">Паркинг места</a></li>-->
+<!--                <li><a th:href="@{/reservations}" th:classappend="${activeLink == 'reservations'} ? 'active'">Резервации</a></li>-->
+<!--                <li class="nav-item" sec:authorize="isAuthenticated()">-->
+<!--                    <form th:action="@{/logout}" method="post" class="logout-form">-->
+<!--                        <button type="submit" class="btn-link">Logout</button>-->
+<!--                    </form>-->
+<!--                </li>-->
+<!--                <li><a th:href="@{/login}" sec:authorize="!isAuthenticated()" th:classappend="${activeLink == 'login'} ? 'active'">Логин</a></li>-->
+<!--                <li><a th:href="@{/register}" sec:authorize="!isAuthenticated()" th:classappend="${activeLink == 'register'} ? 'active'">Регистрация</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </div>-->
+<!--</header>-->
+
+<!--<footer>-->
+<!--    <p>&copy; 2024 Паркинг Система</p>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <header>
     <h1>Паркинг Система</h1>
-    <nav>
-        <ul>
-            <li><a th:href="@{/}">Начало</a></li>
-            <li><a th:href="@{/users}">Потребители</a></li>
-            <li><a th:href="@{/vehicles}">Превозни средства</a></li>
-            <li><a th:href="@{/parking-spots}">Паркинг места</a></li>
-            <li><a th:href="@{/reservations}">Резервации</a></li>
-            <li><a th:href="@{/login}">Логин</a></li>
-            <li><a th:href="@{/register}">Регистрация</a></li>
-        </ul>
-    </nav>
+    <div th:fragment="layout(activeLink)">
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li><a th:href="@{/}" th:classappend="${activeLink == 'home'} ? 'active'">Начало</a></li>
+                <li><a th:href="@{/users}" th:classappend="${activeLink == 'users'} ? 'active'">Потребители</a></li>
+                <li><a th:href="@{/vehicles}" th:classappend="${activeLink == 'vehicles'} ? 'active'">Превозни средства</a></li>
+                <li><a th:href="@{/parking-spots}" th:classappend="${activeLink == 'parking-spots'} ? 'active'">Паркинг места</a></li>
+                <li><a th:href="@{/reservations}" th:classappend="${activeLink == 'reservations'} ? 'active'">Резервации</a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post" class="logout-form">
+                        <button type="submit" class="btn-link">Logout</button>
+                    </form>
+                </li>
+                <li><a th:href="@{/login}" sec:authorize="!isAuthenticated()" th:classappend="${activeLink == 'login'} ? 'active'">Логин</a></li>
+                <li><a th:href="@{/register}" sec:authorize="!isAuthenticated()" th:classappend="${activeLink == 'register'} ? 'active'">Регистрация</a></li>
+            </ul>
+        </nav>
+    </div>
 </header>
 
 <footer>

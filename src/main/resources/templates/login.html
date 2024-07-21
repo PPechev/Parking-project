@@ -1,3 +1,54 @@
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--    <title>Логин</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header th:replace="fragments/layout :: layout('login')"></header>-->
+
+<!--<main>-->
+<!--    <div>-->
+<!--        <h2>Логин</h2>-->
+<!--        <form th:action="@{/login}"-->
+<!--              th:object="${loginDTO}"-->
+<!--              method="post">-->
+<!--            <div>-->
+<!--                <label th:for="username">Потребителско име:</label>-->
+<!--                <input-->
+<!--                        th:field="*{username}"-->
+<!--                        type="text"-->
+<!--                        id="username"-->
+<!--                        name="username"-->
+<!--                        required>-->
+<!--                <small th:each="err : ${#fields.errors('username')}"-->
+<!--                       th:text="${err}" class="text-danger"></small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label th:for="password">Парола:</label>-->
+<!--                <input-->
+<!--                        th:field="*{password}"-->
+<!--                        type="password"-->
+<!--                        id="password"-->
+<!--                        name="password"-->
+<!--                        required>-->
+<!--                <small th:each="err : ${#fields.errors('password')}"-->
+<!--                       th:text="${err}" class="text-danger"></small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <button type="submit">Логин</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -5,22 +56,38 @@
     <title>Логин</title>
 </head>
 <body>
-<header th:replace="fragments/layout"></header>
+<header th:replace="fragments/layout :: layout('login')"></header>
 
-<main>
-    <div>
+<main class="form-container">
+    <div class="form-box">
         <h2>Логин</h2>
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/login}"
+              th:object="${loginDTO}"
+              method="post">
             <div>
-                <label for="username">Потребителско име:</label>
-                <input type="text" id="username" name="username" required>
+                <label th:for="username">Потребителско име:</label>
+                <input
+                        th:field="*{username}"
+                        type="text"
+                        id="username"
+                        name="username"
+                        required>
+                <small th:each="err : ${#fields.errors('username')}"
+                       th:text="${err}" class="text-danger"></small>
             </div>
             <div>
-                <label for="password">Парола:</label>
-                <input type="password" id="password" name="password" required>
+                <label th:for="password">Парола:</label>
+                <input
+                        th:field="*{password}"
+                        type="password"
+                        id="password"
+                        name="password"
+                        required>
+                <small th:each="err : ${#fields.errors('password')}"
+                       th:text="${err}" class="text-danger"></small>
             </div>
             <div>
-                <button type="submit">Вход</button>
+                <button type="submit">Логин</button>
             </div>
         </form>
     </div>

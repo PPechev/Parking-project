@@ -1,70 +1,140 @@
+
+
 /*body {*/
 /*    font-family: Arial, sans-serif;*/
-/*    background-image: url('/images/img5.jpg'); !* Заменете с правилния път към вашето изображение *!*/
+/*    background-image: url('/images/img5.jpg');*/
 /*    background-size: cover;*/
 /*    background-position: center;*/
 /*    margin: 0;*/
 /*    padding: 0;*/
-/*    color: white; !* Цветът на текста е бял *!*/
+/*    color: white;*/
 /*}*/
 
 /*header {*/
-/*    background-color: transparent; !* Напълно прозрачен фон за хедъра *!*/
-/*    padding: 0.1rem;*/
+/*    background-color: transparent;*/
+/*    padding: 1rem;*/
 /*    text-align: center;*/
-/*    color: white; !* Цветът на текста в хедъра е бял *!*/
+/*    color: white;*/
 /*}*/
 
 /*nav ul {*/
 /*    list-style: none;*/
 /*    padding: 0;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
 /*}*/
 
 /*nav li {*/
-/*    display: inline;*/
 /*    margin-right: 1rem;*/
 /*}*/
 
-/*nav li a {*/
-/*    color: white; !* Цветът на текста в навигацията е бял *!*/
+/*nav li a, .logout-form button {*/
+/*    color: white;*/
 /*    text-decoration: none;*/
+/*    padding: 0.5rem 1rem;*/
+/*    border-radius: 4px;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*nav li a:hover, .logout-form button:hover {*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    color: white;*/
+/*}*/
+
+/*.logout-form {*/
+/*    display: inline;*/
+/*}*/
+
+/*.logout-form button {*/
+/*    border: none;*/
+/*    background: none;*/
+/*    cursor: pointer;*/
+/*    color: white;*/
+/*    padding: 0.5rem 1rem;*/
+/*    border-radius: 4px;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.logout-form button:hover {*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    color: white;*/
+/*}*/
+
+/*.nav-item.dropdown .dropdown-menu {*/
+/*    display: none;*/
+/*    position: absolute;*/
+/*    background-color: rgba(0, 0, 0, 0.8);*/
+/*    min-width: 10rem;*/
+/*    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);*/
+/*    border-radius: 0.25rem;*/
+/*    z-index: 1000;*/
+/*    color: white;*/
+/*}*/
+
+/*.nav-item.dropdown:hover .dropdown-menu {*/
+/*    display: block;*/
+/*}*/
+
+/*.dropdown-menu .dropdown-item {*/
+/*    padding: 0.5rem 1rem;*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*}*/
+
+/*.dropdown-menu .dropdown-item:hover {*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    color: white;*/
+/*}*/
+
+/*.active {*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    color: white;*/
 /*}*/
 
 /*main {*/
 /*    padding: 1rem;*/
-/*    background-color: transparent; !* Напълно прозрачен фон за основното съдържание *!*/
+/*    background-color: transparent;*/
 /*    margin: 1rem;*/
-/*    color: white; !* Цветът на текста в основното съдържание е бял *!*/
+/*    color: white;*/
 /*}*/
 
 /*footer {*/
-/*    background-color: transparent; !* Полупрозрачен фон за футъра *!*/
+/*    background-color: transparent;*/
 /*    text-align: center;*/
 /*    padding: 1rem;*/
 /*    position: fixed;*/
 /*    bottom: 0;*/
 /*    width: 100%;*/
-/*    color: white; !* Цветът на текста във футъра е бял *!*/
+/*    color: white;*/
 /*}*/
 
-/*.alert {*/
-/*    padding: 1rem;*/
-/*    margin-bottom: 1rem;*/
-/*    border: 1px solid transparent;*/
-/*    border-radius: .25rem;*/
+/*.parking-spot-list {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
 /*}*/
 
-/*.alert-success {*/
-/*    color: #155724;*/
-/*    background-color: #d4edda;*/
-/*    border-color: #c3e6cb;*/
+/*.parking-spot {*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    margin: 10px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    font-size: 1.2rem;*/
+/*    border-radius: 5px;*/
+/*    color: white;*/
 /*}*/
 
-/*.alert-danger {*/
-/*    color: #721c24;*/
-/*    background-color: #f8d7da;*/
-/*    border-color: #f5c6cb;*/
+/*.parking-spot.available {*/
+/*    background-color: green;*/
 /*}*/
+
+/*.parking-spot.occupied {*/
+/*    background-color: red;*/
+/*}*/
+
 
 body {
     font-family: Arial, sans-serif;
@@ -86,16 +156,77 @@ header {
 nav ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav li {
-    display: inline;
     margin-right: 1rem;
 }
 
-nav li a {
+nav li a, .logout-form button {
     color: white;
     text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav li a:hover, .logout-form button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.logout-form {
+    display: inline;
+}
+
+.logout-form button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-form button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.nav-item.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    min-width: 10rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+    border-radius: 0.25rem;
+    z-index: 1000;
+    color: white;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu .dropdown-item {
+    padding: 0.5rem 1rem;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
 }
 
 main {
@@ -138,4 +269,55 @@ footer {
 
 .parking-spot.occupied {
     background-color: red;
+}
+
+/* Нови стилове за логин и регистрационни форми */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.form-box h2 {
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.form-box label {
+    color: #fff;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-box button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-box button:hover {
+    background-color: #0056b3;
+}
+
+.form-box small.text-danger {
+    color: #ff6b6b;
 }
