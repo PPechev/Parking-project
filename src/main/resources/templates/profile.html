@@ -1,52 +1,136 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--    <title>Профил</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header th:replace="fragments/layout :: layout('profile')"></header>-->
+
+<!--<main class="form-container">-->
+<!--    <div class="form-box">-->
+<!--        <h2>Профил</h2>-->
+<!--        <form th:action="@{/profile}"-->
+<!--              th:object="${userUpdateDto}"-->
+<!--              method="post">-->
+<!--            <div>-->
+<!--                <label th:for="username">Потребителско име:</label>-->
+<!--                <input th:field="*{username}" type="text" id="username" name="username" required>-->
+<!--                <small th:each="err : ${#fields.errors('username')}" th:text="${err}" class="text-danger"></small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label th:for="email">Имейл:</label>-->
+<!--                <input th:field="*{email}" type="email" id="email" name="email" required>-->
+<!--                <small th:each="err : ${#fields.errors('email')}" th:text="${err}" class="text-danger"></small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label th:for="phone">Телефон:</label>-->
+<!--                <input th:field="*{phone}" type="text" id="phone" name="phone">-->
+<!--                <small th:each="err : ${#fields.errors('phone')}" th:text="${err}" class="text-danger"></small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label th:for="firstName">Първо име:</label>-->
+<!--                <input th:field="*{firstName}" type="text" id="firstName" name="firstName">-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label th:for="lastName">Фамилия:</label>-->
+<!--                <input th:field="*{lastName}" type="text" id="lastName" name="lastName">-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label th:for="password">Нова парола:</label>-->
+<!--                <input th:field="*{password}" type="password" id="password" name="password">-->
+<!--                <small th:each="err : ${#fields.errors('password')}" th:text="${err}" class="text-danger"></small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <button type="submit">Обновяване на профила</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--        <div th:if="${param.success}">-->
+<!--            <p class="success-message">Профилът беше успешно обновен!</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Профил</title>
+    <style>
+        .profile-container {
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #f8f9fa;
+            padding: 15px;
+        }
+        .sidebar .nav-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: left;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .sidebar .nav-button:hover {
+            background-color: #0056b3;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
 <header th:replace="fragments/layout :: layout('profile')"></header>
 
-<main class="form-container">
-    <div class="form-box">
-        <h2>Профил</h2>
-        <form th:action="@{/profile}"
-              th:object="${userUpdateDto}"
-              method="post">
-            <div>
-                <label th:for="username">Потребителско име:</label>
-                <input th:field="*{username}" type="text" id="username" name="username" required>
-                <small th:each="err : ${#fields.errors('username')}" th:text="${err}" class="text-danger"></small>
-            </div>
-            <div>
-                <label th:for="email">Имейл:</label>
-                <input th:field="*{email}" type="email" id="email" name="email" required>
-                <small th:each="err : ${#fields.errors('email')}" th:text="${err}" class="text-danger"></small>
-            </div>
-            <div>
-                <label th:for="phone">Телефон:</label>
-                <input th:field="*{phone}" type="text" id="phone" name="phone">
-                <small th:each="err : ${#fields.errors('phone')}" th:text="${err}" class="text-danger"></small>
-            </div>
-            <div>
-                <label th:for="firstName">Първо име:</label>
-                <input th:field="*{firstName}" type="text" id="firstName" name="firstName">
-            </div>
-            <div>
-                <label th:for="lastName">Фамилия:</label>
-                <input th:field="*{lastName}" type="text" id="lastName" name="lastName">
-            </div>
-            <div>
-                <label th:for="password">Нова парола:</label>
-                <input th:field="*{password}" type="password" id="password" name="password">
-                <small th:each="err : ${#fields.errors('password')}" th:text="${err}" class="text-danger"></small>
-            </div>
-            <div>
-                <button type="submit">Обновяване на профила</button>
-            </div>
-        </form>
-        <div th:if="${param.success}">
-            <p class="success-message">Профилът беше успешно обновен!</p>
+<main class="profile-container">
+    <div class="sidebar">
+        <button class="nav-button" onclick="window.location.href='/profile'">Моят профил</button>
+        <button class="nav-button" onclick="window.location.href='/reservations'">Моите резервации</button>
+        <button class="nav-button" onclick="window.location.href='/vehicles'">Моите превозни средства</button>
+        <button class="nav-button" onclick="window.location.href='/change-password'">Смяна на парола</button>
+    </div>
+    <div class="content">
+        <div class="form-box">
+            <h2>Моят профил</h2>
+            <form th:action="@{/profile/update}" th:object="${user}" method="post">
+                <div>
+                    <label th:for="username">Потребителско име:</label>
+                    <input th:field="*{username}" type="text" id="username" name="username" readonly>
+                </div>
+                <div>
+                    <label th:for="email">Имейл:</label>
+                    <input th:field="*{email}" type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label th:for="firstName">Име:</label>
+                    <input th:field="*{firstName}" type="text" id="firstName" name="firstName" required>
+                </div>
+                <div>
+                    <label th:for="lastName">Фамилия:</label>
+                    <input th:field="*{lastName}" type="text" id="lastName" name="lastName" required>
+                </div>
+                <div>
+                    <label th:for="phone">Телефон:</label>
+                    <input th:field="*{phone}" type="text" id="phone" name="phone">
+                </div>
+                <div>
+                    <button type="submit">Запази</button>
+                </div>
+            </form>
         </div>
     </div>
 </main>

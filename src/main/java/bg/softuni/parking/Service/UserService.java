@@ -1,8 +1,6 @@
 package bg.softuni.parking.Service;
 
-import bg.softuni.parking.model.dto.UserLoginDto;
-import bg.softuni.parking.model.dto.UserRegistrationDto;
-import bg.softuni.parking.model.dto.UserUpdateDto;
+import bg.softuni.parking.model.dto.*;
 import bg.softuni.parking.model.entities.User;
 import bg.softuni.parking.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -87,4 +85,26 @@ public class UserService {
 //        }
 //        return true;
 //    }
+
+
+
+    public UserProfileDto getUserProfile(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow();
+        return modelMapper.map(user, UserProfileDto.class);
+    }
+
+    public void updateUserProfile(UserProfileDto userProfileDto) {
+        User user = userRepository.findById(userProfileDto.getId()).orElseThrow();
+        user.setEmail(userProfileDto.getEmail());
+        user.setFirstName(userProfileDto.getFirstName());
+        user.setLastName(userProfileDto.getLastName());
+        user.setPhone(userProfileDto.getPhone());
+        userRepository.save(user);
+    }
+
+    public void changePassword(String username, ChangePasswordDto changePasswordDto) {
+        User user = userRepository.findByUsername(username).orElseThrow();
+        user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+        userRepository.save(user);
+    }
 }
