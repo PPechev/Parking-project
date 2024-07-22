@@ -82,6 +82,10 @@
                 </li>
                 <li><a th:href="@{/login}" sec:authorize="!isAuthenticated()" th:classappend="${activeLink == 'login'} ? 'active'">Логин</a></li>
                 <li><a th:href="@{/register}" sec:authorize="!isAuthenticated()" th:classappend="${activeLink == 'register'} ? 'active'">Регистрация</a></li>
+<!--                <li><a th:href="@{/profile}" th:classappend="${activeLink == 'profile'} ? 'active'">Профил</a></li>-->
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}" th:classappend="${activeLink == 'profile'} ? 'active'">Профил</a></li>
+
+
             </ul>
         </nav>
     </div>

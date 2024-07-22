@@ -29,14 +29,7 @@ public class User extends BaseEntity {
     private String firstName;
     private String lastName;
 
-//    public String getPhone() {
-//        return phone;
-//    }
-//
-//    public User setPhone(String phone) {
-//        this.phone = phone;
-//        return this;
-//    }
+
 
     public String getFirstName() {
         return firstName;

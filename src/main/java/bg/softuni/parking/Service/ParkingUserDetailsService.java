@@ -36,7 +36,9 @@ public class ParkingUserDetailsService implements UserDetailsService {
                 user.getPassword(),
                 user.getRoles().stream().map(Role::getName).map(ParkingUserDetailsService::mapped).toList(),
                 user.getFirstName(),
-                user.getLastName()
+                user.getLastName(),
+                user.getPhone(),
+                user.getEmail()
                 );
     }
     private static GrantedAuthority mapped(UserRoleEnum role) {

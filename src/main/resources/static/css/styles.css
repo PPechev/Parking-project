@@ -1,5 +1,6 @@
 
 
+
 /*body {*/
 /*    font-family: Arial, sans-serif;*/
 /*    background-image: url('/images/img5.jpg');*/
@@ -133,6 +134,57 @@
 
 /*.parking-spot.occupied {*/
 /*    background-color: red;*/
+/*}*/
+
+/*!* Нови стилове за логин и регистрационни форми *!*/
+/*.form-container {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*}*/
+
+/*.form-box {*/
+/*    background-color: rgba(0, 0, 0, 0.8);*/
+/*    padding: 2rem;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
+/*}*/
+
+/*.form-box h2 {*/
+/*    margin-bottom: 1rem;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.form-box label {*/
+/*    color: #fff;*/
+/*}*/
+
+/*.form-box input {*/
+/*    width: 100%;*/
+/*    padding: 0.5rem;*/
+/*    margin-bottom: 1rem;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*.form-box button {*/
+/*    width: 100%;*/
+/*    padding: 0.5rem;*/
+/*    background-color: #007bff;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.form-box button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*.form-box small.text-danger {*/
+/*    color: #ff6b6b;*/
 /*}*/
 
 

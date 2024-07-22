@@ -21,6 +21,7 @@
 
 package bg.softuni.parking.web;
 
+import bg.softuni.parking.Service.UserService;
 import bg.softuni.parking.model.dto.UserLoginDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LoginController {
+
+    private final UserService userService;
+
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @ModelAttribute("loginDTO")
     public UserLoginDto loginDTO() {
@@ -54,8 +61,13 @@ public class LoginController {
             return "redirect:/login";
         }
 
+//        if (!userService.isUserExists(userLoginDto)){
+//            throw new RuntimeException("Username or password is incorrect");
+//        }
         // Логика за проверка на потребителското име и паролата
         // Ако валидацията е успешна, пренасочване към началната страница
+
+
         return "redirect:/home";
     }
 }
