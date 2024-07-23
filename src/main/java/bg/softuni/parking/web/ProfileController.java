@@ -166,6 +166,14 @@ public class ProfileController {
         userService.changePassword(userDetails.getUsername(), changePasswordDto);
         return "redirect:/profile";
     }
+
+    @GetMapping("/change-email")
+    public String changeEmail(Model model) {
+        model.addAttribute("changeEmailDto", new ChangeEmailDto());
+        return "change-email";
+    }
+
+
         @PostMapping("/change-email")
     public String changeEmail(@Valid @ModelAttribute("changeEmailDto") ChangeEmailDto changeEmailDto,
                               BindingResult bindingResult,
