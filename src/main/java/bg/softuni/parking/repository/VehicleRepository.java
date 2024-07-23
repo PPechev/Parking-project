@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     List<Vehicle> findAllByOwner(User user);
+
+    List<Vehicle> findByOwnerUsername(String username);
 }

@@ -373,3 +373,28 @@ footer {
 .form-box small.text-danger {
     color: #ff6b6b;
 }
+
+/* New styles for profile sidebar */
+.sidebar {
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparency */
+    padding: 15px;
+}
+
+.sidebar .nav-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .nav-button:hover {
+    background-color: #0056b3;
+}
