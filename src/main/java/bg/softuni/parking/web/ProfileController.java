@@ -101,6 +101,7 @@
 package bg.softuni.parking.web;
 
 import bg.softuni.parking.Service.UserService;
+import bg.softuni.parking.model.dto.ChangeEmailDto;
 import bg.softuni.parking.model.dto.UserProfileDto;
 import bg.softuni.parking.model.dto.ChangePasswordDto;
 import bg.softuni.parking.model.user.ParkingUserDetails;
@@ -163,6 +164,20 @@ public class ProfileController {
         }
 
         userService.changePassword(userDetails.getUsername(), changePasswordDto);
+        return "redirect:/profile";
+    }
+        @PostMapping("/change-email")
+    public String changeEmail(@Valid @ModelAttribute("changeEmailDto") ChangeEmailDto changeEmailDto,
+                              BindingResult bindingResult,
+                              @AuthenticationPrincipal ParkingUserDetails userDetails,
+                              RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("changeEmailDto", changeEmailDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.changeEmailDto", bindingResult);
+            return "redirect:/change-email";
+        }
+
+        userService.changeEmail(userDetails.getUsername(), changeEmailDto);
         return "redirect:/profile";
     }
 }
