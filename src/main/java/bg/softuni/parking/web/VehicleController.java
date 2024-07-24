@@ -55,4 +55,13 @@ public class VehicleController {
         model.addAttribute("vehicles", vehicles);
         return "vehicles";
     }
+
+
+    @GetMapping("/all-vehicles")
+    public String getAllVehicles(Model model) {
+        List<Vehicle> vehicles = vehicleService.findAll();
+        model.addAttribute("vehicles", vehicles);
+        return "all-vehicles";
+    }
+
 }

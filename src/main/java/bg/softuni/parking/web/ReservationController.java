@@ -56,4 +56,12 @@ public class ReservationController {
         model.addAttribute("reservations", reservations);
         return "reservations";
     }
+
+    @GetMapping("/all-reservations")
+    public String getAllReservations(Model model) {
+        List<Reservation> reservations = reservationService.findAll();
+        model.addAttribute("reservations", reservations);
+        return "all-reservations";
+    }
+
 }

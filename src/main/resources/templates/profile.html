@@ -16,6 +16,11 @@
 <!--        .readonly-fields {-->
 <!--            margin-bottom: 20px;-->
 <!--        }-->
+<!--        .sidebar {-->
+<!--            background-color: rgba(255, 255, 255, 0.5); /* Making the sidebar semi-transparent */-->
+<!--            padding: 20px;-->
+<!--            width: 200px;-->
+<!--        }-->
 <!--    </style>-->
 <!--</head>-->
 <!--<body>-->
@@ -24,8 +29,8 @@
 <!--<main class="profile-container">-->
 <!--    <div class="sidebar">-->
 <!--        <button class="nav-button" onclick="window.location.href='/profile'">Моят профил</button>-->
-<!--        <button class="nav-button" onclick="window.location.href='/reservations'">Моите резервации</button>-->
-<!--        <button class="nav-button" onclick="window.location.href='/vehicles'">Моите превозни средства</button>-->
+<!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/reservations?username=' + ${user.username} + '\''">Моите резервации</button>-->
+<!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/vehicles?username=' + ${user.username} + '\''">Моите превозни средства</button>-->
 <!--        <button class="nav-button" onclick="window.location.href='/change-password'">Смяна на парола</button>-->
 <!--    </div>-->
 <!--    <div class="content">-->
@@ -76,7 +81,6 @@
 <!--<footer th:replace="fragments/layout :: footer"></footer>-->
 <!--</body>-->
 <!--</html>-->
-
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">

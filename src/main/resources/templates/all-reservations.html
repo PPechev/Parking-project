@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Reservations</title>
+</head>
+<body>
+<h1>All Reservations</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>User</th>
+        <th>Vehicle</th>
+        <th>Parking Spot</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.startTime}"></td>
+        <td th:text="${reservation.endTime}"></td>
+        <td th:text="${reservation.user.username}"></td>
+        <td th:text="${reservation.vehicle.licensePlate}"></td>
+        <td th:text="${reservation.parkingSpot.id}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Vehicles</title>
+</head>
+<body>
+<h1>All Vehicles</h1>
+<table>
+    <thead>
+    <tr>
+        <th>License Plate</th>
+        <th>Owner</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vehicle : ${vehicles}">
+        <td th:text="${vehicle.licensePlate}"></td>
+        <td th:text="${vehicle.owner.username}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
