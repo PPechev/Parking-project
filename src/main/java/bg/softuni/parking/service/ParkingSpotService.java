@@ -1,4 +1,4 @@
-package bg.softuni.parking.Service;
+package bg.softuni.parking.service;
 
 import bg.softuni.parking.model.entities.ParkingSpot;
 import bg.softuni.parking.repository.ParkingSpotRepository;

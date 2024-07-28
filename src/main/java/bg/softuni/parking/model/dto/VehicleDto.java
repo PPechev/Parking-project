@@ -2,9 +2,21 @@ package bg.softuni.parking.model.dto;
 
 public class VehicleDto {
 
+    private long id;
+
     private String licensePlate;
 
     // Getters and Setters
+
+
+    public long getId() {
+        return id;
+    }
+
+    public VehicleDto setId(long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getLicensePlate() {
         return licensePlate;

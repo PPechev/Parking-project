@@ -21,7 +21,7 @@
 
 package bg.softuni.parking.web;
 
-import bg.softuni.parking.Service.UserService;
+import bg.softuni.parking.service.UserService;
 import bg.softuni.parking.model.dto.UserLoginDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

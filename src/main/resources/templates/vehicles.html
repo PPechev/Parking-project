@@ -1,19 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <title>Моите превозни средства</title>
+    <style>
+        .vehicle-container {
+            padding: 20px;
+        }
+        .vehicle-box {
+            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #fff;
+        }
+        .vehicle-box h2 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .vehicle-box label {
+            font-weight: bold;
+            color: #fff;
+        }
+        .vehicle-box .list-group-item {
+            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */
+            color: #fff;
+            border: none;
+            margin-bottom: 0.5rem;
+        }
+        .vehicle-box .list-group-item span {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-<header th:replace="fragments/layout"></header>
+<header th:replace="fragments/layout :: layout('vehicles')"></header>
 
-<main>
-    <div>
-        <h2>Списък на превозни средства</h2>
-        <ul>
-            <li th:each="vehicle : ${vehicles}" th:text="${vehicle.licensePlate}"></li>
+<main class="container mt-4 vehicle-container">
+    <div class="vehicle-box">
+        <h2>Моите превозни средства</h2>
+        <ul class="list-group">
+            <li class="list-group-item" th:each="vehicle : ${vehicles}">
+                <span>Регистрационен номер: <span th:text="${vehicle.licensePlate}"></span></span>
+                <button class="btn btn-primary mt-3" th:attr="onclick='window.location.href=\'/vehicles/edit/' + ${vehicle.id} + '\''">Редактиране</button>
+            </li>
         </ul>
+        <button class="btn btn-success mt-3" onclick="window.location.href='/vehicles/add'">Добавяне на ново превозно средство</button>
     </div>
 </main>
 
+<footer th:replace="fragments/layout :: footer"></footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -60,7 +60,7 @@ package bg.softuni.parking.config;//package bg.softuni.parking.config;
 //}
 
 
-import bg.softuni.parking.Service.ParkingUserDetailsService;
+import bg.softuni.parking.service.ParkingUserDetailsService;
 import bg.softuni.parking.repository.UserRepository;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;

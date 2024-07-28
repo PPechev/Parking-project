@@ -60,6 +60,7 @@ public class ParkingUserDetails extends User {
     private final String phone;
     private final String email;
 
+
     public ParkingUserDetails(String username,
                               String password,
                               Collection<? extends GrantedAuthority> authorities,

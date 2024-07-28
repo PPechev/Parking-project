@@ -1,8 +1,7 @@
 package bg.softuni.parking.web;
 
-import bg.softuni.parking.Service.ParkingSpotService;
+import bg.softuni.parking.service.ParkingSpotService;
 import bg.softuni.parking.model.entities.ParkingSpot;
-import bg.softuni.parking.repository.ParkingSpotRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package bg.softuni.parking.Service;
+package bg.softuni.parking.service;
 
 import bg.softuni.parking.model.entities.Role;
 import bg.softuni.parking.model.entities.User;
@@ -39,6 +39,7 @@ public class ParkingUserDetailsService implements UserDetailsService {
                 user.getLastName(),
                 user.getPhone(),
                 user.getEmail()
+
                 );
     }
     private static GrantedAuthority mapped(UserRoleEnum role) {

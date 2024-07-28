@@ -52,8 +52,20 @@ public class ReservationDto {
     private String parkingSpotLocation;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private Long vehicleId;
+
 
     // Getters and Setters
+
+
+    public Long getVehicleId() {
+        return vehicleId;
+    }
+
+    public ReservationDto setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
+        return this;
+    }
 
     public Long getId() {
         return id;

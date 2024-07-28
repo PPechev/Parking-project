@@ -1,17 +1,20 @@
-package bg.softuni.parking.Service;
+package bg.softuni.parking.service;
 
 import bg.softuni.parking.model.dto.*;
 import bg.softuni.parking.model.entities.Reservation;
 import bg.softuni.parking.model.entities.User;
+import bg.softuni.parking.model.entities.Vehicle;
 import bg.softuni.parking.repository.UserRepository;
+import bg.softuni.parking.repository.VehicleRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -20,13 +23,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final VehicleRepository vehicleRepository;
 
 
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, VehicleRepository vehicleRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.vehicleRepository = vehicleRepository;
     }
 
 
@@ -57,8 +62,8 @@ public class UserService {
         return mappedUser;
     }
 
-    public void updateUser(UserUpdateDto userUpdateDto, String username) {
-        User user = userRepository.findByUsername(username)
+    public void updateUser(UserUpdateDto userUpdateDto) {
+        User user = userRepository.findByUsername(userUpdateDto.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         user.setUsername(userUpdateDto.getUsername());
@@ -67,9 +72,7 @@ public class UserService {
         user.setFirstName(userUpdateDto.getFirstName());
         user.setLastName(userUpdateDto.getLastName());
 
-        if (userUpdateDto.getPassword() != null && !userUpdateDto.getPassword().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(userUpdateDto.getPassword()));
-        }
+
 
         userRepository.save(user);
     }
@@ -104,7 +107,7 @@ public class UserService {
 //        return dto;
 //    }
 
-//
+    //
 //    public UserProfileDto getUserProfile(String username) {
 //        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 //        UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
@@ -113,31 +116,15 @@ public class UserService {
 //        dto.setVehicles(user.getVehicles());
 //        return dto;
 //    }
-public UserProfileDto getUserProfile(String username) {
-    User user = userRepository.findByUsername(username)
-            .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    public UserProfileDto getUserProfile(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-    UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
+        UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
 
-    List<ReservationDto> reservations = user.getReservations().stream()
-            .map(reservation -> {
-                ReservationDto reservationDto = new ReservationDto();
-                reservationDto.setId(reservation.getId());
-                reservationDto.setParkingSpotLocation(reservation.getParkingSpot().getLocation());
-                reservationDto.setStartTime(reservation.getStartTime());
-                reservationDto.setEndTime(reservation.getEndTime());
-                return reservationDto;
-            })
-            .collect(Collectors.toList());
+        return dto;
 
-    List<VehicleDto> vehicles = user.getVehicles().stream()
-            .map(vehicle -> modelMapper.map(vehicle, VehicleDto.class))
-            .collect(Collectors.toList());
-
-    dto.setReservations(reservations);
-    dto.setVehicles(vehicles);
-    return dto;
-}
+    }
 
     private ReservationDto convertToReservationDto(Reservation reservation) {
         ReservationDto dto = new ReservationDto();
@@ -198,6 +185,22 @@ public UserProfileDto getUserProfile(String username) {
         User user = userRepository.findByUsername(username).orElseThrow();
         user.setEmail(changeEmailDto.getNewEmail());
         userRepository.save(user);
+    }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
+    }
+
+    public void setSelectedVehicle(Long vehicleId) {
+        User currentUser = getCurrentUser();
+        currentUser.setSelectedVehicleId(vehicleId);
+    }
+
+    public Vehicle getSelectedVehicle() {
+        User currentUser = getCurrentUser();
+        Long selectedVehicleId = currentUser.getSelectedVehicleId();
+        return vehicleRepository.findById(selectedVehicleId).orElse(null);
     }
 
 }

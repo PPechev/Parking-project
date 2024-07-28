@@ -1,6 +1,6 @@
 package bg.softuni.parking.web;
 
-import bg.softuni.parking.Service.UserService;
+import bg.softuni.parking.service.UserService;
 import bg.softuni.parking.model.entities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
