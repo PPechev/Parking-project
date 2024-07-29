@@ -39,7 +39,6 @@ public class ParkingUserDetailsService implements UserDetailsService {
                 user.getLastName(),
                 user.getPhone(),
                 user.getEmail()
-
                 );
     }
     private static GrantedAuthority mapped(UserRoleEnum role) {

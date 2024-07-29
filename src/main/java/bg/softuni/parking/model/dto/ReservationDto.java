@@ -53,10 +53,20 @@ public class ReservationDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Long vehicleId;
+    private String vehicleLicensePlate; // TODO
 
 
     // Getters and Setters
 
+
+    public String getVehicleLicensePlate() {
+        return vehicleLicensePlate;
+    }
+
+    public ReservationDto setVehicleLicensePlate(String vehicleLicensePlate) {
+        this.vehicleLicensePlate = vehicleLicensePlate;
+        return this;
+    }
 
     public Long getVehicleId() {
         return vehicleId;

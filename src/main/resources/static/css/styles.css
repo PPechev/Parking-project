@@ -1,3 +1,295 @@
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    background-image: url('/images/img5.jpg');*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    color: white;*/
+/*}*/
+
+/*header {*/
+/*    background-color: transparent;*/
+/*    padding: 1rem;*/
+/*    text-align: center;*/
+/*    color: white;*/
+/*}*/
+
+/*.navbar-transparent {*/
+/*    background-color: rgba(255, 255, 255, 0); !* Напълно прозрачен фон *!*/
+/*    border: none; !* Премахва рамката *!*/
+/*    justify-content: center; !* Централизира навбара *!*/
+/*}*/
+
+/*.navbar-transparent .navbar-nav .nav-link {*/
+/*    color: #fff; !* Цвят на текста на линковете *!*/
+/*}*/
+
+/*.navbar-transparent .navbar-toggler {*/
+/*    border-color: rgba(255, 255, 255, 0); !* Премахва рамката на бутона *!*/
+/*}*/
+
+/*.navbar-transparent .navbar-toggler-icon {*/
+/*    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");*/
+/*}*/
+
+/*nav ul {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+/*nav li {*/
+/*    margin-right: 1rem;*/
+/*}*/
+
+/*nav li a, .logout-form button {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*    padding: 0.5rem 1rem;*/
+/*    border-radius: 4px;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*nav li a:hover, .logout-form button:hover {*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    color: white;*/
+/*}*/
+
+/*.logout-form {*/
+/*    display: inline;*/
+/*}*/
+
+/*.logout-form button {*/
+/*    border: none;*/
+/*    background: none;*/
+/*    cursor: pointer;*/
+/*    color: white;*/
+/*    padding: 0.5rem 1rem;*/
+/*    border-radius: 4px;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.nav-item.dropdown .dropdown-menu {*/
+/*    display: none;*/
+/*    position: absolute;*/
+/*    background-color: rgba(0, 0, 0, 0.8);*/
+/*    min-width: 10rem;*/
+/*    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);*/
+/*    border-radius: 0.25rem;*/
+/*    z-index: 1000;*/
+/*    color: white;*/
+/*}*/
+
+/*.nav-item.dropdown:hover .dropdown-menu {*/
+/*    display: block;*/
+/*}*/
+
+/*.dropdown-menu .dropdown-item {*/
+/*    padding: 0.5rem 1rem;*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*}*/
+
+/*.dropdown-menu .dropdown-item:hover {*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    color: white;*/
+/*}*/
+
+/*.active {*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    color: white;*/
+/*}*/
+
+/*main {*/
+/*    padding: 1rem;*/
+/*    background-color: transparent;*/
+/*    margin: 1rem;*/
+/*    color: white;*/
+/*}*/
+
+/*footer {*/
+/*    background-color: transparent;*/
+/*    text-align: center;*/
+/*    padding: 1rem;*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+/*    color: white;*/
+/*}*/
+
+/*.parking-spot-list {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.parking-spot {*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    margin: 10px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    font-size: 1.2rem;*/
+/*    border-radius: 5px;*/
+/*    color: white;*/
+/*}*/
+
+/*.parking-spot.available {*/
+/*    background-color: green;*/
+/*}*/
+
+/*.parking-spot.occupied {*/
+/*    background-color: red;*/
+/*}*/
+
+/*!* Нови стилове за логин и регистрационни форми *!*/
+/*.form-container {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*}*/
+
+/*.form-box {*/
+/*    background-color: rgba(0, 0, 0, 0.8);*/
+/*    padding: 2rem;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
+/*}*/
+
+/*.form-box h2 {*/
+/*    margin-bottom: 1rem;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.form-box label {*/
+/*    color: #fff;*/
+/*}*/
+
+/*.form-box input {*/
+/*    width: 100%;*/
+/*    padding: 0.5rem;*/
+/*    margin-bottom: 1rem;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*.form-box button {*/
+/*    width: 100%;*/
+/*    padding: 0.5rem;*/
+/*    background-color: #007bff;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.form-box button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*.form-box small.text-danger {*/
+/*    color: #ff6b6b;*/
+/*}*/
+
+/*!*!* New styles for profile sidebar *!*!*/
+/*!*.sidebar {*!*/
+/*!*    width: 200px;*!*/
+/*!*    background-color: rgba(255, 255, 255, 0.1); !* Transparency *!*!*/
+/*!*    padding: 15px;*!*/
+/*!*}*!*/
+
+/*!*.sidebar .nav-button {*!*/
+/*!*    display: block;*!*/
+/*!*    width: 100%;*!*/
+/*!*    padding: 10px;*!*/
+/*!*    margin: 10px 0;*!*/
+/*!*    text-align: left;*!*/
+/*!*    background-color: #007bff;*!*/
+/*!*    color: white;*!*/
+/*!*    border: none;*!*/
+/*!*    border-radius: 4px;*!*/
+/*!*    cursor: pointer;*!*/
+/*!*    transition: background-color 0.3s ease;*!*/
+/*!*}*!*/
+
+/*!*.sidebar .nav-button:hover {*!*/
+/*!*    background-color: #0056b3;*!*/
+/*!*}*!*/
+
+
+/*!* Profile Page Styles *!*/
+/*.profile-container {*/
+/*    display: flex;*/
+/*}*/
+
+/*.content {*/
+/*    flex-grow: 1;*/
+/*    padding: 20px;*/
+/*}*/
+
+/*.readonly-fields {*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.sidebar {*/
+/*    background-color: rgba(255, 255, 255, 0); !* Напълно прозрачен фон *!*/
+/*    padding: 20px;*/
+/*    width: 200px;*/
+/*    border-radius: 8px;*/
+/*}*/
+
+/*.sidebar .nav-button {*/
+/*    display: block;*/
+/*    width: 100%;*/
+/*    padding: 10px;*/
+/*    margin: 10px 0;*/
+/*    text-align: left;*/
+/*    background-color: #007bff;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.sidebar .nav-button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*.form-box {*/
+/*    background-color: rgba(255, 255, 255, 0); !* Напълно прозрачен фон *!*/
+/*    padding: 2rem;*/
+/*    border-radius: 8px;*/
+/*}*/
+
+/*.form-box h2 {*/
+/*    margin-bottom: 1rem;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.form-box label {*/
+/*    font-weight: bold;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.form-box .list-group-item {*/
+/*    background-color: rgba(255, 255, 255, 0); !* Напълно прозрачен фон за списъка *!*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    margin-bottom: 0.5rem;*/
+/*}*/
+
+/*.form-box .list-group-item span {*/
+/*    display: block;*/
+/*}*/
+
+
 body {
     font-family: Arial, sans-serif;
     background-image: url('/images/img5.jpg');
@@ -16,17 +308,17 @@ header {
 }
 
 .navbar-transparent {
-    background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */
-    border: none; /* Премахва рамката */
-    justify-content: center; /* Централизира навбара */
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    justify-content: center;
 }
 
 .navbar-transparent .navbar-nav .nav-link {
-    color: #fff; /* Цвят на текста на линковете */
+    color: #fff;
 }
 
 .navbar-transparent .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0); /* Премахва рамката на бутона */
+    border-color: rgba(255, 255, 255, 0);
 }
 
 .navbar-transparent .navbar-toggler-icon {
@@ -124,6 +416,7 @@ footer {
 .parking-spot-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .parking-spot {
@@ -136,6 +429,8 @@ footer {
     font-size: 1.2rem;
     border-radius: 5px;
     color: white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .parking-spot.available {
@@ -146,7 +441,11 @@ footer {
     background-color: red;
 }
 
-/* Нови стилове за логин и регистрационни форми */
+.parking-spot:hover {
+    transform: scale(1.1);
+}
+
+/* New styles for login and registration forms */
 .form-container {
     display: flex;
     justify-content: center;
@@ -197,32 +496,6 @@ footer {
     color: #ff6b6b;
 }
 
-/*!* New styles for profile sidebar *!*/
-/*.sidebar {*/
-/*    width: 200px;*/
-/*    background-color: rgba(255, 255, 255, 0.1); !* Transparency *!*/
-/*    padding: 15px;*/
-/*}*/
-
-/*.sidebar .nav-button {*/
-/*    display: block;*/
-/*    width: 100%;*/
-/*    padding: 10px;*/
-/*    margin: 10px 0;*/
-/*    text-align: left;*/
-/*    background-color: #007bff;*/
-/*    color: white;*/
-/*    border: none;*/
-/*    border-radius: 4px;*/
-/*    cursor: pointer;*/
-/*    transition: background-color 0.3s ease;*/
-/*}*/
-
-/*.sidebar .nav-button:hover {*/
-/*    background-color: #0056b3;*/
-/*}*/
-
-
 /* Profile Page Styles */
 .profile-container {
     display: flex;
@@ -238,7 +511,7 @@ footer {
 }
 
 .sidebar {
-    background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */
+    background-color: rgba(255, 255, 255, 0);
     padding: 20px;
     width: 200px;
     border-radius: 8px;
@@ -263,7 +536,7 @@ footer {
 }
 
 .form-box {
-    background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */
+    background-color: rgba(255, 255, 255, 0);
     padding: 2rem;
     border-radius: 8px;
 }
@@ -279,7 +552,7 @@ footer {
 }
 
 .form-box .list-group-item {
-    background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */
+    background-color: rgba(255, 255, 255, 0);
     color: #fff;
     border: none;
     margin-bottom: 0.5rem;
@@ -287,4 +560,31 @@ footer {
 
 .form-box .list-group-item span {
     display: block;
+}
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    text-align: center;
+}
+.parking-spot {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    color: white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.parking-spot.available:hover {
+    transform: scale(1.1);
+    background-color: lightgreen;
 }

@@ -111,6 +111,7 @@
                 <span>Парко място: <span th:text="${reservation.parkingSpotLocation}"></span></span>
                 <span>Начало: <span th:text="${reservation.startTime}"></span></span>
                 <span>Край: <span th:text="${reservation.endTime}"></span></span>
+                <span>Превозно средство: <span th:text="${reservation.getVehicleLicensePlate()}" ></span></span>
                 <button class="btn btn-primary mt-3" th:attr="onclick='window.location.href=\'/reservations/edit/' + ${reservation.id} + '\''">Редактиране</button>
             </li>
         </ul>

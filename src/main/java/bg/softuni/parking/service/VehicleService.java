@@ -77,4 +77,10 @@ public class VehicleService {
         dto.setLicensePlate(vehicle.getLicensePlate());
         return dto;
     }
+
+    public boolean hasVehicles(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return !user.getVehicles().isEmpty();
+    }
 }
