@@ -1,0 +1,155 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+<!--    <title>Нова Резервация</title>-->
+<!--    <style>-->
+<!--        .reservation-container {-->
+<!--            padding: 20px;-->
+<!--        }-->
+<!--        .reservation-box {-->
+<!--            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */-->
+<!--            padding: 2rem;-->
+<!--            border-radius: 8px;-->
+<!--            margin-bottom: 1rem;-->
+<!--            border: 1px solid #fff;-->
+<!--        }-->
+<!--        .reservation-box h2 {-->
+<!--            margin-bottom: 1rem;-->
+<!--            color: #fff;-->
+<!--        }-->
+<!--        .reservation-box label {-->
+<!--            font-weight: bold;-->
+<!--            color: #fff;-->
+<!--        }-->
+<!--        .reservation-box .list-group-item {-->
+<!--            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */-->
+<!--            color: #fff;-->
+<!--            border: none;-->
+<!--            margin-bottom: 0.5rem;-->
+<!--        }-->
+<!--        .reservation-box .list-group-item span {-->
+<!--            display: block;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header th:replace="fragments/layout :: layout('reservations')"></header>-->
+
+<!--<main class="container mt-4 reservation-container">-->
+<!--    <div class="reservation-box">-->
+<!--        <h2>Нова Резервация</h2>-->
+<!--        <form th:action="@{/reservations/new}" th:object="${newReservation}" method="post">-->
+<!--            <input type="hidden" th:field="*{parkingSpotId}" />-->
+<!--            <div class="mb-3">-->
+<!--                <label>Парко място:</label>-->
+<!--                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" th:readonly="true">-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label>Начало:</label>-->
+<!--                <input type="datetime-local" class="form-control" th:field="*{startTime}" required>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label>Край:</label>-->
+<!--                <input type="datetime-local" class="form-control" th:field="*{endTime}" required>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label>Превозно средство:</label>-->
+<!--                <select class="form-control" th:field="*{vehicleId}" required>-->
+<!--                    <option value="" disabled selected>Изберете превозно средство</option>-->
+<!--                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.getLicensePlate()}"></option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-success">Добави резервация</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+
+<!--&lt;!&ndash; Bootstrap JS and dependencies &ndash;&gt;-->
+<!--<script th:src="@{/js/jquery.min.js}"></script>-->
+<!--<script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <title>Създаване на нова резервация</title>
+    <style>
+        .reservation-container {
+            padding: 20px;
+        }
+        .reservation-box {
+            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #fff;
+        }
+        .reservation-box h2 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .reservation-box label {
+            font-weight: bold;
+            color: #fff;
+        }
+        .reservation-box .list-group-item {
+            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */
+            color: #fff;
+            border: none;
+            margin-bottom: 0.5rem;
+        }
+        .reservation-box .list-group-item span {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="fragments/layout :: layout('reservations')"></header>
+
+<main class="container mt-4 reservation-container">
+    <div class="reservation-box">
+        <h2>Създаване на нова резервация</h2>
+        <form th:action="@{/reservations/new}" th:object="${newReservation}" method="post">
+            <div class="mb-3">
+                <label>Парко място:</label>
+                <input type="text" class="form-control" th:field="*{parkingSpotId}" readonly>
+            </div>
+            <div class="mb-3">
+                <label>Начало:</label>
+                <input type="datetime-local" class="form-control" th:field="*{startTime}" required>
+            </div>
+            <div class="mb-3">
+                <label>Край:</label>
+                <input type="datetime-local" class="form-control" th:field="*{endTime}" required>
+            </div>
+            <div class="mb-3">
+                <label>Превозно средство:</label>
+                <select class="form-control" th:field="*{vehicleId}" required>
+                    <option value="" disabled selected>Изберете превозно средство</option>
+                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Създай резервация</button>
+        </form>
+    </div>
+</main>
+
+<footer th:replace="fragments/layout :: footer"></footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
