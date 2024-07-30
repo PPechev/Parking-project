@@ -205,11 +205,15 @@
             <input type="hidden" th:field="*{id}" />
             <div class="mb-3">
                 <label>Парко място:</label>
-                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" />
+<!--                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" />-->
+                <select class="form-control" th:field="*{parkingSpotLocation}" required>
+                    <option value="" disabled selected>Изберете парко място </option>
+                    <option th:each="parkingSpot : ${availableParkingSpots}" th:value="${parkingSpot.location}" th:text="${parkingSpot.location}"></option>
+                </select>
             </div>
             <div class="mb-3">
                 <label>Начало:</label>
-                <input type="datetime-local" class="form-control" th:field="*{startTime}" th:value="${#temporals.formatISO(reservation.getStartTime())}" />
+                <input type="datetime-local" class="form-control" th:field="*{startTime}" th:value="${reservation.getStartTime()}" />
             </div>
             <div class="mb-3">
                 <label>Край:</label>

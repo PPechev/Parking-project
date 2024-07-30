@@ -1,5 +1,7 @@
 package bg.softuni.parking.model.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 public class NewReservationDto {
@@ -46,12 +48,24 @@ public class NewReservationDto {
 
 
     private Long parkingSpotId;
+    private String parkingSpotLocation;
+    @DateTimeFormat(pattern = "yyyy-MM-dd-hh-mm")
     private LocalDateTime startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd-hh-mm")
     private LocalDateTime endTime;
     private Long vehicleId;
 
     public Long getParkingSpotId() {
         return parkingSpotId;
+    }
+
+    public String getParkingSpotLocation() {
+        return parkingSpotLocation;
+    }
+
+    public NewReservationDto setParkingSpotLocation(String parkingSpotLocation) {
+        this.parkingSpotLocation = parkingSpotLocation;
+        return this;
     }
 
     public NewReservationDto setParkingSpotId(Long parkingSpotId) {

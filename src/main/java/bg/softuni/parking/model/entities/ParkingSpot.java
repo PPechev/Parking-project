@@ -26,6 +26,11 @@ public class ParkingSpot  extends BaseEntity{
         this.location = location;
         return this;
     }
+//
+//    public boolean isAvailable() {
+//        return available;
+//    }
+
 
     public boolean isAvailable() {
         return available;
@@ -35,4 +40,12 @@ public class ParkingSpot  extends BaseEntity{
         this.available = available;
         return this;
     }
+    //    public boolean isAvailable() {
+//        return available;
+//    }
+//
+//    public ParkingSpot setAvailable(boolean available) {
+//        this.available = available;
+//        return this;
+//    }
 }

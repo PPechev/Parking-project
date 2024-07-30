@@ -114,9 +114,14 @@
     <div class="reservation-box">
         <h2>Добавяне на нова резервация</h2>
         <form th:action="@{/reservations/add}" th:object="${reservation}" method="post">
+            <input type="hidden" th:field="*{id}" />
             <div class="mb-3">
                 <label>Парко място:</label>
-                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" required>
+<!--                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" required>-->
+                <select class="form-control" th:field="*{parkingSpotLocation}" required>
+                    <option value="" disabled selected>Изберете парко място </option>
+                    <option th:each="parkingSpot : ${availableParkingSpots}" th:value="${parkingSpot.location}" th:text="${parkingSpot.location}"></option>
+                </select>
             </div>
             <div class="mb-3">
                 <label>Начало:</label>
@@ -145,6 +150,5 @@
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
-
 
 

@@ -124,7 +124,8 @@
         <form th:action="@{/reservations/new}" th:object="${newReservation}" method="post">
             <div class="mb-3">
                 <label>Парко място:</label>
-                <input type="text" class="form-control" th:field="*{parkingSpotId}" readonly>
+                <input type="hidden" th:field="*{parkingSpotId}" />
+                <input type="text" class="form-control" th:value="${newReservation.parkingSpotId}"   readonly>
             </div>
             <div class="mb-3">
                 <label>Начало:</label>
