@@ -9,8 +9,11 @@ import java.util.Optional;
 
 @Repository
 public interface ParkingSpotRepository  extends JpaRepository<ParkingSpot, Long> {
-    List<ParkingSpot> findAllByAvailable(boolean isItAvailable);
+    List<ParkingSpot> findAllByAvailable(boolean available);
 
     Optional<ParkingSpot> findByLocation(String location);
+
+    Optional<ParkingSpot> findById(Long id);
+
 
 }

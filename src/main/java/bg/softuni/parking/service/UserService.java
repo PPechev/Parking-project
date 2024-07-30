@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -201,6 +202,30 @@ public class UserService {
         User currentUser = getCurrentUser();
         Long selectedVehicleId = currentUser.getSelectedVehicleId();
         return vehicleRepository.findById(selectedVehicleId).orElse(null);
+    }
+
+
+
+    public List<UserDto> getAllUsersWithReservations() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(user -> {
+                    UserDto userDto = new UserDto();
+                    userDto.setUsername(user.getUsername());
+                    userDto.setReservations(user.getReservations()
+                            .stream()
+                            .map(reservation -> {
+                                ReservationDto reservationDto = new ReservationDto();
+                                reservationDto.setStartTime(reservation.getStartTime());
+                                reservationDto.setEndTime(reservation.getEndTime());
+                                reservationDto.setVehicleLicensePlate(reservation.getVehicle().getLicensePlate());
+                                reservationDto.setParkingSpotLocation(reservation.getParkingSpot().getLocation());
+                                return reservationDto;
+                            })
+                            .collect(Collectors.toList()));
+                    return userDto;
+                })
+                .collect(Collectors.toList());
     }
 
 }

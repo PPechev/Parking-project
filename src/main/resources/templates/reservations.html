@@ -109,13 +109,17 @@
         <ul class="list-group">
             <li class="list-group-item" th:each="reservation : ${reservations}">
                 <span>Парко място: <span th:text="${reservation.parkingSpotLocation}"></span></span>
-                <span>Начало: <span th:text="${reservation.startTime}"></span></span>
-                <span>Край: <span th:text="${reservation.endTime}"></span></span>
                 <span>Превозно средство: <span th:text="${reservation.getVehicleLicensePlate()}" ></span></span>
+                <span>Начало: <span th:text="${#strings.replace(reservation.startTime.toString(), 'T', ' ')}"></span></span>
+<!--                <span>Начало: <span type="datetime-local" th:text="*{reservation.startTime}"></span></span>-->
+<!--                <span>Край: <span type="datetime-local" th:text="*{reservation.endTime}"></span></span>-->
+
+                <span>Край: <span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span></span>
                 <button class="btn btn-primary mt-3" th:attr="onclick='window.location.href=\'/reservations/edit/' + ${reservation.id} + '\''">Редактиране</button>
             </li>
         </ul>
         <button class="btn btn-success mt-3" onclick="window.location.href='/reservations/add'">Добавяне на нова резервация</button>
+
     </div>
 </main>
 

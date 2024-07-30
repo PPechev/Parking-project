@@ -5,6 +5,7 @@ import bg.softuni.parking.repository.ParkingSpotRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParkingSpotService {
@@ -26,5 +27,18 @@ public class ParkingSpotService {
 
     public List<ParkingSpot> findAll() {
         return parkingSpotRepository.findAll();
+    }
+
+    public String getLocationById(Long spotId) {
+        return parkingSpotRepository.findById(spotId).get().getLocation();
+
+    }
+
+    public ParkingSpot getCurrentParkingSpotById(Long spotId) {
+        return parkingSpotRepository.findById(spotId).get();
+    }
+
+    public Optional<ParkingSpot> getParkingSpotById(String location) {
+        return parkingSpotRepository.findByLocation(location);
     }
 }
