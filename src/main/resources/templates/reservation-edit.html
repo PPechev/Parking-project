@@ -413,10 +413,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Обнови информация</button>
-        </form>
-        <form th:method="delete" th:action="@{/reservations/delete/{id}(id=${reservation.id})}" style="margin-top: 1rem;">
-            <input class="btn btn-danger" type="submit" value="Изтриване на резервацията">
-        </form>
+
         </form>
     </div>
 </main>

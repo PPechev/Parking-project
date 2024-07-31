@@ -23,12 +23,14 @@ public class ReservationService {
     private final UserRepository userRepository;
     private final ParkingSpotRepository parkingSpotRepository;
     private final VehicleRepository vehicleRepository;
+    private final ParkingSpotService parkingSpotService;
 
-    public ReservationService(ReservationRepository reservationRepository, UserRepository userRepository, ParkingSpotRepository parkingSpotRepository, VehicleRepository vehicleRepository) {
+    public ReservationService(ReservationRepository reservationRepository, UserRepository userRepository, ParkingSpotRepository parkingSpotRepository, VehicleRepository vehicleRepository, ParkingSpotService parkingSpotService) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
         this.parkingSpotRepository = parkingSpotRepository;
         this.vehicleRepository = vehicleRepository;
+        this.parkingSpotService = parkingSpotService;
     }
 
     public List<ReservationDto> getUserReservations(String username) {
@@ -137,6 +139,7 @@ public class ReservationService {
     }
 
     public void deleteReservation(Long id) {
+        parkingSpotService.makeSpotAvailable(getReservationById(id).getParkingSpotLocation());
         reservationRepository.deleteById(id);
     }
 }

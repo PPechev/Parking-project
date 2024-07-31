@@ -46,8 +46,13 @@
             <li class="list-group-item" th:each="vehicle : ${vehicles}">
                 <span>Регистрационен номер: <span th:text="${vehicle.licensePlate}"></span></span>
                 <button class="btn btn-primary mt-3" th:attr="onclick='window.location.href=\'/vehicles/edit/' + ${vehicle.id} + '\''">Редактиране</button>
+                </form>
+                <form th:method="delete" th:action="@{/vehicles/delete/{id}(id=${vehicle.getId()})}" style="margin-top: 1rem;">
+                    <input class="btn btn-danger" type="submit" value="Изтриване на превозно средство">
+                </form>
             </li>
         </ul>
+
         <button class="btn btn-success mt-3" onclick="window.location.href='/vehicles/add'">Добавяне на ново превозно средство</button>
     </div>
 </main>

@@ -19,4 +19,9 @@ public interface ReservationRepository  extends JpaRepository<Reservation, Long>
     List<Reservation> findByUser(User user);
 
     void deleteById(Long id);
+
+    boolean existsByVehicleId(Long vehicleId);
+
+    List<Reservation> findAllByVehicleId(Long vehicleId);
+
 }

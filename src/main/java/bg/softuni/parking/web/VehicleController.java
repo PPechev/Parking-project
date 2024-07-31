@@ -3,6 +3,7 @@ package bg.softuni.parking.web;
 import bg.softuni.parking.model.dto.VehicleDto;
 import bg.softuni.parking.model.entities.Vehicle;
 import bg.softuni.parking.service.VehicleService;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class VehicleController {
     @GetMapping
     public String viewVehicles(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
+
         model.addAttribute("vehicles", vehicles);
         return "vehicles";
     }
@@ -58,5 +60,11 @@ public class VehicleController {
         List<Vehicle> vehicles = vehicleService.findAll();
         model.addAttribute("vehicles", vehicles);
         return "all-vehicles";
+    }
+    @DeleteMapping("/delete/{id}")
+    public String deleteVehicle(@PathVariable Long id, Model model) {
+
+        vehicleService.deleteVehicle(id);
+        return "redirect:/vehicles";
     }
 }

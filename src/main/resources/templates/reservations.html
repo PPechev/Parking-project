@@ -116,9 +116,14 @@
 
                 <span>Край: <span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span></span>
                 <button class="btn btn-primary mt-3" th:attr="onclick='window.location.href=\'/reservations/edit/' + ${reservation.id} + '\''">Редактиране</button>
+                </form>
+                <form th:method="delete" th:action="@{/reservations/delete/{id}(id=${reservation.id})}" style="margin-top: 1rem;">
+                    <input class="btn btn-danger" type="submit" value="Изтриване на резервацията">
+                </form>
             </li>
         </ul>
         <button class="btn btn-success mt-3" onclick="window.location.href='/reservations/add'">Добавяне на нова резервация</button>
+
 
     </div>
 </main>

@@ -47,6 +47,11 @@
     <div class="vehicle-list">
         <div class="vehicle-item list-group-item" th:each="vehicle : ${vehicles}">
             <span><strong>Регистрационен номер:</strong> <span th:text="${vehicle.licensePlate}"></span></span>
+            <span><strong>Потребител:</strong> <span th:text="${vehicle.getOwner().username}"></span></span>
+            </form>
+            <form th:method="delete" th:action="@{/vehicles/delete/{id}(id=${vehicle.id})}" style="margin-top: 1rem;">
+                <input class="btn btn-danger" type="submit" value="Изтриване на превозно средство">
+            </form>
 
             <a class="btn btn-primary edit-button" th:href="@{/vehicles/edit/{id}(id=${vehicle.id})}">Редактиране</a>
         </div>

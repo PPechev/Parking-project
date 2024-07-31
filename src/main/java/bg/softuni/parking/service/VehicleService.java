@@ -1,8 +1,10 @@
 package bg.softuni.parking.service;
 
 import bg.softuni.parking.model.dto.VehicleDto;
+import bg.softuni.parking.model.entities.Reservation;
 import bg.softuni.parking.model.entities.User;
 import bg.softuni.parking.model.entities.Vehicle;
+import bg.softuni.parking.repository.ReservationRepository;
 import bg.softuni.parking.repository.UserRepository;
 import bg.softuni.parking.repository.VehicleRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,10 +19,12 @@ public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
     private final UserRepository userRepository;
+    private final ReservationRepository reservationRepository;
 
-    public VehicleService(VehicleRepository vehicleRepository, UserRepository userRepository) {
+    public VehicleService(VehicleRepository vehicleRepository, UserRepository userRepository, ReservationRepository reservationRepository) {
         this.vehicleRepository = vehicleRepository;
         this.userRepository = userRepository;
+        this.reservationRepository = reservationRepository;
     }
 
 
@@ -83,4 +87,17 @@ public class VehicleService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return !user.getVehicles().isEmpty();
     }
+
+    public void deleteVehicle(Long id) {
+        List<Reservation> allByVehicleId = reservationRepository.findAllByVehicleId(id);
+        allByVehicleId.forEach(r -> r.getParkingSpot().setAvailable(true));
+        allByVehicleId.forEach(reservationRepository::delete);
+
+        vehicleRepository.deleteById(id);
+    }
+    public boolean hasReservations(Long vehicleId) {
+        return reservationRepository.existsByVehicleId(vehicleId);
+    }
+
+
 }

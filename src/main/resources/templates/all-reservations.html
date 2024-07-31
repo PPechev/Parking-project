@@ -51,6 +51,10 @@
             <span><strong>Край:</strong> <span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span></span>
             <span><strong>Парко място:</strong> <span th:text="${reservation.parkingSpot.location}"></span></span>
             <a class="btn btn-primary edit-button" th:href="@{/reservations/edit/{id}(id=${reservation.id})}">Редактиране</a>
+            </form>
+            <form th:method="delete" th:action="@{/reservations/delete/{id}(id=${reservation.id})}" style="margin-top: 1rem;">
+                <input class="btn btn-danger" type="submit" value="Изтриване на резервацията">
+            </form>
         </div>
     </div>
 </main>
