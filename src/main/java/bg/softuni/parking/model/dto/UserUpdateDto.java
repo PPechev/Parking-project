@@ -1,10 +1,28 @@
 package bg.softuni.parking.model.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 public class UserUpdateDto {
+
+    @NotNull
+    @Size(min = 3,  message = "Полето трябва да съдържа поне 3 символа!")
     private String username;
+    @NotNull
+    @Email
     private String email;
+    @NotNull
+    @Size(max = 15 , message = "Полето не може да съдържа повече от 15 символа!")
+    @Pattern(regexp = "^[A-Za-z]+$" , message = "Полето трябва да съдържа само букви!")
     private String firstName;
+    @NotNull
+    @Size(max = 15 , message = "Полето не може да съдържа повече от 15 символа!")
+    @Pattern(regexp = "^[A-Za-z]+$" , message = "Полето трябва да съдържа само букви!")
     private String lastName;
+    @NotNull
+    @Pattern(regexp = "^\\d+$", message = "Полето трябва да съдържа само цифри")
     private String phone;
 
     // Getters and Setters

@@ -77,7 +77,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/", true)
+                        .defaultSuccessUrl("/")
 //             addition for error
                         .failureUrl("/login?error=true"))
 

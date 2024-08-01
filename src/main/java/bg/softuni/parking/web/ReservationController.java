@@ -129,6 +129,7 @@ import bg.softuni.parking.model.entities.Reservation;
 import bg.softuni.parking.service.ParkingSpotService;
 import bg.softuni.parking.service.ReservationService;
 import bg.softuni.parking.service.VehicleService;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -170,21 +171,15 @@ public class ReservationController {
 //        model.addAttribute("availableParkingSpots", availableParkingSpots);
 //        return "reservation-edit";
 //    }
-    //vanya
+    //changed
+    @Transactional
     @GetMapping("/edit/{id}")
     public String editReservation(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        ReservationDto reservation = reservationService.getReservationById(id);
-        ParkingSpot currentParkingSpot =  parkingSpotService.getParkingSpotById(reservation.getParkingSpotLocation()).get();
-        currentParkingSpot.setAvailable(true);
-        parkingSpotService.saveParkingSpot(currentParkingSpot);
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-        String formattedStartTime = reservation.getStartTime().format(formatter);
-        String formattedEndTime = reservation.getEndTime().format(formatter);
-        reservation.setStartTime(LocalDateTime.parse(formattedStartTime, formatter));
-        reservation.setEndTime(LocalDateTime.parse(formattedEndTime, formatter));
+        ReservationDto reservation = reservationService.getFormattedReservationById(id);
+        parkingSpotService.makeSpotAvailable(reservation.getParkingSpotLocation());
+
         List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
-
 
         model.addAttribute("reservation", reservation);
         model.addAttribute("vehicles", vehicles);
@@ -215,13 +210,13 @@ public class ReservationController {
         reservationService.addReservation(reservationDto, userDetails.getUsername());
         return "redirect:/reservations";
     }
-
-    @GetMapping("/all-reservations")
-    public String getAllReservations(Model model) {
-        List<Reservation> reservations = reservationService.findAll();
-        model.addAttribute("reservations", reservations);
-        return "all-reservations";
-    }
+//
+//    @GetMapping("/all-reservations")
+//    public String getAllReservations(Model model) {
+//        List<Reservation> reservations = reservationService.findAll();
+//        model.addAttribute("reservations", reservations);
+//        return "all-reservations";
+//    }
 
 //    @GetMapping("/new/{parkingSpotLocation}")
 //    public String newReservationForm(@PathVariable String parkingSpotLocation, Model model, @AuthenticationPrincipal UserDetails userDetails) {

@@ -31,11 +31,11 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping("/all-users")
-    public String getAllUsers(Model model) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
-        return "all-users";
-    }
+//    @GetMapping("/all-users")
+//    public String getAllUsers(Model model) {
+//        List<User> users = userService.findAll();
+//        model.addAttribute("users", users);
+//        return "all-users";
+//    }
 
 }
