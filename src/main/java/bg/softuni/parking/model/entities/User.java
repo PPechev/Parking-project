@@ -143,8 +143,20 @@ public class User extends BaseEntity {
 
     @Transient
     private Long selectedVehicleId;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BankCard> bankCards = new HashSet<>();
 
     // Getters and setters
+
+
+    public Set<BankCard> getBankCards() {
+        return bankCards;
+    }
+
+    public User setBankCards(Set<BankCard> bankCards) {
+        this.bankCards = bankCards;
+        return this;
+    }
 
     public Long getSelectedVehicleId() {
         return selectedVehicleId;

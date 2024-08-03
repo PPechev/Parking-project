@@ -1,0 +1,109 @@
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Bank Cards</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header th:replace="fragments/layout :: header"></header>-->
+<!--<div class="container">-->
+<!--    <h1>Bank Cards</h1>-->
+<!--    <div th:if="${bankCards.isEmpty()}">-->
+<!--        <p>No bank cards found.</p>-->
+<!--    </div>-->
+<!--    <div th:if="${!bankCards.isEmpty()}">-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Card Number</th>-->
+<!--                <th>Actions</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="card : ${bankCards}">-->
+<!--                <td th:text="${card.cardNumber}"></td>-->
+<!--                <td>-->
+<!--                    <a th:href="@{/bank-cards/edit/{id}(id=${card.id})}" class="btn btn-primary">Edit</a>-->
+<!--                    <a th:href="@{/bank-cards/delete/{id}(id=${card.id})}" class="btn btn-danger">Delete</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--    <a th:href="@{/bank-cards/add}" class="btn btn-success">Add New Card</a>-->
+<!--</div>-->
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <title>Моите банкови карти</title>
+    <style>
+        .card-container {
+            padding: 20px;
+        }
+        .card-box {
+            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #fff;
+        }
+        .card-box h2 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .card-box label {
+            font-weight: bold;
+            color: #fff;
+        }
+        .card-box .list-group-item {
+            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */
+            color: #fff;
+            border: none;
+            margin-bottom: 0.5rem;
+        }
+        .card-box .list-group-item span {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="fragments/layout :: layout('cards')"></header>
+
+<main class="container mt-4 card-container">
+    <div class="card-box">
+        <h2>Моите банкови карти</h2>
+        <ul class="list-group">
+            <li class="list-group-item" th:each="card : ${bankCards}">
+                <span>Номер на карта: <span th:text="${card.cardNumber}"></span></span>
+                <button class="btn btn-primary mt-3" th:attr="onclick='window.location.href=\'/bank-cards/edit/' + ${card.id} + '\''">Редактиране</button>
+                <form th:method="delete" th:action="@{/bank-cards/delete/{id}(id=${card.id})}" style="margin-top: 1rem;">
+                    <input class="btn btn-danger" type="submit" value="Изтриване на карта">
+                </form>
+            </li>
+        </ul>
+
+        <button class="btn btn-success mt-3" onclick="window.location.href='/bank-cards/add'">Добавяне на нова карта</button>
+    </div>
+</main>
+
+<footer th:replace="fragments/layout :: footer"></footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

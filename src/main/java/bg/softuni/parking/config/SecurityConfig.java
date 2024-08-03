@@ -70,14 +70,15 @@ public class SecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/login", "/register", "/parking-spots").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/parking-spots","/login?error=true").permitAll()
+                        .requestMatchers("admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/", true)
 //             addition for error
                         .failureUrl("/login?error=true"))
 

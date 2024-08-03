@@ -95,6 +95,7 @@ public class ReservationDto {
     private String vehicleLicensePlate; // TODO
 
 
+
     // Getters and Setters
 
 

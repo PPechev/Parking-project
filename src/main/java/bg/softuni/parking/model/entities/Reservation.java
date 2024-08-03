@@ -26,7 +26,19 @@ public class Reservation extends BaseEntity {
     @Column(name = "end_time" ,nullable = false)
     private LocalDateTime endTime;
 
+    private boolean isItPaid ;
+
     public Reservation() {
+        this.isItPaid=false;
+    }
+
+    public boolean isItPaid() {
+        return isItPaid;
+    }
+
+    public Reservation setItPaid(boolean itPaid) {
+        isItPaid = itPaid;
+        return this;
     }
 
     public User getUser() {

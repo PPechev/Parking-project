@@ -1,3 +1,119 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+<!--    <title>Профил</title>-->
+<!--    <style>-->
+<!--        .profile-container {-->
+<!--            display: flex;-->
+<!--        }-->
+<!--        .content {-->
+<!--            flex-grow: 1;-->
+<!--            padding: 20px;-->
+<!--        }-->
+<!--        .readonly-fields {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+<!--        .sidebar {-->
+<!--            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */-->
+<!--            padding: 20px;-->
+<!--            width: 200px;-->
+<!--            border-radius: 8px;-->
+<!--        }-->
+<!--        .sidebar .nav-button {-->
+<!--            display: block;-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            margin: 10px 0;-->
+<!--            text-align: left;-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+<!--        .sidebar .nav-button:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+<!--        .form-box {-->
+<!--            background-color: rgba(0, 0, 0, 0.6); /* Напълно прозрачен фон */-->
+<!--            padding: 2rem;-->
+<!--            border-radius: 8px;-->
+<!--        }-->
+<!--        .form-box h2 {-->
+<!--            margin-bottom: 1rem;-->
+<!--            color: #fff;-->
+<!--        }-->
+<!--        .form-box label {-->
+<!--            font-weight: bold;-->
+<!--            color: #fff;-->
+<!--        }-->
+<!--        .form-box .list-group-item {-->
+<!--            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */-->
+<!--            color: #fff;-->
+<!--            border: none;-->
+<!--            margin-bottom: 0.5rem;-->
+<!--        }-->
+<!--        .form-box .list-group-item span {-->
+<!--            display: block;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header th:replace="fragments/layout :: layout('profile')"></header>-->
+
+<!--<main class="container mt-4 profile-container">-->
+<!--    <div class="sidebar">-->
+<!--        <button class="nav-button" onclick="window.location.href='/profile'">Моят профил</button>-->
+<!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/reservations?username=' + ${user.username} + '\''">Моите резервации</button>-->
+<!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/vehicles?username=' + ${user.username} + '\''">Моите превозни средства</button>-->
+<!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/bankcard?username=' + ${user.username} + '\''">банкова карта</button>-->
+<!--        <button class="nav-button" onclick="window.location.href='/change-password'">Смяна на парола</button>-->
+<!--    </div>-->
+<!--    <div class="content">-->
+<!--        <div class="form-box">-->
+<!--            <h2>Моят профил</h2>-->
+<!--            <div class="readonly-fields">-->
+<!--                <div class="mb-3">-->
+<!--                    <label>Потребителско име:</label>-->
+<!--                    <span th:text="${user.username}"></span>-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    <label>Имейл:</label>-->
+<!--                    <span th:text="${user.email}"></span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label>Име:</label>-->
+<!--                <span th:text="${user.firstName}"></span>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label>Фамилия:</label>-->
+<!--                <span th:text="${user.lastName}"></span>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label>Телефон:</label>-->
+<!--                <span th:text="${user.phone}"></span>-->
+<!--            </div>-->
+
+<!--            <button class="btn btn-primary mt-3" onclick="window.location.href='/profile/edit'">Редактиране на профил</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+
+<!--&lt;!&ndash; Bootstrap JS and dependencies &ndash;&gt;-->
+<!--<script th:src="@{/js/jquery.min.js}"></script>-->
+<!--<script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -65,12 +181,12 @@
 </head>
 <body>
 <header th:replace="fragments/layout :: layout('profile')"></header>
-
-<main class="container mt-4 profile-container">
+<main class="profile-container">
     <div class="sidebar">
         <button class="nav-button" onclick="window.location.href='/profile'">Моят профил</button>
         <button class="nav-button" th:attr="onclick='window.location.href=\'/reservations?username=' + ${user.username} + '\''">Моите резервации</button>
         <button class="nav-button" th:attr="onclick='window.location.href=\'/vehicles?username=' + ${user.username} + '\''">Моите превозни средства</button>
+        <button class="nav-button" th:attr="onclick='window.location.href=\'/bank-cards?username=' + ${user.username} + '\''">Банкови карти</button> <!-- Нов бутон за банкови карти -->
         <button class="nav-button" onclick="window.location.href='/change-password'">Смяна на парола</button>
     </div>
     <div class="content">
