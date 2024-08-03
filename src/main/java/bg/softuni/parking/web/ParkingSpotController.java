@@ -23,36 +23,6 @@ public class ParkingSpotController {
         this.parkingSpotService = parkingSpotService;
         this.userService = userService;
     }
-//
-//    @GetMapping("/parking-spots")
-//        public String listParkingSpots(Model model) {
-//            List<ParkingSpot> parkingSpots = parkingSpotService.findAll();
-//            model.addAttribute("parkingSpots", parkingSpots);
-//            return "parking-spots";
-//        }
-
-
-//    @GetMapping("/parking-spots")
-//    public String getParkingSpots(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-//        boolean isLoggedIn = userDetails != null;
-//        boolean hasVehicles = false;
-//
-//        if (isLoggedIn) {
-//            // Проверете дали потребителят има създадени превозни средства
-//            Optional<User> optionalUser = userService.findByUsername(userDetails.getUsername());
-//            if (optionalUser.isPresent()) {
-//                User user = optionalUser.get();
-//                hasVehicles = !user.getVehicles().isEmpty();
-//            }
-//        }
-//
-//        List<ParkingSpot> parkingSpots = parkingSpotService.findAll();
-//        model.addAttribute("parkingSpots", parkingSpots);
-//        model.addAttribute("isLoggedIn", isLoggedIn);
-//        model.addAttribute("hasVehicles", hasVehicles);
-//
-//        return "parking-spots";
-//    }
 
     @GetMapping("/parking-spots")
     public String getParkingSpots(Model model, @AuthenticationPrincipal UserDetails userDetails) {

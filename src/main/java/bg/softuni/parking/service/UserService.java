@@ -133,24 +133,24 @@ public class UserService {
 
     }
 
-    private ReservationDto convertToReservationDto(Reservation reservation) {
-        ReservationDto dto = new ReservationDto();
-        dto.setId(reservation.getId());
-        dto.setParkingSpotLocation(reservation.getParkingSpot().getLocation());
-        dto.setStartTime(reservation.getStartTime());
-        dto.setEndTime(reservation.getEndTime());
-        return dto;
-    }
+//    private ReservationDto convertToReservationDto(Reservation reservation) {
+//        ReservationDto dto = new ReservationDto();
+//        dto.setId(reservation.getId());
+//        dto.setParkingSpotLocation(reservation.getParkingSpot().getLocation());
+//        dto.setStartTime(reservation.getStartTime());
+//        dto.setEndTime(reservation.getEndTime());
+//        return dto;
+//    }
 
 
-    public void updateUserProfile(UserProfileDto userProfileDto) {
-        User user = userRepository.findByUsername(userProfileDto.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        user.setEmail(userProfileDto.getEmail());
-        user.setFirstName(userProfileDto.getFirstName());
-        user.setLastName(userProfileDto.getLastName());
-        user.setPhone(userProfileDto.getPhone());
-        userRepository.save(user);
-    }
+//    public void updateUserProfile(UserProfileDto userProfileDto) {
+//        User user = userRepository.findByUsername(userProfileDto.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//        user.setEmail(userProfileDto.getEmail());
+//        user.setFirstName(userProfileDto.getFirstName());
+//        user.setLastName(userProfileDto.getLastName());
+//        user.setPhone(userProfileDto.getPhone());
+//        userRepository.save(user);
+//    }
 
 
 
@@ -161,50 +161,50 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void changeEmail(String username, ChangeEmailDto changeEmailDto) {
-        User user = userRepository.findByUsername(username).orElseThrow();
-        user.setEmail(changeEmailDto.getNewEmail());
-        userRepository.save(user);
-    }
+//    public void changeEmail(String username, ChangeEmailDto changeEmailDto) {
+//        User user = userRepository.findByUsername(username).orElseThrow();
+//        user.setEmail(changeEmailDto.getNewEmail());
+//        userRepository.save(user);
+//    }
 
-    public User getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (User) authentication.getPrincipal();
-    }
+//    public User getCurrentUser() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return (User) authentication.getPrincipal();
+//    }
 
-    public void setSelectedVehicle(Long vehicleId) {
-        User currentUser = getCurrentUser();
-        currentUser.setSelectedVehicleId(vehicleId);
-    }
-
-    public Vehicle getSelectedVehicle() {
-        User currentUser = getCurrentUser();
-        Long selectedVehicleId = currentUser.getSelectedVehicleId();
-        return vehicleRepository.findById(selectedVehicleId).orElse(null);
-    }
-
-
-    public List<UserDto> getAllUsersWithReservations() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
-                .map(user -> {
-                    UserDto userDto = new UserDto();
-                    userDto.setUsername(user.getUsername());
-                    userDto.setReservations(user.getReservations()
-                            .stream()
-                            .map(reservation -> {
-                                ReservationDto reservationDto = new ReservationDto();
-                                reservationDto.setStartTime(reservation.getStartTime());
-                                reservationDto.setEndTime(reservation.getEndTime());
-                                reservationDto.setVehicleLicensePlate(reservation.getVehicle().getLicensePlate());
-                                reservationDto.setParkingSpotLocation(reservation.getParkingSpot().getLocation());
-                                return reservationDto;
-                            })
-                            .collect(Collectors.toList()));
-                    return userDto;
-                })
-                .collect(Collectors.toList());
-    }
+//    public void setSelectedVehicle(Long vehicleId) {
+//        User currentUser = getCurrentUser();
+//        currentUser.setSelectedVehicleId(vehicleId);
+//    }
+//
+//    public Vehicle getSelectedVehicle() {
+//        User currentUser = getCurrentUser();
+//        Long selectedVehicleId = currentUser.getSelectedVehicleId();
+//        return vehicleRepository.findById(selectedVehicleId).orElse(null);
+//    }
+//
+//
+//    public List<UserDto> getAllUsersWithReservations() {
+//        List<User> users = userRepository.findAll();
+//        return users.stream()
+//                .map(user -> {
+//                    UserDto userDto = new UserDto();
+//                    userDto.setUsername(user.getUsername());
+//                    userDto.setReservations(user.getReservations()
+//                            .stream()
+//                            .map(reservation -> {
+//                                ReservationDto reservationDto = new ReservationDto();
+//                                reservationDto.setStartTime(reservation.getStartTime());
+//                                reservationDto.setEndTime(reservation.getEndTime());
+//                                reservationDto.setVehicleLicensePlate(reservation.getVehicle().getLicensePlate());
+//                                reservationDto.setParkingSpotLocation(reservation.getParkingSpot().getLocation());
+//                                return reservationDto;
+//                            })
+//                            .collect(Collectors.toList()));
+//                    return userDto;
+//                })
+//                .collect(Collectors.toList());
+//    }
 
     //  addition
     public boolean usernameExists(String username) {

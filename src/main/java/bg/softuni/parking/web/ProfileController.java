@@ -35,18 +35,7 @@ public class ProfileController {
         return "profile"; // Името на шаблона за информационната страница
     }
 
-//    @GetMapping("/profile/edit")
-//    public String editProfile(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-//        UserProfileDto userProfileDto = userService.getUserProfile(userDetails.getUsername());
-//        model.addAttribute("user", userProfileDto);
-//        return "profile-edit"; // Името на шаблона за редактиране
-//    }
-//
-//    @PostMapping("/profile/update")
-//    public String updateProfile(@ModelAttribute UserUpdateDto userUpdateDto, @AuthenticationPrincipal UserDetails userDetails) {
-//        userService.updateUser(userUpdateDto);
-//        return "redirect:/profile";
-//    }
+
 
 
   @GetMapping("/profile/edit")

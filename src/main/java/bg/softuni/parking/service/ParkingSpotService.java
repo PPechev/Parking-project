@@ -34,13 +34,13 @@ public class ParkingSpotService {
 
     }
 
-    public ParkingSpot getCurrentParkingSpotById(Long spotId) {
-        return parkingSpotRepository.findById(spotId).get();
-    }
-
-    public Optional<ParkingSpot> getParkingSpotById(String location) {
-        return parkingSpotRepository.findByLocation(location);
-    }
+//    public ParkingSpot getCurrentParkingSpotById(Long spotId) {
+//        return parkingSpotRepository.findById(spotId).get();
+//    }
+//
+//    public Optional<ParkingSpot> getParkingSpotById(String location) {
+//        return parkingSpotRepository.findByLocation(location);
+//    }
 
     public void makeSpotAvailable(String parkingSpotLocation) {
        ParkingSpot parkingSpot = parkingSpotRepository.findByLocation(parkingSpotLocation).orElseThrow(() -> new IllegalArgumentException("Invalid parking spot"));

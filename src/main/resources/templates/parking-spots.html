@@ -1,17 +1,18 @@
 
 
+
 <!--<!DOCTYPE html>-->
 <!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
 <!--<head>-->
 <!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
-<!--    <title>Паркинг места</title>-->
+<!--    <title th:text="#{parking.spots.title}">Паркинг места</title>-->
 <!--</head>-->
 <!--<body>-->
 <!--<header th:replace="fragments/layout :: header"></header>-->
 
 <!--<main>-->
 <!--    <div class="center-content">-->
-<!--        <h2>Паркинг места</h2>-->
+<!--        <h2 th:text="#{parking.spots.title}">Паркинг места</h2>-->
 <!--        <div class="parking-spot-list">-->
 <!--            <div th:each="spot : ${parkingSpots}" class="parking-spot"-->
 <!--                 th:classappend="${spot.available} ? 'available' : 'occupied'">-->
@@ -34,13 +35,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <title th:text="#{parking.spots.title}">Паркинг места</title>
+    <style>
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+        .parking-spot-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .parking-spot {
+            flex: 1 1 150px;
+            max-width: 200px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #343a40;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .parking-spot.available {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .parking-spot.occupied {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .parking-spot button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .parking-spot button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .parking-spot button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 <header th:replace="fragments/layout :: header"></header>
 
-<main>
+<main class="container mt-5">
     <div class="center-content">
         <h2 th:text="#{parking.spots.title}">Паркинг места</h2>
         <div class="parking-spot-list">
@@ -58,5 +113,9 @@
 </main>
 
 <footer th:replace="fragments/layout :: footer"></footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

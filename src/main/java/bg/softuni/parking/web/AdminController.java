@@ -59,30 +59,43 @@ public class AdminController {
         reservationService.deleteReservation(id);
         return "redirect:/admin/all-reservations";
     }
+//
+//    @Transactional
+//    @GetMapping("/edit/{id}")
+//    public String editVehicle(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+////        ReservationDto reservation = reservationService.getFormattedReservationById(id);
+//        VehicleDto vehicle = vehicleService.getVehicleById(id);
+////        parkingSpotService.makeSpotAvailable(reservation.getParkingSpotLocation());
+//
+//        List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
+//        List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
+//
+////        model.addAttribute("reservation", reservation);
+//        model.addAttribute("vehicles", vehicles);
+////        model.addAttribute("availableParkingSpots", availableParkingSpots);
+//
+//        return "reservation-edit";
+//    }
+//
+//
+//    @PostMapping("/update")
+//    public String updateReservation(@ModelAttribute ReservationDto reservationDto) {
+//        reservationService.updateReservation(reservationDto);
+//        return "redirect:/admin/all-reservations";
+//    }
 
-    @Transactional
     @GetMapping("/edit/{id}")
-    public String editReservation(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        ReservationDto reservation = reservationService.getFormattedReservationById(id);
-        parkingSpotService.makeSpotAvailable(reservation.getParkingSpotLocation());
-
-        List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
-        List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
-
-        model.addAttribute("reservation", reservation);
-        model.addAttribute("vehicles", vehicles);
-        model.addAttribute("availableParkingSpots", availableParkingSpots);
-
-        return "reservation-edit";
+    public String editVehicle(@PathVariable Long id, Model model) {
+        VehicleDto vehicle = vehicleService.getVehicleById(id);
+        model.addAttribute("vehicle", vehicle);
+        return "vehicles-edit";
     }
-
 
     @PostMapping("/update")
-    public String updateReservation(@ModelAttribute ReservationDto reservationDto) {
-        reservationService.updateReservation(reservationDto);
-        return "redirect:/admin/all-reservations";
+    public String updateVehicle(@ModelAttribute VehicleDto vehicleDto) {
+        vehicleService.updateVehicle(vehicleDto);
+        return "redirect:/all-vehicles";
     }
-
 
     @GetMapping("/all-vehicles")
     public String getAllVehicles(Model model) {
@@ -94,7 +107,7 @@ public class AdminController {
     public String deleteVehicle(@PathVariable Long id, Model model) {
 
         vehicleService.deleteVehicle(id);
-        return "redirect:/admin/all-vehicles";
+        return "redirect:/all-vehicles";
     }
 
 

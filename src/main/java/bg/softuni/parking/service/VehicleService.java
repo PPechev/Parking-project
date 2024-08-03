@@ -40,9 +40,9 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
-    public List<Vehicle> findVehiclesByUsername(String username) {
-        return vehicleRepository.findByOwnerUsername(username);
-    }
+//    public List<Vehicle> findVehiclesByUsername(String username) {
+//        return vehicleRepository.findByOwnerUsername(username);
+//    }
 
 
     public List<VehicleDto> getUserVehicles(String username) {
@@ -95,9 +95,9 @@ public class VehicleService {
 
         vehicleRepository.deleteById(id);
     }
-    public boolean hasReservations(Long vehicleId) {
-        return reservationRepository.existsByVehicleId(vehicleId);
-    }
+//    public boolean hasReservations(Long vehicleId) {
+//        return reservationRepository.existsByVehicleId(vehicleId);
+//    }
 
 
 }
