@@ -1,28 +1,63 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--    <title>Логин</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header th:replace="fragments/layout :: layout('login')"></header>-->
+
+<!--<main class="form-container">-->
+<!--    <div class="form-box">-->
+<!--        <h2>Логин</h2>-->
+<!--        <form th:action="@{/login}" method="post">-->
+<!--            &lt;!&ndash;     addition for error &ndash;&gt;-->
+<!--            <div th:if="${loginError}" class="bg-danger" th:text="${loginError}"></div>-->
+<!--            <div>-->
+<!--                <label for="username">Потребителско име:</label>-->
+<!--                <input type="text" id="username" name="username" required>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label for="password">Парола:</label>-->
+<!--                <input type="password" id="password" name="password" required>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <button type="submit">Логин</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <title>Логин</title>
+    <title th:text="#{login.title}">Логин</title>
 </head>
 <body>
 <header th:replace="fragments/layout :: layout('login')"></header>
 
 <main class="form-container">
     <div class="form-box">
-        <h2>Логин</h2>
+        <h2 th:text="#{login.title}">Логин</h2>
         <form th:action="@{/login}" method="post">
             <!--     addition for error -->
             <div th:if="${loginError}" class="bg-danger" th:text="${loginError}"></div>
             <div>
-                <label for="username">Потребителско име:</label>
+                <label for="username" th:text="#{login.username}">Потребителско име:</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div>
-                <label for="password">Парола:</label>
+                <label for="password" th:text="#{login.password}">Парола:</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <div>
-                <button type="submit">Логин</button>
+                <button type="submit" th:text="#{login.button}">Логин</button>
             </div>
         </form>
     </div>

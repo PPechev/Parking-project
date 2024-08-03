@@ -7,118 +7,20 @@
 <!--    <title>Паркинг места</title>-->
 <!--</head>-->
 <!--<body>-->
-<!--<header th:replace="fragments/layout"></header>-->
-
-<!--<main>-->
-<!--    <div>-->
-<!--        <h2>Паркинг места</h2>-->
-<!--        <div class="parking-spot-list">-->
-<!--            <div th:each="spot : ${parkingSpots}" class="parking-spot" th:classappend="${spot.available} ? 'available' : 'occupied'">-->
-<!--                <span th:text="${spot.location}"></span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</main>-->
-
-<!--<footer th:replace="fragments/layout :: footer"></footer>-->
-<!--</body>-->
-<!--</html>-->
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
-<!--    <title>Паркинг места</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<header th:replace="fragments/layout"></header>-->
-
-<!--<main>-->
-<!--    <div>-->
-<!--        <h2>Паркинг места</h2>-->
-<!--        <div class="parking-spot-list">-->
-<!--            <div th:each="spot : ${parkingSpots}" class="parking-spot" th:classappend="${spot.available} ? 'available' : 'occupied'" role="button" aria-pressed="false">-->
-<!--                <span th:text="${spot.location}"></span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</main>-->
-
-<!--<footer th:replace="fragments/layout :: footer"></footer>-->
-<!--</body>-->
-<!--</html>-->
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
-<!--    <title>Паркинг места</title>-->
-<!--    <script th:inline="javascript">-->
-<!--        /*<![CDATA[*/-->
-<!--        function handleParkingSpotClick(isAvailable, isLoggedIn, hasVehicles, spotId) {-->
-<!--            if (!isLoggedIn) {-->
-<!--                window.location.href = /*[[@{/login}]]*/ '/login';-->
-<!--            } else if (!hasVehicles) {-->
-<!--                window.location.href = /*[[@{/vehicles/add}]]*/ '/vehicles/create';-->
-<!--            } else if (isAvailable) {-->
-<!--                window.location.href = /*[[@{/reservations/add}]]*/ '/reservations/create?spotId=' + spotId;-->
-<!--            }-->
-<!--        }-->
-<!--        /*]]>*/-->
-<!--    </script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<header th:replace="fragments/layout"></header>-->
+<!--<header th:replace="fragments/layout :: header"></header>-->
 
 <!--<main>-->
 <!--    <div class="center-content">-->
 <!--        <h2>Паркинг места</h2>-->
 <!--        <div class="parking-spot-list">-->
-<!--            <div th:each="spot : ${parkingSpots}" class="parking-spot" th:classappend="${spot.available} ? 'available' : 'occupied'"-->
-<!--                 th:onclick="'handleParkingSpotClick(' + ${spot.available} + ', ' + ${isLoggedIn} + ', ' + ${hasVehicles} + ', ' + ${spot.id} + ')'"-->
-<!--                 role="button" aria-pressed="false">-->
-<!--                <span th:text="${spot.location}"></span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</main>-->
-
-<!--<footer th:replace="fragments/layout :: footer"></footer>-->
-<!--</body>-->
-<!--</html>-->
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
-<!--    <title>Паркинг места</title>-->
-<!--    <script th:inline="javascript">-->
-<!--        /*<![CDATA[*/-->
-<!--        function handleParkingSpotClick(isAvailable, isLoggedIn, hasVehicles, spotId) {-->
-<!--            if (!isLoggedIn) {-->
-<!--                window.location.href = /*[[@{/login}]]*/ '/login';-->
-<!--            } else if (!hasVehicles) {-->
-<!--                window.location.href = /*[[@{/vehicles/add}]]*/ '/vehicles/create';-->
-<!--            } else if (isAvailable) {-->
-<!--                window.location.href = /*[[@{/reservations/new}]]*/ '/reservations/new?spotId=' + spotId;-->
-<!--            }-->
-<!--        }-->
-<!--        /*]]>*/-->
-<!--    </script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<header th:replace="fragments/layout"></header>-->
-
-<!--<main>-->
-<!--    <div class="center-content">-->
-<!--        <h2>Паркинг места</h2>-->
-<!--        <div class="parking-spot-list">-->
-<!--            <div th:each="spot : ${parkingSpots}" class="parking-spot" th:classappend="${spot.available} ? 'available' : 'occupied'"-->
-<!--                 th:onclick="'handleParkingSpotClick(' + ${spot.available} + ', ' + ${isLoggedIn} + ', ' + ${hasVehicles} + ', ' + ${spot.id} + ')'"-->
-<!--                 role="button" aria-pressed="false">-->
-<!--                <span th:text="${spot.location}"></span>-->
+<!--            <div th:each="spot : ${parkingSpots}" class="parking-spot"-->
+<!--                 th:classappend="${spot.available} ? 'available' : 'occupied'">-->
+<!--                <form th:action="@{/reservations/new}" method="get">-->
+<!--                    <input type="hidden" name="spotId" th:value="${spot.id}" />-->
+<!--                    <button type="submit" th:disabled="${!spot.available}">-->
+<!--                        <span th:text="${spot.location}"></span>-->
+<!--                    </button>-->
+<!--                </form>-->
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
@@ -133,14 +35,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <title>Паркинг места</title>
+    <title th:text="#{parking.spots.title}">Паркинг места</title>
 </head>
 <body>
 <header th:replace="fragments/layout :: header"></header>
 
 <main>
     <div class="center-content">
-        <h2>Паркинг места</h2>
+        <h2 th:text="#{parking.spots.title}">Паркинг места</h2>
         <div class="parking-spot-list">
             <div th:each="spot : ${parkingSpots}" class="parking-spot"
                  th:classappend="${spot.available} ? 'available' : 'occupied'">

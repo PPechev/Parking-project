@@ -1,3 +1,6 @@
+
+
+
 <!--<!DOCTYPE html>-->
 <!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
 <!--<head>-->
@@ -45,10 +48,22 @@
 <!--        <ul class="list-group">-->
 <!--            <li class="list-group-item" th:each="reservation : ${reservations}">-->
 <!--                <span>Парко място: <span th:text="${reservation.parkingSpotLocation}"></span></span>-->
-<!--                <span>Начало: <span th:text="${reservation.startTime}"></span></span>-->
-<!--                <span>Край: <span th:text="${reservation.endTime}"></span></span>-->
+<!--                <span>Превозно средство: <span th:text="${reservation.getVehicleLicensePlate()}" ></span></span>-->
+<!--                <span>Начало: <span th:text="${#strings.replace(reservation.startTime.toString(), 'T', ' ')}"></span></span>-->
+<!--&lt;!&ndash;                <span>Начало: <span type="datetime-local" th:text="*{reservation.startTime}"></span></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span>Край: <span type="datetime-local" th:text="*{reservation.endTime}"></span></span>&ndash;&gt;-->
+
+<!--                <span>Край: <span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span></span>-->
+<!--                <button class="btn btn-primary mt-3" th:attr="onclick='window.location.href=\'/reservations/edit/' + ${reservation.id} + '\''">Редактиране</button>-->
+<!--                </form>-->
+<!--                <form th:method="delete" th:action="@{/reservations/delete/{id}(id=${reservation.id})}" style="margin-top: 1rem;">-->
+<!--                    <input class="btn btn-danger" type="submit" value="Изтриване на резервацията">-->
+<!--                </form>-->
 <!--            </li>-->
 <!--        </ul>-->
+<!--        <button class="btn btn-success mt-3" onclick="window.location.href='/reservations/add'">Добавяне на нова резервация</button>-->
+
+
 <!--    </div>-->
 <!--</main>-->
 
@@ -61,7 +76,6 @@
 <!--</html>-->
 
 
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -69,7 +83,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <title>Моите резервации</title>
+    <title th:text="#{reservations.title}">Моите резервации</title>
     <style>
         .reservation-container {
             padding: 20px;
@@ -105,26 +119,24 @@
 
 <main class="container mt-4 reservation-container">
     <div class="reservation-box">
-        <h2>Моите резервации</h2>
+        <h2 th:text="#{reservations.title}">Моите резервации</h2>
         <ul class="list-group">
             <li class="list-group-item" th:each="reservation : ${reservations}">
-                <span>Парко място: <span th:text="${reservation.parkingSpotLocation}"></span></span>
-                <span>Превозно средство: <span th:text="${reservation.getVehicleLicensePlate()}" ></span></span>
-                <span>Начало: <span th:text="${#strings.replace(reservation.startTime.toString(), 'T', ' ')}"></span></span>
-<!--                <span>Начало: <span type="datetime-local" th:text="*{reservation.startTime}"></span></span>-->
-<!--                <span>Край: <span type="datetime-local" th:text="*{reservation.endTime}"></span></span>-->
-
-                <span>Край: <span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span></span>
-                <button class="btn btn-primary mt-3" th:attr="onclick='window.location.href=\'/reservations/edit/' + ${reservation.id} + '\''">Редактиране</button>
-                </form>
+                <span th:text="#{reservations.parkingSpot} + ': '">
+                    Парко място: </span><span th:text="${reservation.parkingSpotLocation}"></span>
+                <span th:text="#{reservations.vehicle} + ': '">
+                    Превозно средство: </span><span th:text="${reservation.vehicleLicensePlate}"></span>
+                <span th:text="#{reservations.startTime} + ': '">
+                    Начало: </span><span th:text="${#strings.replace(reservation.startTime.toString(), 'T', ' ')}"></span>
+                <span th:text="#{reservations.endTime} + ': '">
+                    Край: </span><span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span>
+                <button class="btn btn-primary mt-3" th:text="#{reservations.edit}" th:attr="onclick='window.location.href=\'/reservations/edit/' + ${reservation.id} + '\''">Редактиране</button>
                 <form th:method="delete" th:action="@{/reservations/delete/{id}(id=${reservation.id})}" style="margin-top: 1rem;">
-                    <input class="btn btn-danger" type="submit" value="Изтриване на резервацията">
+                    <input class="btn btn-danger" type="submit" th:value="#{reservations.delete}">
                 </form>
             </li>
         </ul>
-        <button class="btn btn-success mt-3" onclick="window.location.href='/reservations/add'">Добавяне на нова резервация</button>
-
-
+        <button class="btn btn-success mt-3" th:text="#{reservations.add}" onclick="window.location.href='/reservations/add'">Добавяне на нова резервация</button>
     </div>
 </main>
 

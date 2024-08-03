@@ -1,4 +1,6 @@
 
+
+
 <!--<!DOCTYPE html>-->
 <!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
 <!--<head>-->
@@ -47,7 +49,6 @@
 <!--            <input type="hidden" th:field="*{id}" />-->
 <!--            <div class="mb-3">-->
 <!--                <label>Парко място:</label>-->
-<!--&lt;!&ndash;                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" required>&ndash;&gt;-->
 <!--                <select class="form-control" th:field="*{parkingSpotLocation}" required>-->
 <!--                    <option value="" disabled selected>Изберете парко място </option>-->
 <!--                    <option th:each="parkingSpot : ${availableParkingSpots}" th:value="${parkingSpot.location}" th:text="${parkingSpot.location}"></option>-->
@@ -55,17 +56,17 @@
 <!--            </div>-->
 <!--            <div class="mb-3">-->
 <!--                <label>Начало:</label>-->
-<!--                <input type="datetime-local" class="form-control" th:field="*{startTime}" required>-->
+<!--                <input type="datetime-local" class="form-control" th:field="*{startTime}" id="startTime" required>-->
 <!--            </div>-->
 <!--            <div class="mb-3">-->
 <!--                <label>Край:</label>-->
-<!--                <input type="datetime-local" class="form-control" th:field="*{endTime}" required>-->
+<!--                <input type="datetime-local" class="form-control" th:field="*{endTime}" id="endTime" required>-->
 <!--            </div>-->
 <!--            <div class="mb-3">-->
 <!--                <label>Превозно средство:</label>-->
 <!--                <select class="form-control" th:field="*{vehicleId}" required>-->
 <!--                    <option value="" disabled selected>Изберете превозно средство</option>-->
-<!--                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.getLicensePlate()}"></option>-->
+<!--                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}"></option>-->
 <!--                </select>-->
 <!--            </div>-->
 <!--            <div class="mb-3">-->
@@ -74,6 +75,10 @@
 <!--                    <option value="" disabled selected>Изберете банкова карта</option>-->
 <!--                    <option th:each="card : ${bankingCards}" th:value="${card.id}" th:text="${card.cardNumber}"></option>-->
 <!--                </select>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label>Цена за престоя:</label>-->
+<!--                <input type="text" class="form-control" id="totalPrice" readonly>-->
 <!--            </div>-->
 <!--            <button type="submit" class="btn btn-success">Добави резервация</button>-->
 <!--        </form>-->
@@ -85,6 +90,32 @@
 <!--&lt;!&ndash; Bootstrap JS and dependencies &ndash;&gt;-->
 <!--<script th:src="@{/js/jquery.min.js}"></script>-->
 <!--<script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        const startTimeInput = document.getElementById('startTime');-->
+<!--        const endTimeInput = document.getElementById('endTime');-->
+<!--        const totalPriceInput = document.getElementById('totalPrice');-->
+
+<!--        function calculateTotalPrice() {-->
+<!--            const startTime = new Date(startTimeInput.value);-->
+<!--            const endTime = new Date(endTimeInput.value);-->
+
+<!--            if (startTime && endTime && startTime < endTime) {-->
+<!--                const diffMs = endTime - startTime;-->
+<!--                const diffHours = diffMs / (1000 * 60 * 60);-->
+<!--                const pricePerHour = 2; // Цената на час може да се промени-->
+<!--                const totalPrice = diffHours * pricePerHour;-->
+
+<!--                totalPriceInput.value = totalPrice.toFixed(2) + ' лв';-->
+<!--            } else {-->
+<!--                totalPriceInput.value = "";-->
+<!--            }-->
+<!--        }-->
+
+<!--        startTimeInput.addEventListener('change', calculateTotalPrice);-->
+<!--        endTimeInput.addEventListener('change', calculateTotalPrice);-->
+<!--    });-->
+<!--</script>-->
 <!--</body>-->
 <!--</html>-->
 
@@ -96,7 +127,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <title>Добавяне на нова резервация</title>
+    <title th:text="#{reservation.title}">Добавяне на нова резервация</title>
     <style>
         .reservation-container {
             padding: 20px;
@@ -132,43 +163,43 @@
 
 <main class="container mt-4 reservation-container">
     <div class="reservation-box">
-        <h2>Добавяне на нова резервация</h2>
+        <h2 th:text="#{reservation.title}">Добавяне на нова резервация</h2>
         <form th:action="@{/reservations/add}" th:object="${reservation}" method="post">
             <input type="hidden" th:field="*{id}" />
             <div class="mb-3">
-                <label>Парко място:</label>
+                <label th:text="#{reservation.parkingSpot}">Парко място:</label>
                 <select class="form-control" th:field="*{parkingSpotLocation}" required>
-                    <option value="" disabled selected>Изберете парко място </option>
+                    <option value="" disabled selected th:text="#{reservation.parkingSpot}">Изберете парко място </option>
                     <option th:each="parkingSpot : ${availableParkingSpots}" th:value="${parkingSpot.location}" th:text="${parkingSpot.location}"></option>
                 </select>
             </div>
             <div class="mb-3">
-                <label>Начало:</label>
-                <input type="datetime-local" class="form-control" th:field="*{startTime}" id="startTime" required>
+                <label th:text="#{reservation.startTime}">Начало:</label>
+                <input type="datetime-local" class="form-control" th:field="*{startTime}" required>
             </div>
             <div class="mb-3">
-                <label>Край:</label>
-                <input type="datetime-local" class="form-control" th:field="*{endTime}" id="endTime" required>
+                <label th:text="#{reservation.endTime}">Край:</label>
+                <input type="datetime-local" class="form-control" th:field="*{endTime}" required>
             </div>
             <div class="mb-3">
-                <label>Превозно средство:</label>
+                <label th:text="#{reservation.vehicle}">Превозно средство:</label>
                 <select class="form-control" th:field="*{vehicleId}" required>
-                    <option value="" disabled selected>Изберете превозно средство</option>
+                    <option value="" disabled selected th:text="#{reservation.vehicle}">Изберете превозно средство</option>
                     <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}"></option>
                 </select>
             </div>
             <div class="mb-3">
-                <label>Банкова карта:</label>
+                <label th:text="#{reservation.bankCard}">Банкова карта:</label>
                 <select class="form-control" th:field="*{bankCardId}" required>
-                    <option value="" disabled selected>Изберете банкова карта</option>
+                    <option value="" disabled selected th:text="#{reservation.bankCard}">Изберете банкова карта</option>
                     <option th:each="card : ${bankingCards}" th:value="${card.id}" th:text="${card.cardNumber}"></option>
                 </select>
             </div>
             <div class="mb-3">
-                <label>Цена за престоя:</label>
+                <label th:text="#{reservation.totalPrice}">Цена за престоя:</label>
                 <input type="text" class="form-control" id="totalPrice" readonly>
             </div>
-            <button type="submit" class="btn btn-success">Добави резервация</button>
+            <button type="submit" class="btn btn-success" th:text="#{reservation.addButton}">Добави резервация</button>
         </form>
     </div>
 </main>

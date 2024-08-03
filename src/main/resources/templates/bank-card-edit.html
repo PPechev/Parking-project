@@ -1,0 +1,51 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Edit Bank Card</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header th:replace="fragments/layout :: header"></header>-->
+<!--<div class="container">-->
+<!--    <h1>Edit Bank Card</h1>-->
+<!--    <form th:action="@{/bank-cards/edit}" method="post" th:object="${bankCard}">-->
+<!--        <input type="hidden" th:value="${bankCard.id}" name="id">-->
+<!--        <div class="form-group">-->
+<!--            <label for="cardNumber">Card Number</label>-->
+<!--            <input type="text" id="cardNumber" name="cardNumber" class="form-control" th:field="*{cardNumber}" required>-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-success">Save Changes</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--<footer th:replace="fragments/layout :: footer"></footer>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{card.edit.title}">Редактиране на банкова карта</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header th:replace="fragments/layout :: header"></header>
+<div class="container">
+    <h1 th:text="#{card.edit.title}">Редактиране на банкова карта</h1>
+    <form th:action="@{/bank-cards/edit}" method="post" th:object="${bankCard}">
+        <input type="hidden" th:value="${bankCard.id}" name="id">
+        <div class="form-group">
+            <label for="cardNumber" th:text="#{card.number}">Номер на карта</label>
+            <input type="text" id="cardNumber" name="cardNumber" class="form-control" th:field="*{cardNumber}" required>
+        </div>
+        <button type="submit" class="btn btn-success" th:text="#{card.edit.button}">Запази промените</button>
+    </form>
+</div>
+<footer th:replace="fragments/layout :: footer"></footer>
+</body>
+</html>

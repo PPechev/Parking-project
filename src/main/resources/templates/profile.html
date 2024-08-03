@@ -1,3 +1,6 @@
+
+
+
 <!--<!DOCTYPE html>-->
 <!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
 <!--<head>-->
@@ -65,13 +68,12 @@
 <!--</head>-->
 <!--<body>-->
 <!--<header th:replace="fragments/layout :: layout('profile')"></header>-->
-
-<!--<main class="container mt-4 profile-container">-->
+<!--<main class="profile-container">-->
 <!--    <div class="sidebar">-->
 <!--        <button class="nav-button" onclick="window.location.href='/profile'">Моят профил</button>-->
 <!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/reservations?username=' + ${user.username} + '\''">Моите резервации</button>-->
 <!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/vehicles?username=' + ${user.username} + '\''">Моите превозни средства</button>-->
-<!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/bankcard?username=' + ${user.username} + '\''">банкова карта</button>-->
+<!--        <button class="nav-button" th:attr="onclick='window.location.href=\'/bank-cards?username=' + ${user.username} + '\''">Банкови карти</button> &lt;!&ndash; Нов бутон за банкови карти &ndash;&gt;-->
 <!--        <button class="nav-button" onclick="window.location.href='/change-password'">Смяна на парола</button>-->
 <!--    </div>-->
 <!--    <div class="content">-->
@@ -121,7 +123,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <title>Профил</title>
+    <title th:text="#{profile.title}">Профил</title>
     <style>
         .profile-container {
             display: flex;
@@ -183,39 +185,39 @@
 <header th:replace="fragments/layout :: layout('profile')"></header>
 <main class="profile-container">
     <div class="sidebar">
-        <button class="nav-button" onclick="window.location.href='/profile'">Моят профил</button>
-        <button class="nav-button" th:attr="onclick='window.location.href=\'/reservations?username=' + ${user.username} + '\''">Моите резервации</button>
-        <button class="nav-button" th:attr="onclick='window.location.href=\'/vehicles?username=' + ${user.username} + '\''">Моите превозни средства</button>
-        <button class="nav-button" th:attr="onclick='window.location.href=\'/bank-cards?username=' + ${user.username} + '\''">Банкови карти</button> <!-- Нов бутон за банкови карти -->
-        <button class="nav-button" onclick="window.location.href='/change-password'">Смяна на парола</button>
+        <button class="nav-button" onclick="window.location.href='/profile'" th:text="#{profile.myProfile}">Моят профил</button>
+        <button class="nav-button" th:attr="onclick='window.location.href=\'/reservations?username=' + ${user.username} + '\''" th:text="#{profile.myReservations}">Моите резервации</button>
+        <button class="nav-button" th:attr="onclick='window.location.href=\'/vehicles?username=' + ${user.username} + '\''" th:text="#{profile.myVehicles}">Моите превозни средства</button>
+        <button class="nav-button" th:attr="onclick='window.location.href=\'/bank-cards?username=' + ${user.username} + '\''" th:text="#{profile.myBankCards}">Банкови карти</button> <!-- Нов бутон за банкови карти -->
+        <button class="nav-button" onclick="window.location.href='/change-password'" th:text="#{profile.changePassword}">Смяна на парола</button>
     </div>
     <div class="content">
         <div class="form-box">
-            <h2>Моят профил</h2>
+            <h2 th:text="#{profile.myProfile}">Моят профил</h2>
             <div class="readonly-fields">
                 <div class="mb-3">
-                    <label>Потребителско име:</label>
+                    <label th:text="#{profile.username}">Потребителско име:</label>
                     <span th:text="${user.username}"></span>
                 </div>
                 <div class="mb-3">
-                    <label>Имейл:</label>
+                    <label th:text="#{profile.email}">Имейл:</label>
                     <span th:text="${user.email}"></span>
                 </div>
             </div>
             <div class="mb-3">
-                <label>Име:</label>
+                <label th:text="#{profile.firstName}">Име:</label>
                 <span th:text="${user.firstName}"></span>
             </div>
             <div class="mb-3">
-                <label>Фамилия:</label>
+                <label th:text="#{profile.lastName}">Фамилия:</label>
                 <span th:text="${user.lastName}"></span>
             </div>
             <div class="mb-3">
-                <label>Телефон:</label>
+                <label th:text="#{profile.phone}">Телефон:</label>
                 <span th:text="${user.phone}"></span>
             </div>
 
-            <button class="btn btn-primary mt-3" onclick="window.location.href='/profile/edit'">Редактиране на профил</button>
+            <button class="btn btn-primary mt-3" onclick="window.location.href='/profile/edit'" th:text="#{profile.editProfile}">Редактиране на профил</button>
         </div>
     </div>
 </main>
