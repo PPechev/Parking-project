@@ -1,335 +1,4 @@
-<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
-<!--&lt;!&ndash;<html xmlns:th="http://www.thymeleaf.org" lang="en">&ndash;&gt;-->
-<!--&lt;!&ndash;<head>&ndash;&gt;-->
-<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
-<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">&ndash;&gt;-->
-<!--&lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/styles.css}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <title>Редактиране на резервация</title>&ndash;&gt;-->
-<!--&lt;!&ndash;    <style>&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-container {&ndash;&gt;-->
-<!--&lt;!&ndash;            padding: 20px;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box {&ndash;&gt;-->
-<!--&lt;!&ndash;            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */&ndash;&gt;-->
-<!--&lt;!&ndash;            padding: 2rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            border-radius: 8px;&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 1rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            border: 1px solid #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box h2 {&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 1rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box label {&ndash;&gt;-->
-<!--&lt;!&ndash;            font-weight: bold;&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box .list-group-item {&ndash;&gt;-->
-<!--&lt;!&ndash;            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;            border: none;&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 0.5rem;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box .list-group-item span {&ndash;&gt;-->
-<!--&lt;!&ndash;            display: block;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-<!--&lt;!&ndash;</head>&ndash;&gt;-->
-<!--&lt;!&ndash;<body>&ndash;&gt;-->
-<!--&lt;!&ndash;<header th:replace="fragments/layout :: layout('reservations')"></header>&ndash;&gt;-->
 
-<!--&lt;!&ndash;<main class="container mt-4 reservation-container">&ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="reservation-box">&ndash;&gt;-->
-<!--&lt;!&ndash;        <h2>Редактиране на резервация</h2>&ndash;&gt;-->
-<!--&lt;!&ndash;        <form th:action="@{/reservations/update}" method="post">&ndash;&gt;-->
-<!--&lt;!&ndash;            <input type="hidden" th:value="${reservation.id}" name="id">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Парко място:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="text" class="form-control" name="parkingSpotLocation" th:value="${reservation.parkingSpotLocation}">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Начало:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="datetime-local" class="form-control" name="startTime" th:value="${#temporals.formatISO(reservation.getStartTime())}">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Край:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="datetime-local" class="form-control" name="endTime" th:value="${#temporals.formatISO(reservation.getEndTime())}">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Превозно средство:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <select class="form-control" >&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option value="" disabled selected>Изберете превозно средство</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.getLicensePlate()}"></option>&ndash;&gt;-->
-<!--&lt;!&ndash;                </select>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <button type="submit" class="btn btn-primary">Обнови информация</button>&ndash;&gt;-->
-<!--&lt;!&ndash;        </form>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;</main>&ndash;&gt;-->
-
-<!--&lt;!&ndash;<footer th:replace="fragments/layout :: footer"></footer>&ndash;&gt;-->
-
-<!--&lt;!&ndash;&lt;!&ndash; Bootstrap JS and dependencies &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;<script th:src="@{/js/jquery.min.js}"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;<script th:src="@{/js/bootstrap.bundle.min.js}"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;</body>&ndash;&gt;-->
-<!--&lt;!&ndash;</html>&ndash;&gt;-->
-
-
-<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
-<!--&lt;!&ndash;<html xmlns:th="http://www.thymeleaf.org" lang="en">&ndash;&gt;-->
-<!--&lt;!&ndash;<head>&ndash;&gt;-->
-<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
-<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">&ndash;&gt;-->
-<!--&lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/styles.css}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <title>Редактиране на резервация</title>&ndash;&gt;-->
-<!--&lt;!&ndash;    <style>&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-container {&ndash;&gt;-->
-<!--&lt;!&ndash;            padding: 20px;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box {&ndash;&gt;-->
-<!--&lt;!&ndash;            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */&ndash;&gt;-->
-<!--&lt;!&ndash;            padding: 2rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            border-radius: 8px;&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 1rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            border: 1px solid #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box h2 {&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 1rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box label {&ndash;&gt;-->
-<!--&lt;!&ndash;            font-weight: bold;&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box .list-group-item {&ndash;&gt;-->
-<!--&lt;!&ndash;            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;            border: none;&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 0.5rem;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box .list-group-item span {&ndash;&gt;-->
-<!--&lt;!&ndash;            display: block;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-<!--&lt;!&ndash;</head>&ndash;&gt;-->
-<!--&lt;!&ndash;<body>&ndash;&gt;-->
-<!--&lt;!&ndash;<header th:replace="fragments/layout :: layout('reservations')"></header>&ndash;&gt;-->
-
-<!--&lt;!&ndash;<main class="container mt-4 reservation-container">&ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="reservation-box">&ndash;&gt;-->
-<!--&lt;!&ndash;        <h2>Редактиране на резервация</h2>&ndash;&gt;-->
-<!--&lt;!&ndash;        <form th:action="@{/reservations/update}" th:object="${reservation}" method="post">&ndash;&gt;-->
-<!--&lt;!&ndash;            <input type="hidden" th:field="*{id}" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Парко място:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" />&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Начало:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="datetime-local" class="form-control" th:field="*{startTime}" />&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Край:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="datetime-local" class="form-control" th:field="*{endTime}" />&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Превозно средство:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <select class="form-control" th:field="*{vehicleId}">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option value="" disabled selected>Изберете превозно средство</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}" th:selected="${vehicle.id == reservation.vehicleId}"></option>&ndash;&gt;-->
-<!--&lt;!&ndash;                </select>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <button type="submit" class="btn btn-primary">Обнови информация</button>&ndash;&gt;-->
-<!--&lt;!&ndash;        </form>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;</main>&ndash;&gt;-->
-
-<!--&lt;!&ndash;<footer th:replace="fragments/layout :: footer"></footer>&ndash;&gt;-->
-
-<!--&lt;!&ndash;&lt;!&ndash; Bootstrap JS and dependencies &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;<script th:src="@{/js/jquery.min.js}"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;<script th:src="@{/js/bootstrap.bundle.min.js}"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;</body>&ndash;&gt;-->
-<!--&lt;!&ndash;</html>&ndash;&gt;-->
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
-<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
-<!--    <title>Редактиране на резервация</title>-->
-<!--    <style>-->
-<!--        .reservation-container {-->
-<!--            padding: 20px;-->
-<!--        }-->
-<!--        .reservation-box {-->
-<!--            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */-->
-<!--            padding: 2rem;-->
-<!--            border-radius: 8px;-->
-<!--            margin-bottom: 1rem;-->
-<!--            border: 1px solid #fff;-->
-<!--        }-->
-<!--        .reservation-box h2 {-->
-<!--            margin-bottom: 1rem;-->
-<!--            color: #fff;-->
-<!--        }-->
-<!--        .reservation-box label {-->
-<!--            font-weight: bold;-->
-<!--            color: #fff;-->
-<!--        }-->
-<!--        .reservation-box .list-group-item {-->
-<!--            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */-->
-<!--            color: #fff;-->
-<!--            border: none;-->
-<!--            margin-bottom: 0.5rem;-->
-<!--        }-->
-<!--        .reservation-box .list-group-item span {-->
-<!--            display: block;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<header th:replace="fragments/layout :: layout('reservations')"></header>-->
-
-<!--<main class="container mt-4 reservation-container">-->
-<!--    <div class="reservation-box">-->
-<!--        <h2>Редактиране на резервация</h2>-->
-<!--        <form th:action="@{/reservations/update}" th:object="${reservation}" method="post">-->
-<!--            <input type="hidden" th:field="*{id}" />-->
-<!--            <div class="mb-3">-->
-<!--                <label>Парко място:</label>-->
-<!--&lt;!&ndash;                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" />&ndash;&gt;-->
-<!--                <select class="form-control" th:field="*{parkingSpotLocation}" required>-->
-<!--                    <option value="" disabled selected>Изберете парко място </option>-->
-<!--                    <option th:each="parkingSpot : ${availableParkingSpots}" th:value="${parkingSpot.location}" th:text="${parkingSpot.location}"></option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label>Начало:</label>-->
-<!--                <input type="datetime-local" class="form-control" th:field="*{startTime}" th:value="${reservation.getStartTime()}" />-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label>Край:</label>-->
-<!--                <input type="datetime-local" class="form-control" th:field="*{endTime}" th:value="${#temporals.formatISO(reservation.getEndTime())}" />-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label>Превозно средство:</label>-->
-<!--                <select class="form-control" th:field="*{vehicleId}">-->
-<!--                    <option value="" disabled selected>Изберете превозно средство</option>-->
-<!--                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}" th:selected="${vehicle.id == reservation.vehicleId}"></option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--            <button type="submit" class="btn btn-primary">Обнови информация</button>-->
-<!--        </form>-->
-<!--    </div>-->
-<!--</main>-->
-
-<!--<footer th:replace="fragments/layout :: footer"></footer>-->
-
-<!--&lt;!&ndash; Bootstrap JS and dependencies &ndash;&gt;-->
-<!--<script th:src="@{/js/jquery.min.js}"></script>-->
-<!--<script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
-<!--</body>-->
-<!--</html>-->
-
-
-
-<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
-<!--&lt;!&ndash;<html xmlns:th="http://www.thymeleaf.org" lang="en">&ndash;&gt;-->
-<!--&lt;!&ndash;<head>&ndash;&gt;-->
-<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
-<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">&ndash;&gt;-->
-<!--&lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/styles.css}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <title>Редактиране на резервация</title>&ndash;&gt;-->
-<!--&lt;!&ndash;    <style>&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-container {&ndash;&gt;-->
-<!--&lt;!&ndash;            padding: 20px;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box {&ndash;&gt;-->
-<!--&lt;!&ndash;            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон */&ndash;&gt;-->
-<!--&lt;!&ndash;            padding: 2rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            border-radius: 8px;&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 1rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            border: 1px solid #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box h2 {&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 1rem;&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box label {&ndash;&gt;-->
-<!--&lt;!&ndash;            font-weight: bold;&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box .list-group-item {&ndash;&gt;-->
-<!--&lt;!&ndash;            background-color: rgba(255, 255, 255, 0); /* Напълно прозрачен фон за списъка */&ndash;&gt;-->
-<!--&lt;!&ndash;            color: #fff;&ndash;&gt;-->
-<!--&lt;!&ndash;            border: none;&ndash;&gt;-->
-<!--&lt;!&ndash;            margin-bottom: 0.5rem;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;        .reservation-box .list-group-item span {&ndash;&gt;-->
-<!--&lt;!&ndash;            display: block;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-<!--&lt;!&ndash;</head>&ndash;&gt;-->
-<!--&lt;!&ndash;<body>&ndash;&gt;-->
-<!--&lt;!&ndash;<header th:replace="fragments/layout :: layout('reservations')"></header>&ndash;&gt;-->
-
-<!--&lt;!&ndash;<main class="container mt-4 reservation-container">&ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="reservation-box">&ndash;&gt;-->
-<!--&lt;!&ndash;        <h2>Редактиране на резервация</h2>&ndash;&gt;-->
-<!--&lt;!&ndash;        <form th:action="@{/reservations/update}" th:object="${reservation}" method="post">&ndash;&gt;-->
-<!--&lt;!&ndash;            <input type="hidden" th:field="*{id}" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Парко място:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="text" class="form-control" th:field="*{parkingSpotLocation}" />&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Начало:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="datetime-local" id="startTime" class="form-control" />&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Край:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="datetime-local" id="endTime" class="form-control" />&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Превозно средство:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <select class="form-control" th:field="*{vehicleId}">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option value="" disabled selected>Изберете превозно средство</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}" th:selected="${vehicle.id == reservation.vehicleId}"></option>&ndash;&gt;-->
-<!--&lt;!&ndash;                </select>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <button type="submit" class="btn btn-primary">Обнови информация</button>&ndash;&gt;-->
-<!--&lt;!&ndash;        </form>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;</main>&ndash;&gt;-->
-
-<!--&lt;!&ndash;<footer th:replace="fragments/layout :: footer"></footer>&ndash;&gt;-->
-
-<!--&lt;!&ndash; Bootstrap JS and dependencies &ndash;&gt;-->
-<!--&lt;!&ndash;<script th:src="@{/js/jquery.min.js}"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;<script th:src="@{/js/bootstrap.bundle.min.js}"></script>&ndash;&gt;-->
-
-<!--&lt;!&ndash;&lt;!&ndash; Вмъкване на данни чрез скрипт &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;<script type="text/javascript">&ndash;&gt;-->
-<!--&lt;!&ndash;    document.addEventListener('DOMContentLoaded', (event) => {&ndash;&gt;-->
-<!--&lt;!&ndash;        const reservationStartTime = [[${#temporals.formatISO(reservation.getStartTime())}]] ;&ndash;&gt;-->
-<!--&lt;!&ndash;        const reservationEndTime = [[${#temporals.formatISO(reservation.getEndTime())}]];&ndash;&gt;-->
-
-<!--&lt;!&ndash;        document.getElementById('startTime').value = reservationStartTime;&ndash;&gt;-->
-<!--&lt;!&ndash;        document.getElementById('endTime').value = reservationEndTime;&ndash;&gt;-->
-<!--&lt;!&ndash;    });&ndash;&gt;-->
-<!--&lt;!&ndash;</script>&ndash;&gt;-->
-
-<!--&lt;!&ndash;</body>&ndash;&gt;-->
-<!--&lt;!&ndash;</html>&ndash;&gt;-->
 
 
 <!DOCTYPE html>
@@ -386,16 +55,7 @@
                     <option th:each="parkingSpot : ${availableParkingSpots}" th:value="${parkingSpot.location}" th:text="${parkingSpot.location}"></option>
                 </select>
             </div>
-            <!--            <div class="mb-3">-->
-            <!--                <label>Начало:</label>-->
-            <!--                <input type="datetime-local" class="form-control" th:field="*{startTime}" th:value="${reservation.getStartTime()}" />-->
-            <!--            </div>-->
-            <!--            <div class="mb-3">-->
-            <!--                <label>Край:</label>-->
-            <!--                <input type="datetime-local" class="form-control" th:field="*{endTime}" th:value="${#temporals.formatISO(reservation.getEndTime())}" />-->
-            <!--            </div>-->
 
-            <!--            vanya-->
             <div class="mb-3">
                 <label>Начало:</label>
                 <input type="datetime-local" class="form-control" th:field="*{startTime}" />
@@ -412,6 +72,17 @@
                     <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}" th:selected="${vehicle.id == reservation.vehicleId}"></option>
                 </select>
             </div>
+            <div class="mb-3">
+                <label>Банкова карта:</label>
+                <select class="form-control" th:field="*{bankCardId}" required>
+                    <option value="" disabled selected>Изберете банкова карта</option>
+                    <option th:each="card : ${bankingCards}" th:value="${card.id}" th:text="${card.cardNumber}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Цена за престоя:</label>
+                <input type="text" class="form-control" id="totalPrice" readonly>
+            </div>
             <button type="submit" class="btn btn-primary">Обнови информация</button>
 
         </form>
@@ -423,5 +94,31 @@
 <!-- Bootstrap JS and dependencies -->
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const startTimeInput = document.getElementById('startTime');
+        const endTimeInput = document.getElementById('endTime');
+        const totalPriceInput = document.getElementById('totalPrice');
+
+        function calculateTotalPrice() {
+            const startTime = new Date(startTimeInput.value);
+            const endTime = new Date(endTimeInput.value);
+
+            if (startTime && endTime && startTime < endTime) {
+                const diffMs = endTime - startTime;
+                const diffHours = diffMs / (1000 * 60 * 60);
+                const pricePerHour = 2; // Цената на час може да се промени
+                const totalPrice = diffHours * pricePerHour;
+
+                totalPriceInput.value = totalPrice.toFixed(2) + ' лв';
+            } else {
+                totalPriceInput.value = "";
+            }
+        }
+
+        startTimeInput.addEventListener('change', calculateTotalPrice);
+        endTimeInput.addEventListener('change', calculateTotalPrice);
+    });
+</script>
 </body>
 </html>

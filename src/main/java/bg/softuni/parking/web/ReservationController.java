@@ -3,11 +3,13 @@
 
 package bg.softuni.parking.web;
 
+import bg.softuni.parking.model.dto.BankCardDto;
 import bg.softuni.parking.model.dto.NewReservationDto;
 import bg.softuni.parking.model.dto.ReservationDto;
 import bg.softuni.parking.model.dto.VehicleDto;
 import bg.softuni.parking.model.entities.ParkingSpot;
 import bg.softuni.parking.model.entities.Reservation;
+import bg.softuni.parking.service.BankCardService;
 import bg.softuni.parking.service.ParkingSpotService;
 import bg.softuni.parking.service.ReservationService;
 import bg.softuni.parking.service.VehicleService;
@@ -30,11 +32,13 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final VehicleService vehicleService;
     private final ParkingSpotService parkingSpotService;
+    private final BankCardService bankCardService;
 
-    public ReservationController(ReservationService reservationService, VehicleService vehicleService, ParkingSpotService parkingSpotService) {
+    public ReservationController(ReservationService reservationService, VehicleService vehicleService, ParkingSpotService parkingSpotService, BankCardService bankCardService) {
         this.reservationService = reservationService;
         this.vehicleService = vehicleService;
         this.parkingSpotService = parkingSpotService;
+        this.bankCardService = bankCardService;
     }
 
     @GetMapping
@@ -59,10 +63,13 @@ public class ReservationController {
 
         List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
+        List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
 
         model.addAttribute("reservation", reservation);
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("availableParkingSpots", availableParkingSpots);
+        model.addAttribute("bankingCards" ,bankCardDto );
+
 
         return "reservation-edit";
     }
@@ -79,9 +86,11 @@ public class ReservationController {
         model.addAttribute("reservation", new ReservationDto());
         List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
+        List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
 
         model.addAttribute("vehicles", vehicles);
         model.addAttribute( "availableParkingSpots", availableParkingSpots);
+        model.addAttribute("bankingCards" ,bankCardDto );
         return "reservation-adding";
     }
 
@@ -101,9 +110,13 @@ public class ReservationController {
         NewReservationDto newReservationDto = new NewReservationDto();
         newReservationDto.setParkingSpotId(spotId);
         newReservationDto.setParkingSpotLocation(parkingSpotService.getLocationById(spotId));
+        List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
+
 
         model.addAttribute("newReservation", newReservationDto);
         model.addAttribute("vehicles", vehicleService.getUserVehicles(userDetails.getUsername()));
+        model.addAttribute("bankingCards" ,bankCardDto );
+
         return "reservation-new";
     }
 

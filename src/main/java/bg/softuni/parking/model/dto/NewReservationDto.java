@@ -55,6 +55,28 @@ public class NewReservationDto {
     private LocalDateTime endTime;
     private Long vehicleId;
 
+    private Long bankCardId;
+    private String bankCardNumber;
+
+
+    public Long getBankCardId() {
+        return bankCardId;
+    }
+
+    public NewReservationDto setBankCardId(Long bankCardId) {
+        this.bankCardId = bankCardId;
+        return this;
+    }
+
+    public String getBankCardNumber() {
+        return bankCardNumber;
+    }
+
+    public NewReservationDto setBankCardNumber(String bankCardNumber) {
+        this.bankCardNumber = bankCardNumber;
+        return this;
+    }
+
     public Long getParkingSpotId() {
         return parkingSpotId;
     }

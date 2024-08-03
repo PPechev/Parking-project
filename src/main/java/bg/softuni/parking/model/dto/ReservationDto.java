@@ -94,10 +94,32 @@ public class ReservationDto {
     private Long vehicleId;
     private String vehicleLicensePlate; // TODO
 
+    private Long bankCardId;
+    private String bankCardNumber;
+
+
 
 
     // Getters and Setters
 
+
+    public Long getBankCardId() {
+        return bankCardId;
+    }
+
+    public ReservationDto setBankCardId(Long bankCardId) {
+        this.bankCardId = bankCardId;
+        return this;
+    }
+
+    public String getBankCardNumber() {
+        return bankCardNumber;
+    }
+
+    public ReservationDto setBankCardNumber(String bankCardNumber) {
+        this.bankCardNumber = bankCardNumber;
+        return this;
+    }
 
     public String getVehicleLicensePlate() {
         return vehicleLicensePlate;

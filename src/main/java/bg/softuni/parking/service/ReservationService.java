@@ -206,17 +206,13 @@ public class ReservationService {
                 .orElseThrow(() -> new IllegalArgumentException("Parking spot not found"));
         Vehicle vehicle = vehicleRepository.findById(reservationDto.getVehicleId())
                 .orElseThrow(() -> new IllegalArgumentException("Vehicle not found"));
-//        if (!parkingSpot.getLocation().equals(reservation.getParkingSpot().getLocation())){
-//            reservation.getParkingSpot().setAvailable(true);
-//        }else {
-//            parkingSpot.setAvailable(false);
-//
-//        }
+
         reservation.setParkingSpot(parkingSpot);
         reservation.setStartTime(reservationDto.getStartTime());
         reservation.setEndTime(reservationDto.getEndTime());
         reservation.setVehicle(vehicle);
         reservation.getParkingSpot().setAvailable(false);
+
         reservationRepository.save(reservation);
     }
 
