@@ -105,9 +105,15 @@
 
 package bg.softuni.parking.model.entities;
 
+import bg.softuni.parking.utils.uuid.UUIDSequence;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
+
 import java.util.HashSet;
 import java.util.Set;
+
+import static java.sql.Types.VARCHAR;
 
 @Entity
 @Table(name = "users")
@@ -138,8 +144,24 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Reservation> reservations = new HashSet<>();
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Vehicle> vehicles = new HashSet<>();
+//    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Vehicle> vehicles = new HashSet<>();
+
+
+
+    @UuidGenerator
+    @JdbcTypeCode(VARCHAR)
+    private String uuid;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public User setUuid(String uuid) {
+        this.uuid = uuid;
+        return this;
+    }
+
 
     @Transient
     private Long selectedVehicleId;
@@ -239,12 +261,12 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public Set<Vehicle> getVehicles() {
-        return vehicles;
-    }
-
-    public User setVehicles(Set<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-        return this;
-    }
+//    public Set<Vehicle> getVehicles() {
+//        return vehicles;
+//    }
+//
+//    public User setVehicles(Set<Vehicle> vehicles) {
+//        this.vehicles = vehicles;
+//        return this;
+//    }
 }

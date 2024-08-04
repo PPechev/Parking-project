@@ -32,28 +32,28 @@ public class RegisterController {
     }
     @PostMapping("/register")
     public String registerSubmit(
-    @Valid @ModelAttribute("registerDTO") UserRegistrationDto userRegistrationDto,
-    BindingResult bindingResult,
-    RedirectAttributes redirectAttributes) {
+            @Valid @ModelAttribute("registerDTO") UserRegistrationDto userRegistrationDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
 
-  if (!userRegistrationDto.getPassword().equals(userRegistrationDto.getConfirmPassword())) {
-    bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Паролите не съвпадат");
-  }
-  if (userService.usernameExists(userRegistrationDto.getUsername())) {
-    bindingResult.rejectValue("username", "error.username", "Потребителското име вече съществува");
-  }
-  //new validation
-  if (userService.emailExists(userRegistrationDto.getEmail())) {
-    bindingResult.rejectValue("email", "error.email", "Потребител с този имейл вече съществува");
-  }
+        if (!userRegistrationDto.getPassword().equals(userRegistrationDto.getConfirmPassword())) {
+            bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Паролите не съвпадат");
+        }
+        if (userService.usernameExists(userRegistrationDto.getUsername())) {
+            bindingResult.rejectValue("username", "error.username", "Потребителското име вече съществува");
+        }
+        //new validation
+        if (userService.emailExists(userRegistrationDto.getEmail())) {
+            bindingResult.rejectValue("email", "error.email", "Потребител с този имейл вече съществува");
+        }
 
-  if (bindingResult.hasErrors()) {
-    redirectAttributes.addFlashAttribute("registerDTO", userRegistrationDto);
-    redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerDTO", bindingResult);
-    return "redirect:/register";
-  }
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("registerDTO", userRegistrationDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerDTO", bindingResult);
+            return "redirect:/register";
+        }
 
-  userService.registerUser(userRegistrationDto);
-  return "redirect:/login";
-}
+        userService.registerUser(userRegistrationDto);
+        return "redirect:/login";
+    }
 }

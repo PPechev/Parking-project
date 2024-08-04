@@ -12,9 +12,14 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicle vehicle;
+//    @ManyToOne
+//    @JoinColumn(name = "vehicle_id", nullable = false)
+//    private Vehicle vehicle;
+
+
+    @Column(nullable = false)
+    private Long vehicleId;
+
 
     @ManyToOne
     @JoinColumn(name = "parking_spot_id", nullable = false)
@@ -27,6 +32,16 @@ public class Reservation extends BaseEntity {
     private LocalDateTime endTime;
 
     private boolean isItPaid ;
+
+
+    public Long getVehicleId() {
+        return vehicleId;
+    }
+
+    public Reservation setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
+        return this;
+    }
 
     public Reservation() {
         this.isItPaid=false;
@@ -50,14 +65,7 @@ public class Reservation extends BaseEntity {
         return this;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
 
-    public Reservation setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-        return this;
-    }
 
     public ParkingSpot getParkingSpot() {
         return parkingSpot;

@@ -1,14 +1,17 @@
 package bg.softuni.parking.web;
 
 import bg.softuni.parking.model.dto.VehicleDto;
-import bg.softuni.parking.model.entities.Vehicle;
+import bg.softuni.parking.model.dto.vehicle.VehicleCreateDto;
+import bg.softuni.parking.model.dto.vehicle.VehicleEditDto;
+import bg.softuni.parking.model.dto.vehicle.VehicleView;
+import bg.softuni.parking.service.UserService;
 import bg.softuni.parking.service.VehicleService;
-import jakarta.transaction.Transactional;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -17,14 +20,23 @@ import java.util.List;
 public class VehicleController {
 
     private final VehicleService vehicleService;
+    private final UserService userService;
 
-    public VehicleController(VehicleService vehicleService) {
+    public VehicleController(VehicleService vehicleService, UserService userService) {
         this.vehicleService = vehicleService;
+        this.userService = userService;
     }
+    // todo
+//  @GetMapping("/all-vehicles")
+//  public String getAllVehicles(Model model) {
+//    List<VehicleView> vehicles = vehicleService.findAll();
+//    model.addAttribute("vehicles", vehicles);
+//    return "all-vehicles";
+//  }
 
     @GetMapping
-    public String viewVehicles(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
+    public String viewVehicles(Model model) {
+        List<VehicleView> vehicles = vehicleService.getUserVehicles(userService.getCurrentUser().getUuid());
 
         model.addAttribute("vehicles", vehicles);
         return "vehicles";
@@ -32,16 +44,27 @@ public class VehicleController {
 
     @GetMapping("/edit/{id}")
     public String editVehicle(@PathVariable Long id, Model model) {
-        VehicleDto vehicle = vehicleService.getVehicleById(id);
+        VehicleView vehicle = vehicleService.getVehicleById(id);
         model.addAttribute("vehicle", vehicle);
         return "vehicles-edit";
     }
 
-    @PostMapping("/update")
-    public String updateVehicle(@ModelAttribute VehicleDto vehicleDto) {
-        vehicleService.updateVehicle(vehicleDto);
+    @PostMapping("/edit/{id}")
+    public String updateVehicle(
+            @PathVariable Long id,
+            @Valid VehicleEditDto vehicleEditDto,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("vehicleEditDto", vehicleEditDto);
+            model.addAttribute("org.springframework.validation.BindingResult.vehicleEditDto", bindingResult);
+            return "vehicles-edit";
+        }
+        vehicleService.updateVehicle(id, vehicleEditDto);
         return "redirect:/vehicles";
     }
+
 
     @GetMapping("/add")
     public String addVehicleForm(Model model) {
@@ -50,21 +73,23 @@ public class VehicleController {
     }
 
     @PostMapping("/add")
-    public String addVehicle(@ModelAttribute VehicleDto vehicleDto, @AuthenticationPrincipal UserDetails userDetails) {
-        vehicleService.addVehicle(vehicleDto, userDetails.getUsername());
-        return "redirect:/vehicles";
+    public String addVehicle(
+            @Valid VehicleCreateDto vehicleCreateDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("vehicleCreateDto", vehicleCreateDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.vehicleCreateDto", bindingResult);
+            return "redirect:/vehicles/add";
+        }
+        vehicleService.addVehicle(vehicleCreateDto, userService.getCurrentUser().getUuid());
+        return "redirect:/profile";
     }
 
-    @GetMapping("/all-vehicles")
-    public String getAllVehicles(Model model) {
-        List<Vehicle> vehicles = vehicleService.findAll();
-        model.addAttribute("vehicles", vehicles);
-        return "all-vehicles";
-    }
     @DeleteMapping("/delete/{id}")
-    public String deleteVehicle(@PathVariable Long id, Model model) {
-
-        vehicleService.deleteVehicle(id);
-        return "redirect:/vehicles";
+    public String deleteVehicle(@PathVariable Long id) {
+        this.vehicleService.deleteVehicle(id);
+        return "redirect:/profile";
     }
 }

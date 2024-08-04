@@ -1,9 +1,10 @@
 package bg.softuni.parking.web;
 
+import bg.softuni.parking.model.entities.ParkingSpot;
 import bg.softuni.parking.model.entities.User;
 import bg.softuni.parking.service.ParkingSpotService;
-import bg.softuni.parking.model.entities.ParkingSpot;
 import bg.softuni.parking.service.UserService;
+import bg.softuni.parking.service.VehicleService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,12 @@ public class ParkingSpotController {
 
     private final ParkingSpotService parkingSpotService;
     private final UserService userService;
+    private final VehicleService vehicleService;
 
-    public ParkingSpotController(ParkingSpotService parkingSpotService, UserService userService) {
+    public ParkingSpotController(ParkingSpotService parkingSpotService, UserService userService, VehicleService vehicleService) {
         this.parkingSpotService = parkingSpotService;
         this.userService = userService;
+        this.vehicleService = vehicleService;
     }
 
     @GetMapping("/parking-spots")
@@ -33,7 +36,7 @@ public class ParkingSpotController {
             Optional<User> optionalUser = userService.findByUsername(userDetails.getUsername());
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
-                hasVehicles = !user.getVehicles().isEmpty();
+                hasVehicles = !vehicleService.getUserVehicles(user.getUuid()).isEmpty();
             }
         }
 
@@ -44,5 +47,5 @@ public class ParkingSpotController {
 
         return "parking-spots";
     }
-    }
+}
 

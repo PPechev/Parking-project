@@ -11,7 +11,8 @@ public class ParkingUserDetails extends User {
     private final String lastName;
     private final String phone;
     private final String email;
- // TODO
+    private final String uuid;
+    // TODO
 
 
     public ParkingUserDetails(String username,
@@ -20,14 +21,15 @@ public class ParkingUserDetails extends User {
                               String firstName,
                               String lastName,
                               String phone,
-                              String email
-                              ) {
+                              String email, String uuid
+    ) {
         super(username, password, authorities);
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
 
+        this.uuid = uuid;
     }
 
     public String getFirstName() {
@@ -60,5 +62,9 @@ public class ParkingUserDetails extends User {
             fullName.append(lastName);
         }
         return fullName.toString();
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }

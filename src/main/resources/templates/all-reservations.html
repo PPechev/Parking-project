@@ -46,10 +46,10 @@
 <!--    <h1 class="mb-4">Всички Резервации</h1>-->
 <!--    <div class="reservation-list">-->
 <!--        <div class="reservation-item list-group-item" th:each="reservation : ${reservations}">-->
-<!--            <span><strong>Превозно средство:</strong> <span th:text="${reservation.vehicle.licensePlate}"></span></span>-->
+<!--            <span><strong>Превозно средство:</strong> <span th:text="${reservation.licencePlate}"></span></span>-->
 <!--            <span><strong>Начало:</strong> <span th:text="${#strings.replace(reservation.startTime.toString(), 'T', ' ')}"></span></span>-->
 <!--            <span><strong>Край:</strong> <span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span></span>-->
-<!--            <span><strong>Парко място:</strong> <span th:text="${reservation.parkingSpot.location}"></span></span>-->
+<!--            <span><strong>Парко място:</strong> <span th:text="${reservation.parkingSpotLocation}"></span></span>-->
 <!--            <a class="btn btn-primary edit-button" th:href="@{/admin/edit/{id}(id=${reservation.id})}">Редактиране</a>-->
 <!--            </form>-->
 <!--            <form th:method="delete" th:action="@{/admin/delete/{id}(id=${reservation.id})}" style="margin-top: 1rem;">-->
@@ -105,6 +105,17 @@
             background-color: #0056b3; /* Тъмен син цвят при hover */
             border-color: #0056b3;
         }
+        .delete-button {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #dc3545; /* Червен цвят за бутона */
+            border-color: #dc3545;
+            color: #ffffff; /* Бял цвят за текста на бутона */
+        }
+        .delete-button:hover {
+            background-color: #c82333; /* Тъмно червен цвят при hover */
+            border-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -113,14 +124,13 @@
     <h1 class="mb-4" th:text="#{reservations.all.title}">Всички Резервации</h1>
     <div class="reservation-list">
         <div class="reservation-item list-group-item" th:each="reservation : ${reservations}">
-            <span><strong th:text="#{reservation.vehicle}">Превозно средство:</strong> <span th:text="${reservation.vehicle.licensePlate}"></span></span>
-            <span><strong th:text="#{reservation.start}">Начало:</strong> <span th:text="${#strings.replace(reservation.startTime.toString(), 'T', ' ')}"></span></span>
-            <span><strong th:text="#{reservation.end}">Край:</strong> <span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span></span>
-            <span><strong th:text="#{reservation.parkingSpot}">Парко място:</strong> <span th:text="${reservation.parkingSpot.location}"></span></span>
+            <span><strong th:text="#{vehicle}">Превозно средство:</strong> <span th:text="${reservation.licencePlate}"></span></span>
+            <span><strong th:text="#{start.time}">Начало:</strong> <span th:text="${#strings.replace(reservation.startTime.toString(), 'T', ' ')}"></span></span>
+            <span><strong th:text="#{end.time}">Край:</strong> <span th:text="${#strings.replace(reservation.endTime.toString(), 'T', ' ')}"></span></span>
+            <span><strong th:text="#{parking.spot}">Парко място:</strong> <span th:text="${reservation.parkingSpotLocation}"></span></span>
             <a class="btn btn-primary edit-button" th:href="@{/admin/edit/{id}(id=${reservation.id})}" th:text="#{edit}">Редактиране</a>
-            </form>
             <form th:method="delete" th:action="@{/admin/delete/{id}(id=${reservation.id})}" style="margin-top: 1rem;">
-                <input class="btn btn-danger" type="submit" th:value="#{reservation.delete}">
+                <input class="btn btn-danger delete-button" type="submit" th:value="#{delete}">
             </form>
         </div>
     </div>

@@ -44,3 +44,7 @@ spring:
     mode: HTML5
     encoding: UTF-8
     cache: false
+
+vehicle:
+  api:
+    baseUrl: "http://localhost:8081"

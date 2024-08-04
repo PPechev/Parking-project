@@ -22,20 +22,31 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ProfileController {
 
-    private final UserService userService;
+  private final UserService userService;
 
-    public ProfileController(UserService userService) {
-        this.userService = userService;
-    }
+  public ProfileController(UserService userService) {
+    this.userService = userService;
+  }
 
-    @GetMapping("/profile")
-    public String viewProfile(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        UserProfileDto userProfileDto = userService.getUserProfile(userDetails.getUsername());
-        model.addAttribute("user", userProfileDto);
-        return "profile"; // Името на шаблона за информационната страница
-    }
+  @GetMapping("/profile")
+  public String viewProfile(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+    UserProfileDto userProfileDto = userService.getUserProfile(userDetails.getUsername());
+    model.addAttribute("user", userProfileDto);
+    return "profile"; // Името на шаблона за информационната страница
+  }
 
-
+//    @GetMapping("/profile/edit")
+//    public String editProfile(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+//        UserProfileDto userProfileDto = userService.getUserProfile(userDetails.getUsername());
+//        model.addAttribute("user", userProfileDto);
+//        return "profile-edit"; // Името на шаблона за редактиране
+//    }
+//
+//    @PostMapping("/profile/update")
+//    public String updateProfile(@ModelAttribute UserUpdateDto userUpdateDto, @AuthenticationPrincipal UserDetails userDetails) {
+//        userService.updateUser(userUpdateDto);
+//        return "redirect:/profile";
+//    }
 
 
   @GetMapping("/profile/edit")
@@ -68,7 +79,7 @@ public class ProfileController {
     userService.updateUser(userUpdateDto);
     return "redirect:/profile";
   }
-      @GetMapping("/change-password")
+  @GetMapping("/change-password")
   public String changePassword(Model model) {
     if (!model.containsAttribute("changePasswordDto")) {
       model.addAttribute("changePasswordDto", new ChangePasswordDto());
@@ -78,10 +89,10 @@ public class ProfileController {
 
   @PostMapping("/change-password")
   public String changePassword(
-      @Valid @ModelAttribute("changePasswordDto") ChangePasswordDto changePasswordDto,
-      BindingResult bindingResult,
-      @AuthenticationPrincipal ParkingUserDetails userDetails,
-      RedirectAttributes redirectAttributes) {
+          @Valid @ModelAttribute("changePasswordDto") ChangePasswordDto changePasswordDto,
+          BindingResult bindingResult,
+          @AuthenticationPrincipal ParkingUserDetails userDetails,
+          RedirectAttributes redirectAttributes) {
     // импортваш потребителя от твоите ентитита
     User user = userService.getByUsername(userDetails.getUsername());
 

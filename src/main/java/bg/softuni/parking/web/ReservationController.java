@@ -6,13 +6,9 @@ package bg.softuni.parking.web;
 import bg.softuni.parking.model.dto.BankCardDto;
 import bg.softuni.parking.model.dto.NewReservationDto;
 import bg.softuni.parking.model.dto.ReservationDto;
-import bg.softuni.parking.model.dto.VehicleDto;
+import bg.softuni.parking.model.dto.vehicle.VehicleView;
 import bg.softuni.parking.model.entities.ParkingSpot;
-import bg.softuni.parking.model.entities.Reservation;
-import bg.softuni.parking.service.BankCardService;
-import bg.softuni.parking.service.ParkingSpotService;
-import bg.softuni.parking.service.ReservationService;
-import bg.softuni.parking.service.VehicleService;
+import bg.softuni.parking.service.*;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,18 +27,20 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final VehicleService vehicleService;
     private final ParkingSpotService parkingSpotService;
+    private final UserService userService;
     private final BankCardService bankCardService;
 
-    public ReservationController(ReservationService reservationService, VehicleService vehicleService, ParkingSpotService parkingSpotService, BankCardService bankCardService) {
+    public ReservationController(ReservationService reservationService, VehicleService vehicleService, ParkingSpotService parkingSpotService, UserService userService, BankCardService bankCardService) {
         this.reservationService = reservationService;
         this.vehicleService = vehicleService;
         this.parkingSpotService = parkingSpotService;
+        this.userService = userService;
         this.bankCardService = bankCardService;
     }
 
     @GetMapping
     public String viewReservations(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        List<ReservationDto> reservations = reservationService.getUserReservations(userDetails.getUsername());
+        List<ReservationDto> reservations = reservationService.getUserReservations(userService.getCurrentUser().getUsername());
         List<ReservationDto> validReservations = new ArrayList<>();
         for (ReservationDto reservation : reservations) {
             if (reservation.getStartTime().isAfter(LocalDateTime.now())) {
@@ -54,14 +51,13 @@ public class ReservationController {
         return "reservations";
     }
 
-    //changed
     @Transactional
     @GetMapping("/edit/{id}")
     public String editReservation(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         ReservationDto reservation = reservationService.getFormattedReservationById(id);
         parkingSpotService.makeSpotAvailable(reservation.getParkingSpotLocation());
 
-        List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
+        List<VehicleView> vehicles = vehicleService.getUserVehicles(userService.getCurrentUser().getUuid());
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
         List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
 
@@ -84,13 +80,15 @@ public class ReservationController {
     @GetMapping("/add")
     public String addReservationForm(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("reservation", new ReservationDto());
-        List<VehicleDto> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
+        List<VehicleView> vehicles = vehicleService.getUserVehicles(userService.getCurrentUser().getUuid());
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
         List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
 
+
         model.addAttribute("vehicles", vehicles);
-        model.addAttribute( "availableParkingSpots", availableParkingSpots);
+        model.addAttribute("availableParkingSpots", availableParkingSpots);
         model.addAttribute("bankingCards" ,bankCardDto );
+
         return "reservation-adding";
     }
 
@@ -100,10 +98,10 @@ public class ReservationController {
         return "redirect:/reservations";
     }
 
-
+    //todo for rest
     @GetMapping("/new")
     public String newReservationForm(@RequestParam("spotId") Long spotId, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if (!vehicleService.hasVehicles(userDetails.getUsername())) {
+        if (vehicleService.getUserVehicles(userService.getCurrentUser().getUuid()).isEmpty()) {
             return "redirect:/vehicles/add";
         }
 
@@ -114,7 +112,7 @@ public class ReservationController {
 
 
         model.addAttribute("newReservation", newReservationDto);
-        model.addAttribute("vehicles", vehicleService.getUserVehicles(userDetails.getUsername()));
+        model.addAttribute("vehicles", vehicleService.getUserVehicles(userService.getCurrentUser().getUuid()));
         model.addAttribute("bankingCards" ,bankCardDto );
 
         return "reservation-new";
@@ -131,7 +129,6 @@ public class ReservationController {
         reservationService.deleteReservation(id);
         return "redirect:/reservations";
     }
-
 
 
 }

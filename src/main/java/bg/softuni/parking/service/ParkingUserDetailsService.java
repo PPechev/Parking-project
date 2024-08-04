@@ -38,12 +38,14 @@ public class ParkingUserDetailsService implements UserDetailsService {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getPhone(),
-                user.getEmail()
-                );
+                user.getEmail(),
+                user.getUuid()
+        );
     }
+
     private static GrantedAuthority mapped(UserRoleEnum role) {
         return new SimpleGrantedAuthority(
-        "ROLE_" + role
+                "ROLE_" + role
         );
     }
 }

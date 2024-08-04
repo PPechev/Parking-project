@@ -10,16 +10,17 @@ import java.util.Optional;
 @Service
 public class RoleService {
 
-
     private final RoleRepository roleRepository;
 
     public RoleService(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 
-    public Optional<Role> findRoleByName(UserRoleEnum name) {
-        return roleRepository.findByName(name);
+    public Optional<Role> findRoleByName(UserRoleEnum roleName) {
+        return roleRepository.findByName(roleName);
     }
 
-
+    public Role saveRole(Role role) {
+        return roleRepository.save(role);
+    }
 }

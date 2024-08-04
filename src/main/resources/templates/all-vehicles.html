@@ -38,6 +38,17 @@
 <!--            background-color: #0056b3; /* Тъмен син цвят при hover */-->
 <!--            border-color: #0056b3;-->
 <!--        }-->
+<!--        .delete-button {-->
+<!--            display: inline-block;-->
+<!--            margin-top: 10px;-->
+<!--            background-color: #dc3545; /* Червен цвят за бутона */-->
+<!--            border-color: #dc3545;-->
+<!--            color: #ffffff; /* Бял цвят за текста на бутона */-->
+<!--        }-->
+<!--        .delete-button:hover {-->
+<!--            background-color: #c82333; /* Тъмно червен цвят при hover */-->
+<!--            border-color: #c82333;-->
+<!--        }-->
 <!--    </style>-->
 <!--</head>-->
 <!--<body>-->
@@ -47,13 +58,12 @@
 <!--    <div class="vehicle-list">-->
 <!--        <div class="vehicle-item list-group-item" th:each="vehicle : ${vehicles}">-->
 <!--            <span><strong>Регистрационен номер:</strong> <span th:text="${vehicle.licensePlate}"></span></span>-->
-<!--            <span><strong>Потребител:</strong> <span th:text="${vehicle.getOwner().username}"></span></span>-->
+<!--            <span><strong>Потребител:</strong> <span th:text="${vehicle.owner}"></span></span>-->
+<!--            <a class="btn btn-primary edit-button" th:href="@{/admin/edit-vehicle/{id}(id=${vehicle.id})}">Редактиране</a>-->
+<!--            <form th:action="@{/admin/vehicles/delete/{id}(id=${vehicle.id})}" method="post" style="display:inline;">-->
+<!--                <input type="hidden" name="_method" value="delete">-->
+<!--                <button type="submit" class="btn btn-danger delete-button">Изтриване</button>-->
 <!--            </form>-->
-<!--            <form th:method="delete" th:action="@{/admin/vehicles/delete/{id}(id=${vehicle.id})}" style="margin-top: 1rem;">-->
-<!--                <input class="btn btn-danger" type="submit" value="Изтриване на превозно средство">-->
-<!--            </form>-->
-
-<!--            <a class="btn btn-primary edit-button" th:href="@{/admin/edit/{id}(id=${vehicle.id})}">Редактиране</a>-->
 <!--        </div>-->
 <!--    </div>-->
 <!--</main>-->
@@ -104,6 +114,17 @@
             background-color: #0056b3; /* Тъмен син цвят при hover */
             border-color: #0056b3;
         }
+        .delete-button {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #dc3545; /* Червен цвят за бутона */
+            border-color: #dc3545;
+            color: #ffffff; /* Бял цвят за текста на бутона */
+        }
+        .delete-button:hover {
+            background-color: #c82333; /* Тъмно червен цвят при hover */
+            border-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -113,11 +134,12 @@
     <div class="vehicle-list">
         <div class="vehicle-item list-group-item" th:each="vehicle : ${vehicles}">
             <span><strong th:text="#{vehicle.licensePlate}">Регистрационен номер:</strong> <span th:text="${vehicle.licensePlate}"></span></span>
-            <span><strong th:text="#{vehicle.owner}">Потребител:</strong> <span th:text="${vehicle.getOwner().username}"></span></span>
-            <form th:method="delete" th:action="@{/admin/vehicles/delete/{id}(id=${vehicle.id})}" style="margin-top: 1rem;">
-                <input class="btn btn-danger" type="submit" th:value="#{vehicle.delete}">
+            <span><strong th:text="#{vehicle.user}">Потребител:</strong> <span th:text="${vehicle.owner}"></span></span>
+            <a class="btn btn-primary edit-button" th:href="@{/admin/edit-vehicle/{id}(id=${vehicle.id})}" th:text="#{vehicle.edit}">Редактиране</a>
+            <form th:action="@{/admin/vehicles/delete/{id}(id=${vehicle.id})}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger delete-button" th:text="#{vehicle.delete}">Изтриване</button>
             </form>
-            <a class="btn btn-primary edit-button" th:href="@{/admin/edit/{id}(id=${vehicle.id})}" th:text="#{edit}">Редактиране</a>
         </div>
     </div>
 </main>

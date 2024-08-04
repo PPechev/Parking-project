@@ -18,10 +18,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
 
     @Query("SELECT CASE WHEN COUNT(u) > 0 THEN TRUE ELSE FALSE END FROM User u WHERE u.username = :newUsername AND u.username != :currentUsername")
-  boolean existsByUsernameAndNotCurrentUsername(@Param("newUsername") String newUsername, @Param("currentUsername") String currentUsername);
+    boolean existsByUsernameAndNotCurrentUsername(@Param("newUsername") String newUsername, @Param("currentUsername") String currentUsername);
 
     @Query("SELECT CASE WHEN COUNT(u) > 0 THEN TRUE ELSE FALSE END FROM User u WHERE u.email = :newEmail AND u.email != :currentEmail")
-  boolean existsByEmailAndNotCurrentEmail(@Param("newEmail") String newEmail, @Param("currentEmail") String currentEmail);
+    boolean existsByEmailAndNotCurrentEmail(@Param("newEmail") String newEmail, @Param("currentEmail") String currentEmail);
 
 
+    User findByUuid(String owner);
 }
