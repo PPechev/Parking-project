@@ -9,7 +9,7 @@ import bg.softuni.parking.model.dto.BankCardDto;
 import bg.softuni.parking.model.entities.BankCard;
 import bg.softuni.parking.model.entities.User;
 import bg.softuni.parking.repository.BankCardRepository;
-import bg.softuni.parking.repository.UserRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,18 +19,19 @@ import java.util.stream.Collectors;
 public class BankCardService {
 
     private final BankCardRepository bankCardRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public BankCardService(BankCardRepository bankCardRepository, UserRepository userRepository) {
+    public BankCardService(BankCardRepository bankCardRepository,  UserService userService) {
         this.bankCardRepository = bankCardRepository;
-        this.userRepository = userRepository;
+
+        this.userService = userService;
     }
 
 
 
 
         public List<BankCardDto> getBankCardsByUsername(String username) {
-      User user = userRepository.findByUsername(username)
+      User user = userService.findByUsername(username)
           .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
       return user.getBankCards().stream().map(this::mapToBankCardDto)
           .collect(Collectors.toList());
@@ -48,7 +49,7 @@ public class BankCardService {
 
 
         public void addBankCard(BankCardDto bankCardDto, String username) {
-      User user = userRepository.findByUsername(username)
+      User user = userService.findByUsername(username)
           .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
       BankCard bankCard = new BankCard();
       bankCard.setCardNumber(bankCardDto.getCardNumber());

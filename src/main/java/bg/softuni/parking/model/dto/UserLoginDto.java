@@ -1,6 +1,4 @@
 
-
-
 package bg.softuni.parking.model.dto;
 
 import jakarta.validation.constraints.NotBlank;

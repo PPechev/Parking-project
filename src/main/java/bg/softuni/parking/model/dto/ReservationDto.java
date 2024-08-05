@@ -17,7 +17,7 @@ public class ReservationDto {
     private LocalDateTime endTime;
 
     private Long vehicleId;
-    private String vehicleLicensePlate; // TODO
+    private String vehicleLicensePlate;
 
     private Long bankCardId;
     private String bankCardNumber;

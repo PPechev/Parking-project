@@ -9,11 +9,11 @@ import bg.softuni.parking.model.dto.vehicle.VehicleViewAdmin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
+
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
@@ -29,27 +29,7 @@ public class VehicleService {
         this.restClient = restClient;
     }
 
-// todo
-//  public List<Vehicle> findAll() {
-//    return vehicleRepository.findAll();
-//  }
 
-    //todo
-    //  public boolean hasVehicles(String username) {
-//    User user = userRepository.findByUsername(username)
-//        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//    return !user.getVehicles().isEmpty();
-//  }
-
-//    public List<VehicleView> getUserVehicles(String uuid) {
-//        return restClient
-//                .get()
-//                .uri("http://localhost:8081/vehicles/user/{uuid}", uuid)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .body(new ParameterizedTypeReference<>() {
-//                });
-//    }
 
 
               public List<VehicleView> getUserVehicles(String uuid) {

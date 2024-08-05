@@ -20,7 +20,7 @@ public class SecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/login", "/register", "/parking-spots","/login?error=true","/change-language").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/parking-spots","/login?error=true","/change-language","/about").permitAll()
                         .requestMatchers("admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -29,7 +29,6 @@ public class SecurityConfig {
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/", true)
-//             addition for error
                         .failureUrl("/login?error=true"))
 
                 .logout(logout -> logout

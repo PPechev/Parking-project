@@ -102,7 +102,7 @@ public class ReservationController {
         return "redirect:/reservations";
     }
 
-    //todo for rest
+
     @GetMapping("/new")
     public String newReservationForm(@RequestParam("spotId") Long spotId, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if (vehicleService.getUserVehicles(userService.getCurrentUser().getUuid()).isEmpty()) {

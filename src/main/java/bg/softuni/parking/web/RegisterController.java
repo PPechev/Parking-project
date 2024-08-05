@@ -42,7 +42,6 @@ public class RegisterController {
         if (userService.usernameExists(userRegistrationDto.getUsername())) {
             bindingResult.rejectValue("username", "error.username", "Потребителското име вече съществува");
         }
-        //new validation
         if (userService.emailExists(userRegistrationDto.getEmail())) {
             bindingResult.rejectValue("email", "error.email", "Потребител с този имейл вече съществува");
         }

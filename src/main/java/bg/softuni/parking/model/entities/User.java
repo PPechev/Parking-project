@@ -41,8 +41,6 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Reservation> reservations = new HashSet<>();
 
-//    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<Vehicle> vehicles = new HashSet<>();
 
 
 
@@ -65,7 +63,6 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BankCard> bankCards = new HashSet<>();
 
-    // Getters and setters
 
 
     public Set<BankCard> getBankCards() {

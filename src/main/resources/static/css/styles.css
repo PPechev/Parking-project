@@ -17,7 +17,7 @@ header {
 }
 
 .navbar-transparent {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(0, 0, 0, 0.3);
     border: none;
     justify-content: center;
 }
@@ -154,7 +154,6 @@ footer {
     transform: scale(1.1);
 }
 
-/* New styles for login and registration forms */
 .form-container {
     display: flex;
     justify-content: center;

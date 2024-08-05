@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <title th:text="#{about.title}">За нас</title>
+    <style>
+        .about-container {
+            padding: 20px;
+        }
+        .about-box {
+            background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачен фон */
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+        }
+        .about-box h2 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .about-box p {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="fragments/layout :: layout('about')"></header>
+
+<main class="container mt-4 about-container">
+    <div class="about-box">
+        <h2 th:text="#{about.title}">За нас</h2>
+        <p th:text="#{about.content1}">Добре дошли в нашата паркинг система. Ние предлагаме удобни и сигурни паркинг места за вашите автомобили в Пловдив. Нашият паркинг се намира на адрес: ул. Иван Вазов 15, Пловдив.</p>
+        <p th:text="#{about.content2}">Нашата мисия е да осигурим лесен и бърз достъп до паркинг услуги за всички наши клиенти. С нашата онлайн система можете да резервирате паркинг място предварително и да бъдете сигурни, че ще имате място за вашия автомобил.</p>
+        <p th:text="#{about.content3}">Свържете се с нас на телефон: 0888 123 456 или по имейл: support@parking.bg</p>
+    </div>
+</main>
+
+<footer th:replace="fragments/layout :: footer"></footer>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

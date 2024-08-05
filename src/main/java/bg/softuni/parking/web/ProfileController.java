@@ -82,7 +82,6 @@ public class ProfileController {
           BindingResult bindingResult,
           @AuthenticationPrincipal ParkingUserDetails userDetails,
           RedirectAttributes redirectAttributes) {
-    // импортваш потребителя от твоите ентитита
     User user = userService.getByUsername(userDetails.getUsername());
 
     if (!userService.isPasswordCorrect(user.getPassword(), changePasswordDto.getOldPassword())) {

@@ -62,19 +62,6 @@ public class UserService {
     }
 
 
-//    private User map(UserRegistrationDto userRegistrationDto) {
-//
-//
-//        User mappedUser = modelMapper.map(userRegistrationDto, User.class);
-//
-//        mappedUser.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
-//
-//        Role userRole = roleService.findRoleByName(UserRoleEnum.USER).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//
-//        mappedUser.setRoles(new HashSet<>(Set.of(userRole)));
-//
-//        return mappedUser;
-//    }
 
 
     private User map(UserRegistrationDto userRegistrationDto) {
@@ -119,15 +106,7 @@ public class UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-//    public UserProfileDto getUserProfile(String username) {
-//        User user = userRepository.findByUsername(username)
-//                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-//
-//        UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
-//
-//        return dto;
-//
-//    }
+
 
 
 public UserProfileDto getUserProfile(String username) {
@@ -149,15 +128,6 @@ public UserProfileDto getUserProfile(String username) {
     }
 
 
-//    public void updateUserProfile(UserProfileDto userProfileDto) {
-//        User user = userRepository.findByUsername(userProfileDto.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//        user.setEmail(userProfileDto.getEmail());
-//        user.setFirstName(userProfileDto.getFirstName());
-//        user.setLastName(userProfileDto.getLastName());
-//        user.setPhone(userProfileDto.getPhone());
-//        userRepository.save(user);
-//    }
-
 
 
 
@@ -174,19 +144,12 @@ public void updateUserProfile(UserProfileDto userProfileDto) {
 
 
 
-//    public void changePassword(String username, ChangePasswordDto changePasswordDto) {
-//        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//        // TODO проверка дали новата парола не е същата като старата , също така дали новата парола е еднаква в двете полета
-//        user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
-//        userRepository.save(user);
-//    }
 
 
 
     public void changePassword(String username, ChangePasswordDto changePasswordDto) {
   User user = userRepository.findByUsername(username)
       .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-  // TODO проверка дали новата парола не е същата като старата , също така дали новата парола е еднаква в двете полета
   user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
   userRepository.save(user);
 }
@@ -194,28 +157,6 @@ public void updateUserProfile(UserProfileDto userProfileDto) {
 
 
 
-//
-//    public void changeEmail(String username, ChangeEmailDto changeEmailDto) {
-//        User user = userRepository.findByUsername(username).orElseThrow();
-//        user.setEmail(changeEmailDto.getNewEmail());
-//        userRepository.save(user);
-//    }
-
-
-//  public User getCurrentUser() {
-//    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//    return (User) authentication.getPrincipal();
-//  }
-
-
-//    public ParkingUserDetails getCurrentUser() {
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (principal instanceof ParkingUserDetails) {
-//            return (ParkingUserDetails) principal;
-//        } else {
-//            throw new IllegalStateException("Current user is not of type ParkingUserDetails");
-//        }
-//    }
 
 
 
@@ -278,11 +219,6 @@ public void updateUserProfile(UserProfileDto userProfileDto) {
     public boolean passwordsAreSame(String password, String newPassword) {
         return passwordEncoder.matches(newPassword, password);
     }
-//
-//    public User getByUsername(String username) {
-//        return userRepository.findByUsername(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//    }
 
 
       public User getByUsername(String username) {
@@ -310,12 +246,6 @@ public void updateUserProfile(UserProfileDto userProfileDto) {
         return dto;
     }
 
-//    public void addAdminRole(Long userId) {
-//        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-//        Role role = roleService.findRoleByName(UserRoleEnum.ADMIN).orElseThrow(() -> new IllegalArgumentException("Invalid role name"));
-//        user.getRoles().add(role);
-//        userRepository.save(user);
-//    }
 
 
 
@@ -331,12 +261,6 @@ public void updateUserProfile(UserProfileDto userProfileDto) {
         }
 
 
-//    public void removeAdminRole(Long userId) {
-//        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-//        Role role = roleService.findRoleByName(UserRoleEnum.ADMIN).orElseThrow(() -> new IllegalArgumentException("Invalid role name"));
-//        user.getRoles().remove(role);
-//        userRepository.save(user);
-//    }
 
 
 

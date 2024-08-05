@@ -6,7 +6,6 @@ import org.hibernate.generator.EventType;
 
 import java.util.EnumSet;
 import java.util.UUID;
-//VANYA ADDITIONAL
 public class UUIDSequenceGenerator implements BeforeExecutionGenerator {
   @Override
   public Object generate(SharedSessionContractImplementor session, Object owner, Object currentValue, EventType eventType) {

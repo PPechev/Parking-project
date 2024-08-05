@@ -22,6 +22,10 @@ public class ParkingSpotService {
         return parkingSpotRepository.save(parkingSpot);
     }
 
+    public Optional<ParkingSpot> findById (Long id) {
+       return parkingSpotRepository.findById(id);
+    }
+
     public List<ParkingSpot> findAllAvailable() {
         return parkingSpotRepository.findAllByAvailable(true);
     }
@@ -49,6 +53,11 @@ public class ParkingSpotService {
         ParkingSpot parkingSpot = parkingSpotRepository.findByLocation(parkingSpotLocation)
             .orElseThrow(() -> new ParkingSpotNotFoundException("Invalid parking spot"));
         parkingSpot.setAvailable(true);
+      }
+
+
+      public Optional<ParkingSpot> findByLocation (String location) {
+         return parkingSpotRepository.findByLocation(location);
       }
 
 }

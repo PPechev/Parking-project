@@ -12,7 +12,7 @@ public class ParkingUserDetails extends User {
     private final String phone;
     private final String email;
     private final String uuid;
-    // TODO
+
 
 
     public ParkingUserDetails(String username,
