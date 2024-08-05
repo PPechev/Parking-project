@@ -1,5 +1,6 @@
 package bg.softuni.parking.service;
 
+import bg.softuni.parking.exception.UsernameNotFoundException;
 import bg.softuni.parking.model.entities.Role;
 import bg.softuni.parking.model.entities.User;
 import bg.softuni.parking.model.enums.UserRoleEnum;
@@ -9,7 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 
 public class ParkingUserDetailsService implements UserDetailsService {
 
@@ -20,13 +21,19 @@ public class ParkingUserDetailsService implements UserDetailsService {
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+
+          @Override
+      public UserDetails loadUserByUsername(String username) {
 
         return userRepository.findByUsername(username)
-                .map(ParkingUserDetailsService::map).orElseThrow(() ->
-                        new UsernameNotFoundException("User with username " + username + " not found"));
-    }
+            .map(ParkingUserDetailsService::map).orElseThrow(() ->
+                new UsernameNotFoundException("User with username " + username + " not found"));
+      }
+
+
+
+
 
     private static UserDetails map(User user) {
 

@@ -18,11 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping("/users")
-//    public String users() {
-//
-//        return "users";
-//    }
+
 
     @GetMapping("/users")
     public String listUsers(Model model) {
@@ -31,11 +27,5 @@ public class UserController {
         return "users";
     }
 
-//    @GetMapping("/all-users")
-//    public String getAllUsers(Model model) {
-//        List<User> users = userService.findAll();
-//        model.addAttribute("users", users);
-//        return "all-users";
-//    }
 
 }

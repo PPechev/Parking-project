@@ -20,7 +20,7 @@ public class SecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/login", "/register", "/parking-spots","/login?error=true").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/parking-spots","/login?error=true","/change-language").permitAll()
                         .requestMatchers("admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

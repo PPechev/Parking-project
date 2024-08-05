@@ -13,7 +13,7 @@ public class ChangePasswordDto {
     @NotBlank(message = "Потвърждението на новата парола е задължително")
     private String confirmNewPassword;
 
-    // Getters and setters...
+
 
     public String getOldPassword() {
         return oldPassword;

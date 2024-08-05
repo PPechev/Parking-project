@@ -1,34 +1,4 @@
-//package bg.softuni.parking.web;
-//
-//import bg.softuni.parking.model.dto.BankCardViewDto;
-//import bg.softuni.parking.service.BankCardService;
-//import org.springframework.security.core.annotation.AuthenticationPrincipal;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//
-//import java.util.List;
-//
-//@Controller
-//@RequestMapping("/bank-cards")
-//public class BankCardController {
-//
-//    private final BankCardService bankCardService;
-//
-//    public BankCardController(BankCardService bankCardService) {
-//        this.bankCardService = bankCardService;
-//    }
-//
-//    @GetMapping
-//    public String viewCards(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-//        List<BankCardViewDto> cards = bankCardService.getUserCards(userDetails.getUsername());
-//
-//        model.addAttribute("cardsDto", cards);
-//        return "bank-cards";
-//    }
-//}
+
 
 
 package bg.softuni.parking.web;

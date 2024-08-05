@@ -1,24 +1,4 @@
-//package bg.softuni.parking.model.dto;
-//
-//public class UserLoginDto {
-//
-//    private String username;
-//
-//    private String password;
-//
-//    public UserLoginDto() {}
-//
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//
-//}
+
 
 
 package bg.softuni.parking.model.dto;
@@ -33,7 +13,6 @@ public class UserLoginDto {
     @NotBlank(message = "Паролата е задължителна")
     private String password;
 
-    // Getters and setters...
 
     public String getUsername() {
         return username;

@@ -4,15 +4,14 @@ import bg.softuni.parking.model.dto.BankCardDto;
 import bg.softuni.parking.model.dto.ReservationDto;
 import bg.softuni.parking.model.dto.UserWithRolesDto;
 import bg.softuni.parking.model.dto.reservationAdminView.ReservationAdminView;
-import bg.softuni.parking.model.dto.vehicle.VehicleEditDto;
+
 import bg.softuni.parking.model.dto.vehicle.VehicleView;
 import bg.softuni.parking.model.dto.vehicle.VehicleViewAdmin;
 import bg.softuni.parking.model.entities.ParkingSpot;
-import bg.softuni.parking.model.entities.Reservation;
-import bg.softuni.parking.model.entities.User;
+
 import bg.softuni.parking.service.*;
 import jakarta.transaction.Transactional;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -40,16 +39,7 @@ public class AdminController {
         this.bankCardService = bankCardService;
     }
 
-//    @GetMapping("/all-reservations")
-//    public String viewAllReservations(Model model) {
-////        List<UserDto> users = userService.getAllUsersWithReservations();
-////        model.addAttribute("users", users);
-//
-//        List<Reservation> reservations = reservationService.findAll();
-//        model.addAttribute("reservations", reservations);
-//
-//        return "all-reservations";
-//    }
+
 
     @GetMapping("/all-reservations")
     public String getAllReservations(Model model) {
@@ -70,13 +60,11 @@ public class AdminController {
         ReservationDto reservation = reservationService.getFormattedReservationById(id);
         parkingSpotService.makeSpotAvailable(reservation.getParkingSpotLocation());
 
-//        List<VehicleView> vehicles = vehicleService.getUserVehicles(userDetails.getUsername());
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
         List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
 
 
         model.addAttribute("reservation", reservation);
-//        model.addAttribute("vehicles", vehicles);
         model.addAttribute("availableParkingSpots", availableParkingSpots);
         model.addAttribute("vehicles", vehicleService.getUserVehicles(userService.getCurrentUser().getUuid()));
         model.addAttribute("bankingCards" ,bankCardDto );
@@ -127,23 +115,6 @@ public class AdminController {
         vehicleService.deleteVehicle(id);
         return "redirect:/admin/all-vehicles";
     }
-
-
-
-
-
-
-
-
-
-
-//
-//    @GetMapping("/all-users")
-//    public String getAllUsers(Model model) {
-//        List<User> users = userService.findAll();
-//        model.addAttribute("users", users);
-//        return "all-users";
-//    }
 
 
 

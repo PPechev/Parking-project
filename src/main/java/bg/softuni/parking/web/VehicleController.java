@@ -1,6 +1,7 @@
 package bg.softuni.parking.web;
 
-import bg.softuni.parking.model.dto.VehicleDto;
+import bg.softuni.parking.exception.VehicleAlreadyExists;
+import bg.softuni.parking.exception.VehicleNotFoundException;
 import bg.softuni.parking.model.dto.vehicle.VehicleCreateDto;
 import bg.softuni.parking.model.dto.vehicle.VehicleEditDto;
 import bg.softuni.parking.model.dto.vehicle.VehicleView;
@@ -26,28 +27,36 @@ public class VehicleController {
         this.vehicleService = vehicleService;
         this.userService = userService;
     }
-    // todo
-//  @GetMapping("/all-vehicles")
-//  public String getAllVehicles(Model model) {
-//    List<VehicleView> vehicles = vehicleService.findAll();
-//    model.addAttribute("vehicles", vehicles);
-//    return "all-vehicles";
-//  }
 
-    @GetMapping
-    public String viewVehicles(Model model) {
-        List<VehicleView> vehicles = vehicleService.getUserVehicles(userService.getCurrentUser().getUuid());
 
-        model.addAttribute("vehicles", vehicles);
-        return "vehicles";
-    }
 
-    @GetMapping("/edit/{id}")
-    public String editVehicle(@PathVariable Long id, Model model) {
-        VehicleView vehicle = vehicleService.getVehicleById(id);
-        model.addAttribute("vehicle", vehicle);
-        return "vehicles-edit";
-    }
+
+            @GetMapping
+            public String viewVehicles(Model model) {
+                try {
+                    List<VehicleView> vehicles = vehicleService.getUserVehicles(userService.getCurrentUser().getUuid());
+                    model.addAttribute("vehicles", vehicles);
+                } catch (VehicleNotFoundException e) {
+                    model.addAttribute("errorMessage", e.getMessage());
+                    return "error";
+                }
+                return "vehicles";
+            }
+
+
+
+
+            @GetMapping("/edit/{id}")
+        public String editVehicle(@PathVariable Long id, Model model) {
+          try {
+            VehicleView vehicle = vehicleService.getVehicleById(id);
+            model.addAttribute("vehicle", vehicle);
+          } catch (VehicleNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+          }
+          return "vehicles-edit";
+        }
 
     @PostMapping("/edit/{id}")
     public String updateVehicle(
@@ -66,30 +75,50 @@ public class VehicleController {
     }
 
 
-    @GetMapping("/add")
-    public String addVehicleForm(Model model) {
-        model.addAttribute("vehicle", new VehicleDto());
-        return "vehicle-adding";
-    }
 
-    @PostMapping("/add")
-    public String addVehicle(
-            @Valid VehicleCreateDto vehicleCreateDto,
-            BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("vehicleCreateDto", vehicleCreateDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.vehicleCreateDto", bindingResult);
-            return "redirect:/vehicles/add";
+
+            @GetMapping("/add")
+        public String addVehicleForm(Model model) {
+          if (!model.containsAttribute("vehicleCreateDto")) {
+            model.addAttribute("vehicleCreateDto", new VehicleCreateDto());
+          }
+          return "vehicle-adding";
         }
-        vehicleService.addVehicle(vehicleCreateDto, userService.getCurrentUser().getUuid());
-        return "redirect:/profile";
-    }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteVehicle(@PathVariable Long id) {
-        this.vehicleService.deleteVehicle(id);
-        return "redirect:/profile";
-    }
+
+
+              @PostMapping("/add")
+          public String addVehicle(
+              @Valid VehicleCreateDto vehicleCreateDto,
+              BindingResult bindingResult,
+              RedirectAttributes redirectAttributes) {
+            if (bindingResult.hasErrors()) {
+              redirectAttributes.addFlashAttribute("vehicleCreateDto", vehicleCreateDto);
+              redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.vehicleCreateDto", bindingResult);
+              return "redirect:/vehicles/add";
+            }
+
+            try {
+              vehicleService.addVehicle(vehicleCreateDto, userService.getCurrentUser().getUuid());
+            } catch (VehicleAlreadyExists e) {
+              redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+              redirectAttributes.addFlashAttribute("vehicleCreateDto", vehicleCreateDto);
+              return "redirect:/vehicles/add";
+            }
+            return "redirect:/profile";
+          }
+
+
+
+             @DeleteMapping("/delete/{id}")
+        public String deleteVehicle(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+            try {
+                vehicleService.deleteVehicle(id);
+            } catch (VehicleNotFoundException e) {
+                redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+                return "redirect:/vehicles";
+            }
+            return "redirect:/profile";
+        }
 }

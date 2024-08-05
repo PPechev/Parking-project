@@ -1,6 +1,6 @@
 package bg.softuni.parking.web;
 
-import bg.softuni.parking.model.entities.User;
+
 import bg.softuni.parking.model.user.ParkingUserDetails;
 import bg.softuni.parking.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Optional;
+
 
 @Controller
 public class HomeController {

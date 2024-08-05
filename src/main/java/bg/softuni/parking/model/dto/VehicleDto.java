@@ -6,7 +6,7 @@ public class VehicleDto {
 
     private String licensePlate;
 
-    // Getters and Setters
+
 
 
     public long getId() {

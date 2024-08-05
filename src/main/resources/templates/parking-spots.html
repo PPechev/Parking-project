@@ -1,37 +1,5 @@
 
 
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
-<!--    <title th:text="#{parking.spots.title}">Паркинг места</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<header th:replace="fragments/layout :: header"></header>-->
-
-<!--<main>-->
-<!--    <div class="center-content">-->
-<!--        <h2 th:text="#{parking.spots.title}">Паркинг места</h2>-->
-<!--        <div class="parking-spot-list">-->
-<!--            <div th:each="spot : ${parkingSpots}" class="parking-spot"-->
-<!--                 th:classappend="${spot.available} ? 'available' : 'occupied'">-->
-<!--                <form th:action="@{/reservations/new}" method="get">-->
-<!--                    <input type="hidden" name="spotId" th:value="${spot.id}" />-->
-<!--                    <button type="submit" th:disabled="${!spot.available}">-->
-<!--                        <span th:text="${spot.location}"></span>-->
-<!--                    </button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</main>-->
-
-<!--<footer th:replace="fragments/layout :: footer"></footer>-->
-<!--</body>-->
-<!--</html>-->
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>

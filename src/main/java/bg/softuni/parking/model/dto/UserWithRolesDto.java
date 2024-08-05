@@ -8,7 +8,6 @@ public class UserWithRolesDto {
     private String email;
     private Set<String> roles;
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

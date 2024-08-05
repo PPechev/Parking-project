@@ -1,5 +1,6 @@
 package bg.softuni.parking.service;
 
+import bg.softuni.parking.exception.ParkingSpotNotFoundException;
 import bg.softuni.parking.model.entities.ParkingSpot;
 import bg.softuni.parking.repository.ParkingSpotRepository;
 import org.springframework.stereotype.Service;
@@ -42,8 +43,12 @@ public class ParkingSpotService {
         return parkingSpotRepository.findByLocation(location);
     }
 
-    public void makeSpotAvailable(String parkingSpotLocation) {
-        ParkingSpot parkingSpot = parkingSpotRepository.findByLocation(parkingSpotLocation).orElseThrow(() -> new IllegalArgumentException("Invalid parking spot"));
+
+
+          public void makeSpotAvailable(String parkingSpotLocation) {
+        ParkingSpot parkingSpot = parkingSpotRepository.findByLocation(parkingSpotLocation)
+            .orElseThrow(() -> new ParkingSpotNotFoundException("Invalid parking spot"));
         parkingSpot.setAvailable(true);
-    }
+      }
+
 }

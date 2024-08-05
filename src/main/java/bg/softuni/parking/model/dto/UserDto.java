@@ -8,7 +8,7 @@ public class UserDto {
     private String email;
     private List<ReservationDto> reservations;
 
-    // Getters and setters
+
     public String getUsername() {
         return username;
     }

@@ -25,7 +25,7 @@ public class UserUpdateDto {
     @Pattern(regexp = "^\\d+$", message = "Полето трябва да съдържа само цифри")
     private String phone;
 
-    // Getters and Setters
+
 
     public String getUsername() {
         return username;

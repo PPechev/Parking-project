@@ -1,6 +1,6 @@
 package bg.softuni.parking.repository;
 
-import bg.softuni.parking.model.dto.ReservationDto;
+
 import bg.softuni.parking.model.entities.Reservation;
 import bg.softuni.parking.model.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

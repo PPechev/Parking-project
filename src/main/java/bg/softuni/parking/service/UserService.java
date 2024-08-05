@@ -2,6 +2,7 @@
 
 package bg.softuni.parking.service;
 
+import bg.softuni.parking.exception.*;
 import bg.softuni.parking.model.dto.*;
 import bg.softuni.parking.model.entities.Reservation;
 import bg.softuni.parking.model.entities.Role;
@@ -14,7 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,33 +62,32 @@ public class UserService {
     }
 
 
-    private User map(UserRegistrationDto userRegistrationDto) {
-
-
-        User mappedUser = modelMapper.map(userRegistrationDto, User.class);
-
-        mappedUser.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
-
-        Role userRole = roleService.findRoleByName(UserRoleEnum.USER).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        mappedUser.setRoles(new HashSet<>(Set.of(userRole)));
-
-        return mappedUser;
-    }
-
-//    public void updateUser(UserUpdateDto userUpdateDto) {
-//        User user = userRepository.findByUsername(userUpdateDto.getUsername())
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//
-//        user.setUsername(userUpdateDto.getUsername());
-//        user.setEmail(userUpdateDto.getEmail());
-//        user.setPhone(userUpdateDto.getPhone());
-//        user.setFirstName(userUpdateDto.getFirstName());
-//        user.setLastName(userUpdateDto.getLastName());
+//    private User map(UserRegistrationDto userRegistrationDto) {
 //
 //
-//        userRepository.save(user);
+//        User mappedUser = modelMapper.map(userRegistrationDto, User.class);
+//
+//        mappedUser.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
+//
+//        Role userRole = roleService.findRoleByName(UserRoleEnum.USER).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//
+//        mappedUser.setRoles(new HashSet<>(Set.of(userRole)));
+//
+//        return mappedUser;
 //    }
+
+
+    private User map(UserRegistrationDto userRegistrationDto) {
+    User mappedUser = modelMapper.map(userRegistrationDto, User.class);
+    mappedUser.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
+    Role userRole = roleService.findRoleByName(UserRoleEnum.USER)
+            .orElseThrow(()-> new RoleNotFoundException("Role not found"));
+    mappedUser.setRoles(new HashSet<>(Set.of(userRole)));
+    return mappedUser;
+  }
+
+
+
 
     @Transactional
     public void updateUser(UserUpdateDto userUpdateDto) {
@@ -119,15 +119,25 @@ public class UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    public UserProfileDto getUserProfile(String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+//    public UserProfileDto getUserProfile(String username) {
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+//
+//        UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
+//
+//        return dto;
+//
+//    }
 
-        UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
 
-        return dto;
+public UserProfileDto getUserProfile(String username) {
+  User user = userRepository.findByUsername(username)
+      .orElseThrow(() -> new UserNotFoundException("User not found"));
+  UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
+  return dto;
+}
 
-    }
+
 
     private ReservationDto convertToReservationDto(Reservation reservation) {
         ReservationDto dto = new ReservationDto();
@@ -139,42 +149,87 @@ public class UserService {
     }
 
 
-    public void updateUserProfile(UserProfileDto userProfileDto) {
-        User user = userRepository.findByUsername(userProfileDto.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        user.setEmail(userProfileDto.getEmail());
-        user.setFirstName(userProfileDto.getFirstName());
-        user.setLastName(userProfileDto.getLastName());
-        user.setPhone(userProfileDto.getPhone());
-        userRepository.save(user);
-    }
+//    public void updateUserProfile(UserProfileDto userProfileDto) {
+//        User user = userRepository.findByUsername(userProfileDto.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//        user.setEmail(userProfileDto.getEmail());
+//        user.setFirstName(userProfileDto.getFirstName());
+//        user.setLastName(userProfileDto.getLastName());
+//        user.setPhone(userProfileDto.getPhone());
+//        userRepository.save(user);
+//    }
+
+
+
+
+
+public void updateUserProfile(UserProfileDto userProfileDto) {
+  User user = userRepository.findByUsername(userProfileDto.getUsername())
+      .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+  user.setEmail(userProfileDto.getEmail());
+  user.setFirstName(userProfileDto.getFirstName());
+  user.setLastName(userProfileDto.getLastName());
+  user.setPhone(userProfileDto.getPhone());
+  userRepository.save(user);
+}
+
+
+
+//    public void changePassword(String username, ChangePasswordDto changePasswordDto) {
+//        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//        // TODO проверка дали новата парола не е същата като старата , също така дали новата парола е еднаква в двете полета
+//        user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+//        userRepository.save(user);
+//    }
+
 
 
     public void changePassword(String username, ChangePasswordDto changePasswordDto) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        // TODO проверка дали новата парола не е същата като старата , също така дали новата парола е еднаква в двете полета
-        user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
-        userRepository.save(user);
-    }
+  User user = userRepository.findByUsername(username)
+      .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+  // TODO проверка дали новата парола не е същата като старата , също така дали новата парола е еднаква в двете полета
+  user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+  userRepository.save(user);
+}
 
-    public void changeEmail(String username, ChangeEmailDto changeEmailDto) {
-        User user = userRepository.findByUsername(username).orElseThrow();
-        user.setEmail(changeEmailDto.getNewEmail());
-        userRepository.save(user);
-    }
-//  VANYA REPLACED
+
+
+
+//
+//    public void changeEmail(String username, ChangeEmailDto changeEmailDto) {
+//        User user = userRepository.findByUsername(username).orElseThrow();
+//        user.setEmail(changeEmailDto.getNewEmail());
+//        userRepository.save(user);
+//    }
+
+
 //  public User getCurrentUser() {
 //    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //    return (User) authentication.getPrincipal();
 //  }
 
-    public ParkingUserDetails getCurrentUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof ParkingUserDetails) {
-            return (ParkingUserDetails) principal;
-        } else {
-            throw new IllegalStateException("Current user is not of type ParkingUserDetails");
-        }
+
+//    public ParkingUserDetails getCurrentUser() {
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if (principal instanceof ParkingUserDetails) {
+//            return (ParkingUserDetails) principal;
+//        } else {
+//            throw new IllegalStateException("Current user is not of type ParkingUserDetails");
+//        }
+//    }
+
+
+
+      public ParkingUserDetails getCurrentUser() {
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if (principal instanceof ParkingUserDetails) {
+      return (ParkingUserDetails) principal;
+    } else {
+      throw new InvalidUserTypeException("Current user is not of type ParkingUserDetails");
     }
+  }
+
+
+
 
     public List<UserDto> getAllUsersWithReservations() {
         List<User> users = userRepository.findAll();
@@ -223,11 +278,17 @@ public class UserService {
     public boolean passwordsAreSame(String password, String newPassword) {
         return passwordEncoder.matches(newPassword, password);
     }
+//
+//    public User getByUsername(String username) {
+//        return userRepository.findByUsername(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//    }
 
-    public User getByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    }
+
+      public User getByUsername(String username) {
+    return userRepository.findByUsername(username)
+        .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+  }
 
     public User findByUuid(String owner) {
         return userRepository.findByUuid(owner);
@@ -249,18 +310,43 @@ public class UserService {
         return dto;
     }
 
-    public void addAdminRole(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        Role role = roleService.findRoleByName(UserRoleEnum.ADMIN).orElseThrow(() -> new IllegalArgumentException("Invalid role name"));
-        user.getRoles().add(role);
-        userRepository.save(user);
-    }
+//    public void addAdminRole(Long userId) {
+//        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+//        Role role = roleService.findRoleByName(UserRoleEnum.ADMIN).orElseThrow(() -> new IllegalArgumentException("Invalid role name"));
+//        user.getRoles().add(role);
+//        userRepository.save(user);
+//    }
 
-    public void removeAdminRole(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        Role role = roleService.findRoleByName(UserRoleEnum.ADMIN).orElseThrow(() -> new IllegalArgumentException("Invalid role name"));
-        user.getRoles().remove(role);
-        userRepository.save(user);
+
+
+
+
+        public void addAdminRole(Long userId) {
+          User user = userRepository.findById(userId)
+              .orElseThrow(() -> new InvalidUserIdException("Invalid user ID"));
+          Role role = roleService.findRoleByName(UserRoleEnum.ADMIN)
+              .orElseThrow(() -> new RoleNotFoundException("Invalid role name"));
+          user.getRoles().add(role);
+          userRepository.save(user);
+        }
+
+
+//    public void removeAdminRole(Long userId) {
+//        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+//        Role role = roleService.findRoleByName(UserRoleEnum.ADMIN).orElseThrow(() -> new IllegalArgumentException("Invalid role name"));
+//        user.getRoles().remove(role);
+//        userRepository.save(user);
+//    }
+
+
+
+        public void removeAdminRole(Long userId) {
+      User user = userRepository.findById(userId)
+          .orElseThrow(() -> new InvalidUserIdException("Invalid user ID"));
+      Role role = roleService.findRoleByName(UserRoleEnum.ADMIN)
+          .orElseThrow(() -> new RoleNotFoundException("Invalid role name"));
+      user.getRoles().remove(role);
+      userRepository.save(user);
     }
 
     public void deleteUser(Long userId) {
