@@ -16,6 +16,12 @@ public class VehicleView {
     this.id = id;
     return this;
   }
+
+    public VehicleView(long id, String licensePlate) {
+      this.id = id;
+      this.licensePlate = licensePlate;
+    }
+
   
   public String getLicensePlate() {
     return licensePlate;

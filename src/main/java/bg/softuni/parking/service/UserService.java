@@ -273,8 +273,15 @@ public void updateUserProfile(UserProfileDto userProfileDto) {
       userRepository.save(user);
     }
 
-    public void deleteUser(Long userId) {
-        userRepository.deleteById(userId);
-    }
+//    public void deleteUser(Long userId) {
+//        userRepository.deleteById(userId);
+//    }
+
+        public void deleteUser(Long userId) {
+            if (!userRepository.existsById(userId)) {
+                throw new InvalidUserIdException("Invalid user ID");
+            }
+            userRepository.deleteById(userId);
+        }
 
 }

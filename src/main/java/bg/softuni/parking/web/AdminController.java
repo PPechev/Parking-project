@@ -12,6 +12,7 @@ import bg.softuni.parking.model.entities.ParkingSpot;
 import bg.softuni.parking.service.*;
 import jakarta.transaction.Transactional;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class AdminController {
     }
 
 
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/all-reservations")
     public String getAllReservations(Model model) {
         List<ReservationAdminView> reservations = reservationService.findAllForAdmin();
@@ -48,12 +49,14 @@ public class AdminController {
         return "all-reservations";
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/delete/{id}")
     public String deleteReservation(@PathVariable("id") Long id) {
         reservationService.deleteReservation(id);
         return "redirect:/admin/all-reservations";
     }
 
+    @Secured("ROLE_ADMIN")
     @Transactional
     @GetMapping("/edit/{id}")
     public String editReservation(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
@@ -73,19 +76,14 @@ public class AdminController {
     }
 
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/update")
     public String updateReservation(@ModelAttribute ReservationDto reservationDto) {
         reservationService.updateReservation(reservationDto);
         return "redirect:/admin/all-reservations";
     }
 
-
-
-
-
-
-
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/all-vehicles")
     public String getAllVehicles(Model model) {
         List<VehicleViewAdmin> vehicles = vehicleService.findAll()
@@ -100,7 +98,7 @@ public class AdminController {
         return "all-vehicles";
     }
 
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/edit-vehicle/{id}")
     public String editVehicle(@PathVariable Long id, Model model) {
         VehicleView vehicle = vehicleService.getVehicleById(id);
@@ -108,7 +106,7 @@ public class AdminController {
         return "vehicles-edit";
     }
 
-
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("vehicles/delete/{id}")
     public String deleteVehicle(@PathVariable Long id, Model model) {
 
@@ -116,10 +114,7 @@ public class AdminController {
         return "redirect:/admin/all-vehicles";
     }
 
-
-
-
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/all-users")
     public String viewAllUsers(Model model) {
         List<UserWithRolesDto> users = userService.getAllUsersWithRoles();
@@ -127,18 +122,21 @@ public class AdminController {
         return "all-users";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/add-admin-role")
     public String addAdminRole(@RequestParam Long userId) {
         userService.addAdminRole(userId);
         return "redirect:/admin/all-users";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/remove-admin-role")
     public String removeAdminRole(@RequestParam Long userId) {
         userService.removeAdminRole(userId);
         return "redirect:/admin/all-users";
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/delete-user")
     public String deleteUser(@RequestParam Long userId) {
         userService.deleteUser(userId);

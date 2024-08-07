@@ -1,4 +1,4 @@
-package bg.softuni.parking.config;//package bg.softuni.parking.config;
+package bg.softuni.parking.config;
 
 
 import bg.softuni.parking.repository.UserRepository;
