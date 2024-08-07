@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -11,6 +10,7 @@
         .admin-container {
             padding: 20px;
         }
+
         .admin-box {
             background-color: rgba(255, 255, 255, 0);
             padding: 2rem;
@@ -18,10 +18,12 @@
             margin-bottom: 1rem;
             border: 1px solid #fff;
         }
+
         .admin-box h2 {
             margin-bottom: 1rem;
             color: #fff;
         }
+
         .admin-box label {
             font-weight: bold;
         }
@@ -51,11 +53,15 @@
                 <td>
                     <form th:action="@{/admin/add-admin-role}" method="post" style="display:inline;">
                         <input type="hidden" name="userId" th:value="${user.id}"/>
-                        <button type="submit" class="btn btn-success" th:if="${!user.roles.contains('ADMIN')}">Направи админ</button>
+                        <button type="submit" class="btn btn-success" th:if="${!user.roles.contains('ADMIN')}">Направи
+                            админ
+                        </button>
                     </form>
                     <form th:action="@{/admin/remove-admin-role}" method="post" style="display:inline;">
                         <input type="hidden" name="userId" th:value="${user.id}"/>
-                        <button type="submit" class="btn btn-warning" th:if="${user.roles.contains('ADMIN')}">Премахни админ</button>
+                        <button type="submit" class="btn btn-warning" th:if="${user.roles.contains('ADMIN')}">Премахни
+                            админ
+                        </button>
                     </form>
                     <form th:action="@{/admin/delete-user}" method="post" style="display:inline;">
                         <input type="hidden" name="userId" th:value="${user.id}"/>

@@ -1,7 +1,6 @@
 package bg.softuni.parking.model.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
 
 public class NewReservationDto {

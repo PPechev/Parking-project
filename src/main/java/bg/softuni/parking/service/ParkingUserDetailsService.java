@@ -22,18 +22,13 @@ public class ParkingUserDetailsService implements UserDetailsService {
     }
 
 
-
-
-          @Override
-      public UserDetails loadUserByUsername(String username) {
+    @Override
+    public UserDetails loadUserByUsername(String username) {
 
         return userRepository.findByUsername(username)
-            .map(ParkingUserDetailsService::map).orElseThrow(() ->
-                new UsernameNotFoundException("User with username " + username + " not found"));
-      }
-
-
-
+                .map(ParkingUserDetailsService::map).orElseThrow(() ->
+                        new UsernameNotFoundException("User with username " + username + " not found"));
+    }
 
 
     private static UserDetails map(User user) {

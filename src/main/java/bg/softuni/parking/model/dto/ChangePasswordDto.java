@@ -14,7 +14,6 @@ public class ChangePasswordDto {
     private String confirmNewPassword;
 
 
-
     public String getOldPassword() {
         return oldPassword;
     }

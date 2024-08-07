@@ -4,7 +4,6 @@ package bg.softuni.parking.service;
 
 import bg.softuni.parking.exception.*;
 import bg.softuni.parking.model.dto.*;
-import bg.softuni.parking.model.entities.Reservation;
 import bg.softuni.parking.model.entities.Role;
 import bg.softuni.parking.model.entities.User;
 import bg.softuni.parking.model.enums.UserRoleEnum;
@@ -15,10 +14,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -62,18 +59,14 @@ public class UserService {
     }
 
 
-
-
     private User map(UserRegistrationDto userRegistrationDto) {
-    User mappedUser = modelMapper.map(userRegistrationDto, User.class);
-    mappedUser.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
-    Role userRole = roleService.findRoleByName(UserRoleEnum.USER)
-            .orElseThrow(()-> new RoleNotFoundException("Role not found"));
-    mappedUser.setRoles(new HashSet<>(Set.of(userRole)));
-    return mappedUser;
-  }
-
-
+        User mappedUser = modelMapper.map(userRegistrationDto, User.class);
+        mappedUser.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
+        Role userRole = roleService.findRoleByName(UserRoleEnum.USER)
+                .orElseThrow(() -> new RoleNotFoundException("Role not found"));
+        mappedUser.setRoles(new HashSet<>(Set.of(userRole)));
+        return mappedUser;
+    }
 
 
     @Transactional
@@ -107,69 +100,41 @@ public class UserService {
     }
 
 
-
-
-public UserProfileDto getUserProfile(String username) {
-  User user = userRepository.findByUsername(username)
-      .orElseThrow(() -> new UserNotFoundException("User not found"));
-  UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
-  return dto;
-}
-
-
-
-    private ReservationDto convertToReservationDto(Reservation reservation) {
-        ReservationDto dto = new ReservationDto();
-        dto.setId(reservation.getId());
-        dto.setParkingSpotLocation(reservation.getParkingSpot().getLocation());
-        dto.setStartTime(reservation.getStartTime());
-        dto.setEndTime(reservation.getEndTime());
+    public UserProfileDto getUserProfile(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        UserProfileDto dto = modelMapper.map(user, UserProfileDto.class);
         return dto;
     }
 
 
-
-
-
-
-public void updateUserProfile(UserProfileDto userProfileDto) {
-  User user = userRepository.findByUsername(userProfileDto.getUsername())
-      .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-  user.setEmail(userProfileDto.getEmail());
-  user.setFirstName(userProfileDto.getFirstName());
-  user.setLastName(userProfileDto.getLastName());
-  user.setPhone(userProfileDto.getPhone());
-  userRepository.save(user);
-}
-
-
-
-
+    public void updateUserProfile(UserProfileDto userProfileDto) {
+        User user = userRepository.findByUsername(userProfileDto.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+        user.setEmail(userProfileDto.getEmail());
+        user.setFirstName(userProfileDto.getFirstName());
+        user.setLastName(userProfileDto.getLastName());
+        user.setPhone(userProfileDto.getPhone());
+        userRepository.save(user);
+    }
 
 
     public void changePassword(String username, ChangePasswordDto changePasswordDto) {
-  User user = userRepository.findByUsername(username)
-      .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-  user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
-  userRepository.save(user);
-}
-
-
-
-
-
-
-
-      public ParkingUserDetails getCurrentUser() {
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof ParkingUserDetails) {
-      return (ParkingUserDetails) principal;
-    } else {
-      throw new InvalidUserTypeException("Current user is not of type ParkingUserDetails");
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+        user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+        userRepository.save(user);
     }
-  }
 
 
+    public ParkingUserDetails getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof ParkingUserDetails) {
+            return (ParkingUserDetails) principal;
+        } else {
+            throw new InvalidUserTypeException("Current user is not of type ParkingUserDetails");
+        }
+    }
 
 
     public List<UserDto> getAllUsersWithReservations() {
@@ -221,16 +186,14 @@ public void updateUserProfile(UserProfileDto userProfileDto) {
     }
 
 
-      public User getByUsername(String username) {
-    return userRepository.findByUsername(username)
-        .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-  }
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+    }
 
     public User findByUuid(String owner) {
         return userRepository.findByUuid(owner);
     }
-
-
 
 
     public List<UserWithRolesDto> getAllUsersWithRoles() {
@@ -247,41 +210,31 @@ public void updateUserProfile(UserProfileDto userProfileDto) {
     }
 
 
-
-
-
-
-        public void addAdminRole(Long userId) {
-          User user = userRepository.findById(userId)
-              .orElseThrow(() -> new InvalidUserIdException("Invalid user ID"));
-          Role role = roleService.findRoleByName(UserRoleEnum.ADMIN)
-              .orElseThrow(() -> new RoleNotFoundException("Invalid role name"));
-          user.getRoles().add(role);
-          userRepository.save(user);
-        }
-
-
-
-
-
-        public void removeAdminRole(Long userId) {
-      User user = userRepository.findById(userId)
-          .orElseThrow(() -> new InvalidUserIdException("Invalid user ID"));
-      Role role = roleService.findRoleByName(UserRoleEnum.ADMIN)
-          .orElseThrow(() -> new RoleNotFoundException("Invalid role name"));
-      user.getRoles().remove(role);
-      userRepository.save(user);
+    public void addAdminRole(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidUserIdException("Invalid user ID"));
+        Role role = roleService.findRoleByName(UserRoleEnum.ADMIN)
+                .orElseThrow(() -> new RoleNotFoundException("Invalid role name"));
+        user.getRoles().add(role);
+        userRepository.save(user);
     }
 
-//    public void deleteUser(Long userId) {
-//        userRepository.deleteById(userId);
-//    }
 
-        public void deleteUser(Long userId) {
-            if (!userRepository.existsById(userId)) {
-                throw new InvalidUserIdException("Invalid user ID");
-            }
-            userRepository.deleteById(userId);
+    public void removeAdminRole(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidUserIdException("Invalid user ID"));
+        Role role = roleService.findRoleByName(UserRoleEnum.ADMIN)
+                .orElseThrow(() -> new RoleNotFoundException("Invalid role name"));
+        user.getRoles().remove(role);
+        userRepository.save(user);
+    }
+
+
+    public void deleteUser(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new InvalidUserIdException("Invalid user ID");
         }
+        userRepository.deleteById(userId);
+    }
 
 }

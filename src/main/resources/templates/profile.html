@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -13,19 +10,23 @@
         .profile-container {
             display: flex;
         }
+
         .content {
             flex-grow: 1;
             padding: 20px;
         }
+
         .readonly-fields {
             margin-bottom: 20px;
         }
+
         .sidebar {
             background-color: rgba(255, 255, 255, 0);
             padding: 20px;
             width: 200px;
             border-radius: 8px;
         }
+
         .sidebar .nav-button {
             display: block;
             width: 100%;
@@ -39,28 +40,34 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .sidebar .nav-button:hover {
             background-color: #0056b3;
         }
+
         .form-box {
             background-color: rgba(0, 0, 0, 0.6);
             padding: 2rem;
             border-radius: 8px;
         }
+
         .form-box h2 {
             margin-bottom: 1rem;
             color: #fff;
         }
+
         .form-box label {
             font-weight: bold;
             color: #fff;
         }
+
         .form-box .list-group-item {
             background-color: rgba(255, 255, 255, 0);
             color: #fff;
             border: none;
             margin-bottom: 0.5rem;
         }
+
         .form-box .list-group-item span {
             display: block;
         }
@@ -70,11 +77,24 @@
 <header th:replace="fragments/layout :: layout('profile')"></header>
 <main class="profile-container">
     <div class="sidebar">
-        <button class="nav-button" onclick="window.location.href='/profile'" th:text="#{profile.myProfile}">Моят профил</button>
-        <button class="nav-button" th:attr="onclick='window.location.href=\'/reservations?username=' + ${user.username} + '\''" th:text="#{profile.myReservations}">Моите резервации</button>
-        <button class="nav-button" th:attr="onclick='window.location.href=\'/vehicles?username=' + ${user.username} + '\''" th:text="#{profile.myVehicles}">Моите превозни средства</button>
-        <button class="nav-button" th:attr="onclick='window.location.href=\'/bank-cards?username=' + ${user.username} + '\''" th:text="#{profile.myBankCards}">Банкови карти</button> <!-- Нов бутон за банкови карти -->
-        <button class="nav-button" onclick="window.location.href='/change-password'" th:text="#{profile.changePassword}">Смяна на парола</button>
+        <button class="nav-button" onclick="window.location.href='/profile'" th:text="#{profile.myProfile}">Моят
+            профил
+        </button>
+        <button class="nav-button"
+                th:attr="onclick='window.location.href=\'/reservations?username=' + ${user.username} + '\''"
+                th:text="#{profile.myReservations}">Моите резервации
+        </button>
+        <button class="nav-button"
+                th:attr="onclick='window.location.href=\'/vehicles?username=' + ${user.username} + '\''"
+                th:text="#{profile.myVehicles}">Моите превозни средства
+        </button>
+        <button class="nav-button"
+                th:attr="onclick='window.location.href=\'/bank-cards?username=' + ${user.username} + '\''"
+                th:text="#{profile.myBankCards}">Банкови карти
+        </button> <!-- Нов бутон за банкови карти -->
+        <button class="nav-button" onclick="window.location.href='/change-password'"
+                th:text="#{profile.changePassword}">Смяна на парола
+        </button>
     </div>
     <div class="content">
         <div class="form-box">
@@ -102,7 +122,9 @@
                 <span th:text="${user.phone}"></span>
             </div>
 
-            <button class="btn btn-primary mt-3" onclick="window.location.href='/profile/edit'" th:text="#{profile.editProfile}">Редактиране на профил</button>
+            <button class="btn btn-primary mt-3" onclick="window.location.href='/profile/edit'"
+                    th:text="#{profile.editProfile}">Редактиране на профил
+            </button>
         </div>
     </div>
 </main>

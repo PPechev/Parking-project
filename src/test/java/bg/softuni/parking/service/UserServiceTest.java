@@ -23,11 +23,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.util.*;
-
 import static bg.softuni.parking.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -728,27 +725,7 @@ class UserServiceTest {
     verify(userRepository, never()).findByUsername(anyString());
   }
 
-//  @Test
-//  void testReauthenticateUser() {
-//    // Arrange
-//    UserDetails userDetails = mock(UserDetails.class);
-//    when(parkingUserDetailsService.loadUserByUsername(USERNAME)).thenReturn(userDetails);
-//
-//    // Mock the SecurityContext and Authentication
-//    Authentication authentication = mock(Authentication.class);
-//    SecurityContext securityContext = mock(SecurityContext.class);
-//    when(securityContext.getAuthentication()).thenReturn(authentication);
-//    SecurityContextHolder.setContext(securityContext);
-//
-//    // Act
-//    userService.reauthenticateUser(USERNAME);
-//
-//    // Assert
-//    verify(parkingUserDetailsService).loadUserByUsername(USERNAME);
-//    Authentication updatedAuthentication = SecurityContextHolder.getContext().getAuthentication();
-//    assertNotNull(updatedAuthentication);
-//    assertEquals(userDetails, updatedAuthentication.getPrincipal());
-//  }
+
 
 }
 

@@ -1,12 +1,8 @@
 spring:
   application:
     name: parking
-  #  thymeleaf:
-  #    check-template-location: true
-  #    cache: false
-  #    prefix: file:./src/main/resources/templates/
-  #server:
-  #  port: 8081
+  jackson:
+    time-zone: Europe/Sofia
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/parking?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
@@ -29,15 +25,7 @@ spring:
       filter:
         enabled: true
 
-#forex:
-#  api:
-#    key: ${FOREX_API_KEY:}
-#    url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
-#    base: "USD"
-#
-#orders:
-#  api:
-#    baseUrl: "http://localhost:8081"
+
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -48,3 +36,6 @@ spring:
 vehicle:
   api:
     baseUrl: "http://localhost:8081"
+
+
+

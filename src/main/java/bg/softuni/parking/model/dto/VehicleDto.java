@@ -7,8 +7,6 @@ public class VehicleDto {
     private String licensePlate;
 
 
-
-
     public long getId() {
         return id;
     }

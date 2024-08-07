@@ -1,5 +1,3 @@
-
-
 package bg.softuni.parking.model.dto;
 
 
@@ -18,12 +16,11 @@ public class UserRegistrationDto {
     private String password;
 
     @NotBlank(message = "Имейлът е задължителен")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" , message = "Невалиден имейл адрес")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Невалиден имейл адрес")
     private String email;
 
     @NotBlank(message = "Потвърждението на паролата е задължително")
     private String confirmPassword;
-
 
 
     public String getUsername() {

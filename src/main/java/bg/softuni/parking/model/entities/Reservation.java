@@ -1,7 +1,6 @@
 package bg.softuni.parking.model.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,8 +12,6 @@ public class Reservation extends BaseEntity {
     private User user;
 
 
-
-
     @Column(nullable = false)
     private Long vehicleId;
 
@@ -23,13 +20,13 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "parking_spot_id", nullable = false)
     private ParkingSpot parkingSpot;
 
-    @Column(name = "start_time",nullable = false)
+    @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
 
-    @Column(name = "end_time" ,nullable = false)
+    @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
 
-    private boolean isItPaid ;
+    private boolean isItPaid;
 
 
     public Long getVehicleId() {
@@ -42,7 +39,7 @@ public class Reservation extends BaseEntity {
     }
 
     public Reservation() {
-        this.isItPaid=false;
+        this.isItPaid = false;
     }
 
     public boolean isItPaid() {
@@ -62,7 +59,6 @@ public class Reservation extends BaseEntity {
         this.user = user;
         return this;
     }
-
 
 
     public ParkingSpot getParkingSpot() {

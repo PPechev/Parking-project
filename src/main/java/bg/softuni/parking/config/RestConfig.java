@@ -7,13 +7,13 @@ import org.springframework.web.client.RestClient;
 
 @Configuration
 public class RestConfig {
-  
-  @Bean
-  public RestClient restClient(VehicleApiConfig config) {
-    return RestClient
-        .builder()
-        .baseUrl(config.getBaseUrl())
-        .defaultHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-        .build();
-  }
+
+    @Bean
+    public RestClient restClient(VehicleApiConfig config) {
+        return RestClient
+                .builder()
+                .baseUrl(config.getBaseUrl())
+                .defaultHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                .build();
+    }
 }

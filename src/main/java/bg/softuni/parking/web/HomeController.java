@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-
 @Controller
 public class HomeController {
 
@@ -23,13 +22,13 @@ public class HomeController {
 
     @GetMapping("/")
 
-    public String home(Model model , @AuthenticationPrincipal UserDetails userDetails) {
+    public String home(Model model, @AuthenticationPrincipal UserDetails userDetails) {
 
 
         if (userDetails instanceof ParkingUserDetails parkingUserDetails) {
 
             model.addAttribute("welcomeMessage", parkingUserDetails.getFullName());
-        }else {
+        } else {
 
             model.addAttribute("welcomeMessage", "Anonymous");
         }

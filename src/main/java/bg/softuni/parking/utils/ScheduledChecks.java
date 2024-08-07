@@ -13,7 +13,7 @@ import java.util.List;
 public class ScheduledChecks {
 
 
-    private final ReservationService    reservationService;
+    private final ReservationService reservationService;
 
     public ScheduledChecks(ReservationService reservationService) {
         this.reservationService = reservationService;
@@ -21,12 +21,12 @@ public class ScheduledChecks {
 
     @Transactional
     @Scheduled(cron = "0 * * * * ?")
-    public void  cleanParkingSpots(){
+    public void cleanParkingSpots() {
 
         List<Reservation> allReservations = reservationService.findAll();
 
         for (Reservation reservation : allReservations) {
-            if (reservation.getEndTime().isBefore(LocalDateTime.now())){
+            if (reservation.getEndTime().isBefore(LocalDateTime.now())) {
 
                 reservationService.deleteReservation(reservation.getId());
             }

@@ -4,15 +4,12 @@ import bg.softuni.parking.model.dto.BankCardDto;
 import bg.softuni.parking.model.dto.ReservationDto;
 import bg.softuni.parking.model.dto.UserWithRolesDto;
 import bg.softuni.parking.model.dto.reservationAdminView.ReservationAdminView;
-
 import bg.softuni.parking.model.dto.vehicle.VehicleView;
 import bg.softuni.parking.model.dto.vehicle.VehicleViewAdmin;
 import bg.softuni.parking.model.entities.ParkingSpot;
-
 import bg.softuni.parking.model.entities.Reservation;
 import bg.softuni.parking.service.*;
 import jakarta.transaction.Transactional;
-
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -65,13 +62,13 @@ public class AdminController {
         parkingSpotService.makeSpotAvailable(reservation.getParkingSpotLocation());
 
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
-        List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
-
+        List<BankCardDto> bankCardDto = bankCardService.getBankCardsByUsername(userDetails.getUsername());
+        List<VehicleViewAdmin> allVehicles = vehicleService.findAll();
 
         model.addAttribute("reservation", reservation);
         model.addAttribute("availableParkingSpots", availableParkingSpots);
-        model.addAttribute("vehicles", vehicleService.getUserVehicles(userService.getCurrentUser().getUuid()));
-        model.addAttribute("bankingCards" ,bankCardDto );
+        model.addAttribute("vehicles", allVehicles);
+        model.addAttribute("bankingCards", bankCardDto);
 
         return "reservation-edit";
     }
@@ -117,7 +114,6 @@ public class AdminController {
         });
 
         vehicleService.deleteVehicle(id);
-
 
 
         return "redirect:/admin/all-vehicles";

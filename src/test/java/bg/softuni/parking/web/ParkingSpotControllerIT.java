@@ -7,8 +7,7 @@ import bg.softuni.parking.service.UserService;
 import bg.softuni.parking.service.VehicleService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,31 +42,7 @@ class ParkingSpotControllerIT {
     @MockBean
     private VehicleService vehicleService;
 
-//    @Test
-//    @WithMockUser(username = USERNAME)
-//    void testGetParkingSpots_LoggedInWithVehicles() throws Exception {
-//        User user = new User();
-//        user.setUsername(USERNAME);
-//        user.setUuid("test-uuid");
-//
-//        ParkingSpot parkingSpot = new ParkingSpot();
-//        List<ParkingSpot> parkingSpots = List.of(parkingSpot);
-//
-//        when(userService.findByUsername(USERNAME)).thenReturn(Optional.of(user));
-//        when(vehicleService.getUserVehicles(user.getUuid())).thenReturn(List.of(new Object())); // Mock vehicle list
-//        when(parkingSpotService.findAll()).thenReturn(parkingSpots);
-//
-//        mockMvc.perform(get("/parking-spots"))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("parking-spots"))
-//                .andExpect(model().attribute("parkingSpots", parkingSpots))
-//                .andExpect(model().attribute("isLoggedIn", true))
-//                .andExpect(model().attribute("hasVehicles", true));
-//
-//        verify(userService).findByUsername(USERNAME);
-//        verify(vehicleService).getUserVehicles(user.getUuid());
-//        verify(parkingSpotService).findAll();
-//    }
+
 
     @Test
     @WithMockUser(username = USERNAME)

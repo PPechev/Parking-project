@@ -11,8 +11,6 @@ public class UserProfileDto {
     private String phone;
 
 
-
-
     public String getUsername() {
         return username;
     }

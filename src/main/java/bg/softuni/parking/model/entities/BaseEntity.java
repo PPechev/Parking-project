@@ -8,9 +8,9 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public class BaseEntity {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public Long getId() {
         return id;

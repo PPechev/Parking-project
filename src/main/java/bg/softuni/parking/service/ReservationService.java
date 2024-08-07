@@ -1,5 +1,3 @@
-
-
 package bg.softuni.parking.service;
 
 import bg.softuni.parking.exception.ParkingSpotNotFoundException;
@@ -35,10 +33,7 @@ public class ReservationService {
     }
 
 
-
-
-
-      public List<ReservationDto> getUserReservations(String username) {
+    public List<ReservationDto> getUserReservations(String username) {
         User user = userService.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
         return reservationRepository.findByUser(user).stream()
@@ -47,31 +42,28 @@ public class ReservationService {
     }
 
 
-
-
-              public ReservationDto getReservationById(Long id) {
-            Reservation reservation = reservationRepository.findById(id)
+    public ReservationDto getReservationById(Long id) {
+        Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ReservationNotFoundException("Reservation not found"));
-            return mapToReservationDto(reservation);
-          }
+        return mapToReservationDto(reservation);
+    }
 
 
-
-                public void updateReservation(ReservationDto reservationDto) {
-            Reservation reservation = reservationRepository.findById(reservationDto.getId())
+    public void updateReservation(ReservationDto reservationDto) {
+        Reservation reservation = reservationRepository.findById(reservationDto.getId())
                 .orElseThrow(() -> new ReservationNotFoundException("Reservation not found"));
-            ParkingSpot parkingSpot = parkingSpotService.findByLocation(reservationDto.getParkingSpotLocation())
+        ParkingSpot parkingSpot = parkingSpotService.findByLocation(reservationDto.getParkingSpotLocation())
                 .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"));
-            VehicleView vehicle = vehicleService.getVehicleById(reservationDto.getVehicleId());
+        VehicleView vehicle = vehicleService.getVehicleById(reservationDto.getVehicleId());
 
 
-            reservation.setParkingSpot(parkingSpot);
-            reservation.setStartTime(reservationDto.getStartTime());
-            reservation.setEndTime(reservationDto.getEndTime());
-            reservation.setVehicleId(vehicle.getId());
-            reservation.getParkingSpot().setAvailable(false);
-            reservationRepository.save(reservation);
-          }
+        reservation.setParkingSpot(parkingSpot);
+        reservation.setStartTime(reservationDto.getStartTime());
+        reservation.setEndTime(reservationDto.getEndTime());
+        reservation.setVehicleId(vehicle.getId());
+        reservation.getParkingSpot().setAvailable(false);
+        reservationRepository.save(reservation);
+    }
 
     public List<Reservation> findAll() {
         return reservationRepository.findAll();
@@ -89,35 +81,31 @@ public class ReservationService {
     }
 
 
-
-              public void addReservation(ReservationDto reservationDto, String username) {
-            User user = userService.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-            ParkingSpot parkingSpot = parkingSpotService.findByLocation(reservationDto.getParkingSpotLocation())
-                .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"));
-            VehicleView vehicle = vehicleService.getVehicleById(reservationDto.getVehicleId());
-
-
-            Reservation reservation = new Reservation();
-            reservation.setParkingSpot(parkingSpot);
-            reservation.setStartTime(reservationDto.getStartTime());
-            reservation.setEndTime(reservationDto.getEndTime());
-            reservation.setUser(user);
-
-            reservation.setVehicleId(vehicle.getId());
-            parkingSpot.setAvailable(false);
-            reservationRepository.save(reservation);
-          }
-
-
-
-
-
-          public void createNewReservation(NewReservationDto newReservationDto, String username) {
+    public void addReservation(ReservationDto reservationDto, String username) {
         User user = userService.findByUsername(username)
-            .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+        ParkingSpot parkingSpot = parkingSpotService.findByLocation(reservationDto.getParkingSpotLocation())
+                .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"));
+        VehicleView vehicle = vehicleService.getVehicleById(reservationDto.getVehicleId());
+
+
+        Reservation reservation = new Reservation();
+        reservation.setParkingSpot(parkingSpot);
+        reservation.setStartTime(reservationDto.getStartTime());
+        reservation.setEndTime(reservationDto.getEndTime());
+        reservation.setUser(user);
+
+        reservation.setVehicleId(vehicle.getId());
+        parkingSpot.setAvailable(false);
+        reservationRepository.save(reservation);
+    }
+
+
+    public void createNewReservation(NewReservationDto newReservationDto, String username) {
+        User user = userService.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
         ParkingSpot parkingSpot = parkingSpotService.findById(newReservationDto.getParkingSpotId())
-            .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"));
+                .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"));
         VehicleView vehicle = vehicleService.getVehicleById(newReservationDto.getVehicleId());
 
         Reservation reservation = new Reservation();
@@ -130,21 +118,17 @@ public class ReservationService {
         parkingSpot.setAvailable(false);
 
         reservationRepository.save(reservation);
-      }
+    }
 
 
-
-
-
-          public void deleteReservation(Long id) {
+    public void deleteReservation(Long id) {
         parkingSpotService.makeSpotAvailable(getReservationById(id)
-            .getParkingSpotLocation());
+                .getParkingSpotLocation());
         Reservation reservation = reservationRepository.findById(id)
-            .orElseThrow(() -> new ReservationNotFoundException("Reservation not found"));
+                .orElseThrow(() -> new ReservationNotFoundException("Reservation not found"));
         reservation.setItPaid(true);
         reservationRepository.deleteById(id);
-      }
-
+    }
 
 
     //     additional

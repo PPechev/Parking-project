@@ -78,7 +78,7 @@ nav li a:hover, .logout-form button:hover {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8);
     min-width: 10rem;
-    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
     z-index: 1000;
     color: white;
@@ -269,6 +269,7 @@ footer {
 .form-box .list-group-item span {
     display: block;
 }
+
 .center-content {
     display: flex;
     flex-direction: column;
@@ -278,6 +279,7 @@ footer {
 h2 {
     text-align: center;
 }
+
 .parking-spot {
     width: 100px;
     height: 100px;

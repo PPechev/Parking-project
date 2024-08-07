@@ -22,7 +22,7 @@ public class LanguageController {
     @GetMapping("/change-language")
     public String changeLanguage(HttpServletRequest request, HttpServletResponse response, @RequestParam("lang") String lang) {
         Locale locale = new Locale(lang);
-        localeResolver.setLocale( request,  response, locale);
+        localeResolver.setLocale(request, response, locale);
         return "redirect:" + request.getHeader("Referer");
     }
 }

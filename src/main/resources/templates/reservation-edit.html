@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -11,6 +10,7 @@
         .reservation-container {
             padding: 20px;
         }
+
         .reservation-box {
             background-color: rgba(255, 255, 255, 0);
             padding: 2rem;
@@ -18,20 +18,24 @@
             margin-bottom: 1rem;
             border: 1px solid #fff;
         }
+
         .reservation-box h2 {
             margin-bottom: 1rem;
             color: #fff;
         }
+
         .reservation-box label {
             font-weight: bold;
             color: #fff;
         }
+
         .reservation-box .list-group-item {
             background-color: rgba(255, 255, 255, 0);
             color: #fff;
             border: none;
             margin-bottom: 0.5rem;
         }
+
         .reservation-box .list-group-item span {
             display: block;
         }
@@ -44,36 +48,43 @@
     <div class="reservation-box">
         <h2 th:text="#{reservation.edit.title}">Редактиране на резервация</h2>
         <form th:action="@{/reservations/update}" th:object="${reservation}" method="post">
-            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{id}"/>
             <div class="mb-3">
                 <label th:text="#{reservation.parkingSpot}">Парко място:</label>
                 <select class="form-control" th:field="*{parkingSpotLocation}" required>
-                    <option value="" disabled selected th:text="#{reservation.selectParkingSpot}">Изберете парко място</option>
-                    <option th:each="parkingSpot : ${availableParkingSpots}" th:value="${parkingSpot.location}" th:text="${parkingSpot.location}"></option>
+                    <option value="" disabled selected th:text="#{reservation.selectParkingSpot}">Изберете парко място
+                    </option>
+                    <option th:each="parkingSpot : ${availableParkingSpots}" th:value="${parkingSpot.location}"
+                            th:text="${parkingSpot.location}"></option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label th:text="#{reservation.startTime}">Начало:</label>
-                <input type="datetime-local" class="form-control" th:field="*{startTime}" />
+                <input type="datetime-local" class="form-control" th:field="*{startTime}"/>
             </div>
             <div class="mb-3">
                 <label th:text="#{reservation.endTime}">Край:</label>
-                <input type="datetime-local" class="form-control" th:field="*{endTime}" />
+                <input type="datetime-local" class="form-control" th:field="*{endTime}"/>
             </div>
 
             <div class="mb-3">
                 <label th:text="#{reservation.vehicle}">Превозно средство:</label>
                 <select class="form-control" th:field="*{vehicleId}">
-                    <option value="" disabled selected th:text="#{reservation.selectVehicle}">Изберете превозно средство</option>
-                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}" th:selected="${vehicle.id == reservation.vehicleId}"></option>
+                    <option value="" disabled selected th:text="#{reservation.selectVehicle}">Изберете превозно
+                        средство
+                    </option>
+                    <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.licensePlate}"
+                            th:selected="${vehicle.id == reservation.vehicleId}"></option>
                 </select>
             </div>
             <div class="mb-3">
                 <label th:text="#{reservation.bankCard}">Банкова карта:</label>
                 <select class="form-control" th:field="*{bankCardId}" required>
-                    <option value="" disabled selected th:text="#{reservation.selectBankCard}">Изберете банкова карта</option>
-                    <option th:each="card : ${bankingCards}" th:value="${card.id}" th:text="${card.cardNumber}"></option>
+                    <option value="" disabled selected th:text="#{reservation.selectBankCard}">Изберете банкова карта
+                    </option>
+                    <option th:each="card : ${bankingCards}" th:value="${card.id}"
+                            th:text="${card.cardNumber}"></option>
                 </select>
             </div>
             <div class="mb-3">

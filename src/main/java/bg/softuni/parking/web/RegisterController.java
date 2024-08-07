@@ -1,5 +1,3 @@
-
-
 package bg.softuni.parking.web;
 
 import bg.softuni.parking.model.dto.UserRegistrationDto;
@@ -30,6 +28,7 @@ public class RegisterController {
     public String register() {
         return "register";
     }
+
     @PostMapping("/register")
     public String registerSubmit(
             @Valid @ModelAttribute("registerDTO") UserRegistrationDto userRegistrationDto,

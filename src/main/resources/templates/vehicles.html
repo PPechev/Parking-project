@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -12,6 +10,7 @@
         .vehicle-container {
             padding: 20px;
         }
+
         .vehicle-box {
             background-color: rgba(255, 255, 255, 0);
             padding: 2rem;
@@ -19,20 +18,24 @@
             margin-bottom: 1rem;
             border: 1px solid #fff;
         }
+
         .vehicle-box h2 {
             margin-bottom: 1rem;
             color: #fff;
         }
+
         .vehicle-box label {
             font-weight: bold;
             color: #fff;
         }
+
         .vehicle-box .list-group-item {
             background-color: rgba(255, 255, 255, 0);
             color: #fff;
             border: none;
             margin-bottom: 0.5rem;
         }
+
         .vehicle-box .list-group-item span {
             display: block;
         }
@@ -46,15 +49,21 @@
         <h2 th:text="#{vehicles.title}">Моите превозни средства</h2>
         <ul class="list-group">
             <li class="list-group-item" th:each="vehicle : ${vehicles}">
-                <span><span th:text="#{vehicles.licensePlate}">Регистрационен номер:</span> <span th:text="${vehicle.licensePlate}"></span></span>
-                <button class="btn btn-primary mt-3" th:text="#{vehicles.edit}" th:attr="onclick='window.location.href=\'/vehicles/edit/' + ${vehicle.id} + '\''">Редактиране</button>
-                <form th:method="delete" th:action="@{/vehicles/delete/{id}(id=${vehicle.getId()})}" style="margin-top: 1rem;">
+                <span><span th:text="#{vehicles.licensePlate}">Регистрационен номер:</span> <span
+                        th:text="${vehicle.licensePlate}"></span></span>
+                <button class="btn btn-primary mt-3" th:text="#{vehicles.edit}"
+                        th:attr="onclick='window.location.href=\'/vehicles/edit/' + ${vehicle.id} + '\''">Редактиране
+                </button>
+                <form th:method="delete" th:action="@{/vehicles/delete/{id}(id=${vehicle.getId()})}"
+                      style="margin-top: 1rem;">
                     <input class="btn btn-danger" type="submit" th:value="#{vehicles.delete}">
                 </form>
             </li>
         </ul>
 
-        <button class="btn btn-success mt-3" th:text="#{vehicles.addNew}" onclick="window.location.href='/vehicles/add'">Добавяне на ново превозно средство</button>
+        <button class="btn btn-success mt-3" th:text="#{vehicles.addNew}"
+                onclick="window.location.href='/vehicles/add'">Добавяне на ново превозно средство
+        </button>
     </div>
 </main>
 

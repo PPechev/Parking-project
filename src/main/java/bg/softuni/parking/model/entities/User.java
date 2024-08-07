@@ -1,12 +1,9 @@
-
-
 package bg.softuni.parking.model.entities;
 
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,8 +39,6 @@ public class User extends BaseEntity {
     private Set<Reservation> reservations = new HashSet<>();
 
 
-
-
     @UuidGenerator
     @JdbcTypeCode(VARCHAR)
     private String uuid;
@@ -64,7 +59,6 @@ public class User extends BaseEntity {
     private Set<BankCard> bankCards = new HashSet<>();
 
 
-
     public Set<BankCard> getBankCards() {
         return bankCards;
     }
@@ -82,7 +76,6 @@ public class User extends BaseEntity {
         this.selectedVehicleId = selectedVehicleId;
     }
 
-    // Getters and setters
     public String getUsername() {
         return username;
     }
@@ -155,12 +148,5 @@ public class User extends BaseEntity {
         return this;
     }
 
-//    public Set<Vehicle> getVehicles() {
-//        return vehicles;
-//    }
-//
-//    public User setVehicles(Set<Vehicle> vehicles) {
-//        this.vehicles = vehicles;
-//        return this;
-//    }
+
 }

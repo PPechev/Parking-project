@@ -14,7 +14,6 @@ public class ParkingUserDetails extends User {
     private final String uuid;
 
 
-
     public ParkingUserDetails(String username,
                               String password,
                               Collection<? extends GrantedAuthority> authorities,
@@ -47,7 +46,6 @@ public class ParkingUserDetails extends User {
     public String getEmail() {
         return email;
     }
-
 
 
     public String getFullName() {

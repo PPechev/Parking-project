@@ -6,15 +6,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "vehicle.api")
 public class VehicleApiConfig {
-  
-  private String baseUrl;
-  
-  public String getBaseUrl() {
-    return baseUrl;
-  }
-  
-  public VehicleApiConfig setBaseUrl(String baseUrl) {
-    this.baseUrl = baseUrl;
-    return this;
-  }
+
+    private String baseUrl;
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public VehicleApiConfig setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+        return this;
+    }
 }

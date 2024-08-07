@@ -6,15 +6,15 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "parking_spots")
-public class ParkingSpot  extends BaseEntity{
+public class ParkingSpot extends BaseEntity {
 
     @Column(nullable = false)
     private String location;
     @Column(nullable = false)
-    private boolean available ;
+    private boolean available;
 
     public ParkingSpot() {
-        this.available=true;
+        this.available = true;
     }
 
 
@@ -26,7 +26,6 @@ public class ParkingSpot  extends BaseEntity{
         this.location = location;
         return this;
     }
-
 
 
     public boolean isAvailable() {

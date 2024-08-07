@@ -14,9 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,12 +58,12 @@ public class ReservationController {
 
         List<VehicleView> vehicles = vehicleService.getUserVehicles(userService.getCurrentUser().getUuid());
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
-        List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
+        List<BankCardDto> bankCardDto = bankCardService.getBankCardsByUsername(userDetails.getUsername());
 
         model.addAttribute("reservation", reservation);
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("availableParkingSpots", availableParkingSpots);
-        model.addAttribute("bankingCards" ,bankCardDto );
+        model.addAttribute("bankingCards", bankCardDto);
 
 
         return "reservation-edit";
@@ -79,17 +77,16 @@ public class ReservationController {
     }
 
     @GetMapping("/add")
-    public String addReservationForm(Model model, @AuthenticationPrincipal UserDetails userDetails ) {
+    public String addReservationForm(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("reservation", new ReservationDto());
         List<VehicleView> vehicles = vehicleService.getUserVehicles(userService.getCurrentUser().getUuid());
         List<ParkingSpot> availableParkingSpots = parkingSpotService.findAllAvailable();
-        List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
-
+        List<BankCardDto> bankCardDto = bankCardService.getBankCardsByUsername(userDetails.getUsername());
 
 
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("availableParkingSpots", availableParkingSpots);
-        model.addAttribute("bankingCards" ,bankCardDto );
+        model.addAttribute("bankingCards", bankCardDto);
 
         return "reservation-adding";
     }
@@ -112,12 +109,12 @@ public class ReservationController {
         NewReservationDto newReservationDto = new NewReservationDto();
         newReservationDto.setParkingSpotId(spotId);
         newReservationDto.setParkingSpotLocation(parkingSpotService.getLocationById(spotId));
-        List<BankCardDto> bankCardDto =  bankCardService.getBankCardsByUsername(userDetails.getUsername());
+        List<BankCardDto> bankCardDto = bankCardService.getBankCardsByUsername(userDetails.getUsername());
 
 
         model.addAttribute("newReservation", newReservationDto);
         model.addAttribute("vehicles", vehicleService.getUserVehicles(userService.getCurrentUser().getUuid()));
-        model.addAttribute("bankingCards" ,bankCardDto );
+        model.addAttribute("bankingCards", bankCardDto);
 
         return "reservation-new";
     }

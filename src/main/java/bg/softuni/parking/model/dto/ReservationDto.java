@@ -23,11 +23,6 @@ public class ReservationDto {
     private String bankCardNumber;
 
 
-
-
-
-
-
     public Long getBankCardId() {
         return bankCardId;
     }

@@ -5,7 +5,6 @@ import bg.softuni.parking.model.entities.ParkingSpot;
 import bg.softuni.parking.repository.ParkingSpotRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +22,8 @@ public class ParkingSpotService {
         return parkingSpotRepository.save(parkingSpot);
     }
 
-    public Optional<ParkingSpot> findById (Long id) {
-       return parkingSpotRepository.findById(id);
+    public Optional<ParkingSpot> findById(Long id) {
+        return parkingSpotRepository.findById(id);
     }
 
     public List<ParkingSpot> findAllAvailable() {
@@ -35,51 +34,31 @@ public class ParkingSpotService {
         return parkingSpotRepository.findAll();
     }
 
-//    public String getLocationById(Long spotId) {
-//        return parkingSpotRepository.findById(spotId).get().getLocation();
-//
-//    }
 
-
-          public String getLocationById(Long spotId) {
+    public String getLocationById(Long spotId) {
         return parkingSpotRepository.findById(spotId)
-            .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"))
-            .getLocation();
-      }
-
-//    public ParkingSpot getCurrentParkingSpotById(Long spotId) {
-//        return parkingSpotRepository.findById(spotId).get();
-//    }
-
-        public ParkingSpot getCurrentParkingSpotById(Long spotId) {
-      return parkingSpotRepository.findById(spotId)
-          .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"));
+                .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"))
+                .getLocation();
     }
 
 
+    public ParkingSpot getCurrentParkingSpotById(Long spotId) {
+        return parkingSpotRepository.findById(spotId)
+                .orElseThrow(() -> new ParkingSpotNotFoundException("Parking spot not found"));
+    }
 
 
-
-
-//          public void makeSpotAvailable(String parkingSpotLocation) {
-//        ParkingSpot parkingSpot = parkingSpotRepository.findByLocation(parkingSpotLocation)
-//            .orElseThrow(() -> new ParkingSpotNotFoundException("Invalid parking spot"));
-//        parkingSpot.setAvailable(true);
-//      }
-
-              @Transactional
-          public void makeSpotAvailable(String parkingSpotLocation) {
-            ParkingSpot parkingSpot = parkingSpotRepository.findByLocation(parkingSpotLocation)
+    @Transactional
+    public void makeSpotAvailable(String parkingSpotLocation) {
+        ParkingSpot parkingSpot = parkingSpotRepository.findByLocation(parkingSpotLocation)
                 .orElseThrow(() -> new ParkingSpotNotFoundException("Invalid parking spot"));
-            parkingSpot.setAvailable(true);
-            parkingSpotRepository.save(parkingSpot);
-          }
+        parkingSpot.setAvailable(true);
+        parkingSpotRepository.save(parkingSpot);
+    }
 
 
-
-
-      public Optional<ParkingSpot> findByLocation (String location) {
-         return parkingSpotRepository.findByLocation(location);
-      }
+    public Optional<ParkingSpot> findByLocation(String location) {
+        return parkingSpotRepository.findByLocation(location);
+    }
 
 }

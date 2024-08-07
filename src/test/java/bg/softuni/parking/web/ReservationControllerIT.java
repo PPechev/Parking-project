@@ -1,15 +1,11 @@
 package bg.softuni.parking.web;
 
-import bg.softuni.parking.model.dto.BankCardDto;
 import bg.softuni.parking.model.dto.NewReservationDto;
 import bg.softuni.parking.model.dto.ReservationDto;
-import bg.softuni.parking.model.dto.vehicle.VehicleView;
-import bg.softuni.parking.model.entities.ParkingSpot;
 import bg.softuni.parking.model.user.ParkingUserDetails;
 import bg.softuni.parking.service.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,11 +14,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-
 import static bg.softuni.parking.Constants.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
