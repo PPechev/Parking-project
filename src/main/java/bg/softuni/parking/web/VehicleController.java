@@ -5,6 +5,8 @@ import bg.softuni.parking.exception.VehicleNotFoundException;
 import bg.softuni.parking.model.dto.vehicle.VehicleCreateDto;
 import bg.softuni.parking.model.dto.vehicle.VehicleEditDto;
 import bg.softuni.parking.model.dto.vehicle.VehicleView;
+import bg.softuni.parking.model.entities.Reservation;
+import bg.softuni.parking.service.ReservationService;
 import bg.softuni.parking.service.UserService;
 import bg.softuni.parking.service.VehicleService;
 import jakarta.validation.Valid;
@@ -22,10 +24,11 @@ public class VehicleController {
 
     private final VehicleService vehicleService;
     private final UserService userService;
-
-    public VehicleController(VehicleService vehicleService, UserService userService) {
+    private final ReservationService reservationService;
+    public VehicleController(VehicleService vehicleService, UserService userService, ReservationService reservationService) {
         this.vehicleService = vehicleService;
         this.userService = userService;
+        this.reservationService = reservationService;
     }
 
 
@@ -114,7 +117,13 @@ public class VehicleController {
              @DeleteMapping("/delete/{id}")
         public String deleteVehicle(@PathVariable Long id, RedirectAttributes redirectAttributes) {
             try {
+                List<Reservation> allByVehicleId = reservationService.findAllByVehicleId(id);
+                allByVehicleId.forEach(reservation -> {
+                    reservationService.deleteReservation(reservation.getId());
+                });
+
                 vehicleService.deleteVehicle(id);
+
             } catch (VehicleNotFoundException e) {
                 redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
                 return "redirect:/vehicles";

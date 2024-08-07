@@ -9,6 +9,7 @@ import bg.softuni.parking.model.dto.vehicle.VehicleView;
 import bg.softuni.parking.model.dto.vehicle.VehicleViewAdmin;
 import bg.softuni.parking.model.entities.ParkingSpot;
 
+import bg.softuni.parking.model.entities.Reservation;
 import bg.softuni.parking.service.*;
 import jakarta.transaction.Transactional;
 
@@ -110,7 +111,15 @@ public class AdminController {
     @DeleteMapping("vehicles/delete/{id}")
     public String deleteVehicle(@PathVariable Long id, Model model) {
 
+        List<Reservation> allByVehicleId = reservationService.findAllByVehicleId(id);
+        allByVehicleId.forEach(reservation -> {
+            reservationService.deleteReservation(reservation.getId());
+        });
+
         vehicleService.deleteVehicle(id);
+
+
+
         return "redirect:/admin/all-vehicles";
     }
 

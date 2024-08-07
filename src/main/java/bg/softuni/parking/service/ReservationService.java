@@ -165,4 +165,9 @@ public class ReservationService {
                                 .setLicencePlate(vehicleService.getVehicleById(reservation.getVehicleId()).getLicensePlate()))
                 .collect(Collectors.toList());
     }
+
+
+    public List<Reservation> findAllByVehicleId(Long vehicleId) {
+        return reservationRepository.findAllByVehicleId(vehicleId);
+    }
 }

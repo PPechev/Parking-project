@@ -6,6 +6,7 @@ import bg.softuni.parking.model.dto.vehicle.VehicleCreateDto;
 import bg.softuni.parking.model.dto.vehicle.VehicleEditDto;
 import bg.softuni.parking.model.dto.vehicle.VehicleView;
 import bg.softuni.parking.model.dto.vehicle.VehicleViewAdmin;
+import bg.softuni.parking.model.entities.Reservation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -136,11 +137,16 @@ public class VehicleService {
 
              public void deleteVehicle(Long id) {
                 try {
+
+
                     restClient
                         .delete()
                         .uri("http://localhost:8081/vehicles/{id}", id)
                         .retrieve()
                         .toBodilessEntity();
+
+
+
                 } catch (RestClientResponseException e) {
                     if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
                         throw new VehicleNotFoundException("Превозното средство не е намерено!");
